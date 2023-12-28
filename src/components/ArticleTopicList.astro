@@ -1,0 +1,18 @@
+---
+interface Props {
+  topics: Array<string>;
+}
+
+const { topics } = Astro.props;
+---
+<section class="flex flex-col gap-2 mb-4">
+  <p>Click on one or more topic to filter the articles.</p>
+  <ul class="flex flex-wrap gap-2">
+    {
+      topics.map(topic => (
+        <li class="w-fit h-fit px-2 py-1 border border-supporting-gunmetal-300 rounded-full">   {topic}
+        </li>
+      ))
+    }
+  </ul>
+</section>

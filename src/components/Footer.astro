@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import logoText from "../images/logo_text.svg";
+import codepenIcon from "../images/codepen.svg";
+import githubIcon from "../images/github.svg";
+import dribbbleIcon from "../images/dribbble.svg";
+import twitterIcon from "../images/twitter.svg";
+import linkedinIcon from "../images/linkedin.svg";
+
+export const currentYear = new Date().getFullYear();
+
+export const socialProfiles = [
+  {
+    href: "https://github.com/ToniMaunde",
+    alt: "Github",
+    icon: githubIcon,
+  },
+  {
+    href: "https://dribbble.com/ToniMaunde",
+    alt: "Dribbble",
+    icon: dribbbleIcon,
+  },
+  {
+    href: "https://www.linkedin.com/in/tonimaunde/",
+    alt: "Linkedin",
+    icon: linkedinIcon,
+  },
+  {
+    href: "https://twitter.com/tonimaunde",
+    alt: "Twitter",
+    icon: twitterIcon,
+  },
+  {
+    href: "https://codepen.io/ToniMaunde",
+    alt: "Codepen",
+    icon: codepenIcon,
+  },
+];
+---
+<footer class="px-4 py-8 mt-auto flex flex-col">
+  <Image src={logoText} alt="The website's logo but in text" height="24" />
+  <ul class="mt-4 mb-2 flex gap-4 text-supporting-gunmetal-300">
+    <li>
+      <a href="/">home</a>
+    </li>
+    <li>
+      <a href="/blog">articles</a>
+    </li>
+  </ul>
+  <ul class="flex gap-4 mb-4">
+    {
+      socialProfiles.map(profile => (
+        <li>
+          <a href={profile.href} target="_blank" rel="noreferrer">
+            <Image src={profile.icon} alt={`Milton's ${profile.alt}`} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="text-supporting-gunmetal-300">©{currentYear} Milton David. All Rights Reserved.</p>
+</footer>

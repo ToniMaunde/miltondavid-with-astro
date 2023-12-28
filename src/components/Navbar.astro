@@ -1,0 +1,14 @@
+---
+import { Image } from "astro:assets";
+import logo from "../images/logo.svg";
+import logoText from "../images/logo_text.svg";
+---
+<nav class="flex items-center pt-6 px-4">
+	<a href="/">
+	<Image src={logo} alt="The website's logo" width="24" height="24" />
+	</a>
+  <Image src={logoText} alt="The website's logo but in text" height="24" class="ml-2" />
+	<a href="/blog" class="font-overpass-medium text-supporting-gunmetal-500 ml-auto">
+		Read Articles
+	</a>
+</nav>
