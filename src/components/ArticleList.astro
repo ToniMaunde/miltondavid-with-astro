@@ -1,26 +1,46 @@
 ---
-import type { TArticle } from '../types';
+import type { TArticle } from "../content/config";
 
 interface Props {
-  articles: Array<TArticle>
+  articles: Array<{
+    id: string;
+    slug: string;
+    body: string;
+    collection: string;
+    data: TArticle;
+  }>;
+}
+
+function computeReadingTime(articleBody: string) {
+  // the average
+  const wordsPerMinute = 200;
+  const textLength = articleBody.split(" ").length;
+
+  return Math.ceil(textLength / wordsPerMinute);
 }
 
 const { articles } = Astro.props;
 ---
+
 <ul class="flex flex-col gap-6">
   {
-    articles.map(article => (
+    articles.map((article) => (
       <li class="flex flex-col gap-2">
-        <h3 class="font-overpass-mono text-supporting-gunmetal-600 text-lg/6">
-          {article.title}
-        </h3>
+        <a href={article.slug}>
+          <h3 class="font-overpass-mono text-supporting-gunmetal-600 text-lg/6">
+            {article.data.title}
+          </h3>
+        </a>
         <p class="font-overpass-medium text-supporting-gunmetal-300 text-sm/4">
-          {article.description}
+          {article.data.description}
         </p>
         <p class="text-supporting-gunmetal-100 text-xs/4">
-          ~{article.readingTime} min read <span>&nbsp⦁&nbsp;</span> {article.date}
+          ~{computeReadingTime(article.body)} min read <span>&nbsp⦁&nbsp;</span>{" "}
+          {article.data.createdAt}
         </p>
-        <p class="text-supporting-gunmetal-300 text-sm/4">Topics: App state, React.js</p>
+        <p class="text-supporting-gunmetal-300 text-sm/4">
+          Topics: {article.data.topics.join(", ")}
+        </p>
       </li>
     ))
   }

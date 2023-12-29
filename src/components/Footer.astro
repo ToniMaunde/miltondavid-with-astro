@@ -37,7 +37,8 @@ export const socialProfiles = [
   },
 ];
 ---
-<footer class="px-4 py-8 mt-auto flex flex-col">
+
+<footer class="px-4 py-8 mt-auto grid grid-cols-1">
   <Image src={logoText} alt="The website's logo but in text" height="24" />
   <ul class="mt-4 mb-2 flex gap-4 text-supporting-gunmetal-300">
     <li>
@@ -49,7 +50,7 @@ export const socialProfiles = [
   </ul>
   <ul class="flex gap-4 mb-4">
     {
-      socialProfiles.map(profile => (
+      socialProfiles.map((profile) => (
         <li>
           <a href={profile.href} target="_blank" rel="noreferrer">
             <Image src={profile.icon} alt={`Milton's ${profile.alt}`} />
@@ -58,5 +59,7 @@ export const socialProfiles = [
       ))
     }
   </ul>
-  <p class="text-supporting-gunmetal-300">©{currentYear} Milton David. All Rights Reserved.</p>
+  <p class="text-supporting-gunmetal-300">
+    ©{currentYear} Milton David. All Rights Reserved.
+  </p>
 </footer>
