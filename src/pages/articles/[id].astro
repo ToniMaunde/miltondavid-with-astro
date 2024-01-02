@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const listOfArticles = await getCollection("articles");
+
+  // Extracting the title of each article to slugify them
+  const listOfArticleIDs = listOfArticles.map((article) => {
+    return {
+      params: { id: article.data.title.toLowerCase().split(" ").join("-") },
+    };
+  });
+
+  return listOfArticleIDs;
+}
+
+const { id } = Astro.params;
+---
+
+<div>{id}</div>
