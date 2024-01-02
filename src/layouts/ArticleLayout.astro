@@ -1,13 +1,56 @@
 ---
-// const { frontmatter } = Astro.props;
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import arrowBack from "../images/back.svg";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    createdAt: string;
+    updatedAt: string;
+    topics: Array<string>;
+  };
+}
+
+const { frontmatter } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Article ID</title>
-  </head>
-  <body> </body>
-</html>
+<Layout
+  title={frontmatter.title + " - Milton David"}
+  description={frontmatter.description}
+  isArticle={true}
+>
+  <main class="px-4">
+    <a
+      href="/articles"
+      class="flex items-center text-supporting-gunmetal-500 no-underline w-fit my-10"
+    >
+      <Image
+        src={arrowBack}
+        alt="Arrow back icon"
+        aria-hidden="true"
+        height="16"
+        class="my-0 mr-1"
+      />
+       Read other articles
+    </a>
+    <header>
+      <h1 class="font-overpass-mono text-supporting-gunmetal-700 text-2xl">
+        {frontmatter.title}
+      </h1>
+      <h3 class="text-supporting-gunmetal-300 text-base/6 mb-0">
+        <span class="text-supporting-gunmetal-500 font-overpass-mono"
+          >Summary:</span
+        >
+        {frontmatter.description}
+      </h3>
+      <hr class="my-4 border-supporting-gunmetal-300" />
+    </header>
+  </main>
+  <article
+    class="px-4 flex flex-col text-supporting-gunmetal-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 prose-headings:text-lg/6 prose-blockquote:bg-neutral-100 prose-blockquote:border-l-supporting-gunmetal-200 prose-blockquote:rounded-r-md prose-ul:my-0 prose-em:bg-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700"
+  >
+    <slot />
+  </article>
+</Layout>

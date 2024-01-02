@@ -3,8 +3,6 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const listOfArticles = await getCollection("articles");
-
-  // Extracting the title of each article to slugify them
   const listOfArticleIDs = listOfArticles.map((article) => {
     return {
       params: {
@@ -17,9 +15,8 @@ export async function getStaticPaths() {
   return listOfArticleIDs;
 }
 
-const { article } = Astro.props;
+const article = Astro.props.article;
+const { Content } = await article.render();
 ---
 
-<article>
-  {article}
-</article>
+<Content />

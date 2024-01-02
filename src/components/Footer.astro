@@ -39,27 +39,38 @@ export const socialProfiles = [
 ---
 
 <footer class="px-4 py-8 mt-auto grid grid-cols-1">
-  <Image src={logoText} alt="The website's logo but in text" height="24" />
-  <ul class="mt-4 mb-2 flex gap-4 text-supporting-gunmetal-300">
-    <li>
-      <a href="/">home</a>
+  <Image
+    src={logoText}
+    alt="The website's logo but in text"
+    height="24"
+    class="my-0"
+  />
+  <ul class="mt-4 mb-2 flex gap-4 list-none pl-0">
+    <li class="pl-0 my-0">
+      <a href="/" class="no-underline text-supporting-gunmetal-300">home</a>
     </li>
-    <li>
-      <a href="/articles">articles</a>
+    <li class="pl-0 my-0">
+      <a href="/articles" class="no-underline text-supporting-gunmetal-300"
+        >articles</a
+      >
     </li>
   </ul>
-  <ul class="flex gap-4 mb-4">
+  <ul class="flex gap-4 mt-0 mb-4 list-none pl-0">
     {
       socialProfiles.map((profile) => (
-        <li>
+        <li class="pl-0 my-0">
           <a href={profile.href} target="_blank" rel="noreferrer">
-            <Image src={profile.icon} alt={`Milton's ${profile.alt}`} />
+            <Image
+              src={profile.icon}
+              alt={`Milton's ${profile.alt}`}
+              class="my-0"
+            />
           </a>
         </li>
       ))
     }
   </ul>
-  <p class="text-supporting-gunmetal-300">
+  <p class="text-supporting-gunmetal-300 my-0">
     ©{currentYear} Milton David. All Rights Reserved.
   </p>
 </footer>
