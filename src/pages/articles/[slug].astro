@@ -7,14 +7,19 @@ export async function getStaticPaths() {
   // Extracting the title of each article to slugify them
   const listOfArticleIDs = listOfArticles.map((article) => {
     return {
-      params: { id: article.data.title.toLowerCase().split(" ").join("-") },
+      params: {
+        slug: article.slug,
+      },
+      props: { article },
     };
   });
 
   return listOfArticleIDs;
 }
 
-const { id } = Astro.params;
+const { article } = Astro.props;
 ---
 
-<div>{id}</div>
+<article>
+  {article}
+</article>
