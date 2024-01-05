@@ -1,0 +1,43 @@
+---
+import type { MarkdownHeading } from "astro";
+interface Props {
+  headings: Array<MarkdownHeading>;
+}
+
+const PADDING_LEFT_TAILWINDCSS_CLASSES = new Map<number, string>([
+  [0, "pl-0"],
+  [1, "pl-4"],
+  [2, "pl-5"],
+  [3, "pl-6"],
+  [4, "pl-7"],
+  [5, "pl-8"],
+  [6, "pl-9"],
+]) satisfies Map<number, string>;
+
+const { headings } = Astro.props;
+---
+
+<details class="mb-4">
+  <summary
+    class="font-overpass-mono text-supporting-gunmetal-500 cursor-pointer w-fit text-lg/6"
+    >{" "}In this article</summary
+  >
+  <ol class="px-2 pt-1 grid gap-2">
+    {
+      headings.map((heading) => (
+        <li
+          class={`text-supporting-gunmetal-500 text-base/8 ${PADDING_LEFT_TAILWINDCSS_CLASSES.get(
+            heading.depth - 2
+          )}`}
+        >
+          <a
+            class="font-overpass-regular underline underline-offset-2"
+            href={`#${heading.slug}`}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</details>

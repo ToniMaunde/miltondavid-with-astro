@@ -2,17 +2,18 @@
 layout: ../../layouts/ArticleLayout.astro
 title: Lifting up the state
 description: an alternative to managing state
-createdAt: October 7, 2023
-updatedAt: October 7, 2023
+createdAt: 10/07/2023
+updatedAt: 10/07/2023
 topics:
   - React.js
   - App state
 ---
-import ArticleLink from "../../components/ArticleLink.astro";
+import ArticleLink from "../../components/articles/Link.astro";
+
 
 One of the first thing most web developers working on an application do when the need to handle state arises is to reach out to the JavaScript framework's state management "hook". React.js has **useState()**, Vue.js has **ref()**, Solid.js has **createSignal()** (all of these are the basic ones, these frameworks also provide other hooks to manage the state).
 
-### Introduction
+## Introduction
 
 It is common to see, in tutorials, courses and tweets, developers showcasing simple (and sometimes complex) apps using one of these frameworks. What they also tend to do is to **always** use the state hook of the framework to provide reactivity to the application. 
 
@@ -20,11 +21,11 @@ There is nothing wrong with that. But what if there was another way? What if, e.
 
 Still on this matter, <ArticleLink text="a youtube video" href="https://www.youtube.com/watch?v=sFTGEs2WXQ4" /> from Sam Selikoff made me aware of a primitive store, compatible with all JavaScript frameworks, that can make the exercise of exorcing unnecessary controlled state out of our components very easy.
 
-### Enter the browser's URL: the primordial store
+## Enter the browser's URL: the primordial store
 
 URLs are the backbone of the web; everything that is done in this medium is through it. An URL has <ArticleLink text="several parts" href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#basics_anatomy_of_a_url" /> (protocol/scheme, domain, port (can be ommited), path to a file (optional), parameters (optional) and anchor (optional). Let us focus on the parameters.
 
-#### URLSearchParams (parameters)
+### URLSearchParams (parameters)
 
 These are also called query/search params and are usually part of most web pages that allow the user to sort, filter, order, choose viewing layout, etc.
 
@@ -53,11 +54,11 @@ When the form is filled and submitted, the browser's default behaviour will be t
 
 How we would deal with the form submission and/or use these search parameters would depend on many factors (rendering strategy (SSR, CSR, ISR, SSG, etc), goal and routing choice). The focus of this article lies on the client, so let's see how we can take advantage of the search parameters to manage our application state.
 
-### The typical state management on the client
+## The typical state management on the client
 
 In a common React.js Todo app, that allows you to add, edit and remove todos as well as sort, filter and display them as list or grid, the code would be similar to the one you can find in <ArticleLink text="this repository" href="https://github.com/ToniMaunde/lifting-up-the-state" />. It uses useState() to manage the list of todos (add, delete, edit), and to set the filter for the list of todos.
 
-### Combining state hooks and URLSearchParams
+## Combining state hooks and URLSearchParams
 
 The alternative to the previous approach consists in:
 - **deriving the state** from the URL (in this case just for the filter value);
@@ -67,7 +68,7 @@ The alternative to the previous approach consists in:
 You can see this in detail in the same repository, just on a <ArticleLink text="different branch" href="https://github.com/ToniMaunde/lifting-up-the-state/tree/urlsearchparams" />.
 
 
-### Conclusion
+## Conclusion
 
 Combining the *insert your framework here* state hook and the URLSearchParams can greatly simplify the state management in web applications, re-introduce the shareability of URLs (even in web applications), and, probably, improve the performance of applications with several setStateActions on each re(re)nder. Tanner Linsley takes this even further by advocating, when applicable, the storing of a JSON stringified state in the URL, here's a <ArticleLink text="youtube video" href="https://youtu.be/qUZm3gbMOeo?si=oU6vYUKZCs8nw_q7" /> about it.
 

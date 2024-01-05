@@ -1,5 +1,6 @@
 ---
 import type { TArticle } from "../content/config";
+import { articleDate, computeReadingTime } from "../util";
 
 interface Props {
   articles: Array<{
@@ -11,20 +12,20 @@ interface Props {
   }>;
 }
 
-function computeReadingTime(articleBody: string) {
-  // the average
-  const wordsPerMinute = 200;
-  const textLength = articleBody.split(" ").length;
-
-  return Math.ceil(textLength / wordsPerMinute);
-}
-
 const { articles } = Astro.props;
+const orderedArticles = articles.sort((prev, next) => {
+  const prevTime = new Date(prev.data.updatedAt).getTime();
+  const nextTime = new Date(next.data.updatedAt).getTime();
+  if (prevTime < nextTime) return 1;
+  else if (prevTime > nextTime) return -1;
+
+  return 0;
+});
 ---
 
 <ul class="flex flex-col gap-6">
   {
-    articles.map((article) => (
+    orderedArticles.map((article) => (
       <li class="flex flex-col gap-2">
         <a href={`/articles/${article.slug}`}>
           <h3 class="font-overpass-mono text-supporting-gunmetal-600 text-lg/6">
@@ -36,7 +37,7 @@ const { articles } = Astro.props;
         </p>
         <p class="text-supporting-gunmetal-100 text-xs/4">
           ~{computeReadingTime(article.body)} min read <span>&nbsp⦁&nbsp;</span>{" "}
-          {article.data.createdAt}
+          {articleDate(article.data.createdAt, article.data.updatedAt)}
         </p>
         <p class="text-supporting-gunmetal-300 text-sm/4">
           Topics: {article.data.topics.join(", ")}

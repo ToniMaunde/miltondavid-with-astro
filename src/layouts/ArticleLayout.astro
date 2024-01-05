@@ -2,18 +2,33 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import arrowBack from "../images/back.svg";
+import { getEntry } from "astro:content";
+import ArticleMeta from "../components/ArticleMeta.astro";
+import ArticleLink from "../components/articles/Link.astro";
+import ArticleTOC from "../components/articles/TableOfContents.astro";
+import type { MarkdownLayoutProps } from "astro";
 
-interface Props {
-  frontmatter: {
-    title: string;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-    topics: Array<string>;
-  };
+function slugifyTitle(title: string) {
+  return title.toLowerCase().split(" ").join("-");
 }
 
-const { frontmatter } = Astro.props;
+type Props = MarkdownLayoutProps<{
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  topics: Array<string>;
+}>;
+
+const GITHUB_CONTENT_URL =
+  "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles";
+const TWITTER_SHARING_URL = "https://twitter.com/intent/tweet";
+const LINKEDIN_SHARING_URL = "http://www.linkedin.com/shareArticle";
+
+const { frontmatter, headings } = Astro.props;
+const { href } = Astro.url;
+const ARTICLE_SLUG = slugifyTitle(frontmatter.title);
+const article = await getEntry("articles", ARTICLE_SLUG);
 ---
 
 <Layout
@@ -39,18 +54,41 @@ const { frontmatter } = Astro.props;
       <h1 class="font-overpass-mono text-supporting-gunmetal-700 text-2xl">
         {frontmatter.title}
       </h1>
-      <h3 class="text-supporting-gunmetal-300 text-base/6 mb-0">
-        <span class="text-supporting-gunmetal-500 font-overpass-mono"
-          >Summary:</span
-        >
-        {frontmatter.description}
-      </h3>
+      <ArticleMeta
+        articleBody={article!.body}
+        description={frontmatter.description}
+        createdAt={frontmatter.createdAt}
+        updatedAt={frontmatter.updatedAt}
+      />
       <hr class="my-4 border-supporting-gunmetal-300" />
     </header>
+    <ArticleTOC headings={headings} />
   </main>
   <article
     class="px-4 flex flex-col text-supporting-gunmetal-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 prose-headings:text-lg/6 prose-blockquote:bg-neutral-100 prose-blockquote:border-l-supporting-gunmetal-200 prose-blockquote:rounded-r-md prose-ul:my-0 prose-em:bg-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700"
   >
     <slot />
+    <hr class="my-0 border-supporting-gunmetal-300" />
+    <p class="bg-neutral-200 text-supporting-gunmetal-300 rounded-md p-4 my-6">
+      <span class="text-supporting-gunmetal-500">Share this article:</span>
+      <ArticleLink
+        className="text-supporting-gunmetal-300"
+        href={`${TWITTER_SHARING_URL}?url=${href}&text=${frontmatter.title}&via=tonimaunde`}
+        text="Twitter"
+      />
+      {"  |  "}
+      <ArticleLink
+        className="text-supporting-gunmetal-300"
+        href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${frontmatter.title}&source=Milton Alberto`}
+        text="Linkedin"
+      />
+    </p>
+    <p>
+      Did you find a typo, or would like to contribute to the article? Here's
+      the <ArticleLink
+        href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
+        text="Github Link"
+      /> for this article.
+    </p>
   </article>
 </Layout>

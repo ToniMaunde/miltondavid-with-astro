@@ -2,12 +2,12 @@
 layout: ../../layouts/ArticleLayout.astro
 title: Improving code readability
 description: some examples of tweaks that can be done to improve code readability
-createdAt: September 18, 2022
-updatedAt: Jun 30, 2023
+createdAt: 09/18/2022
+updatedAt: 01/04/2024
 topics:
   - Coding
 ---
-import ArticleLink from "../../components/ArticleLink.astro";
+import ArticleLink from "../../components/articles/Link.astro";
 
 I believe that writing code can, in a way, be compared to telling a story where the order of the events matter and the role of each character has to be well thought out in order to make it engaging and understandable.
 
@@ -15,7 +15,7 @@ So, in this article I'll share some of the coding practices I believe to be help
 
 > Despite the focus being on JavaScript and React.js, some of these tips can apply to other programming languages too.
 
-### 0. Giving meaningful names to variables and functions
+## 0. Giving meaningful names to variables and functions
 Nothing worst that opening a file and finding a variable called *cats* as an abbreviation for categories or *fubr* as an abbreviation for *filterUsersByRegion*. This are edge cases but not far from reality.
 ```js
 // ⚠️
@@ -39,7 +39,7 @@ Now it is easy to understand that...
 * the user is able to add and remove product categories.
 Much easier, don't you agree?
 
-### 1. Writing booleans in the affirmative form
+## 1. Writing booleans in the affirmative form
 
 Variables holding boolean values become more intuitive when in the affirmative form since they are a statement and not a question.
 
@@ -67,7 +67,7 @@ in favour of much cleaner code such as
 if (thereAreOnlineUsers) {...}
 ```
 
-### 2. Avoiding the dot notation in conditional rendering
+## 2. Avoiding the dot notation in conditional rendering
 
 It is far easier to understand the condtion driving the render of an element if it expressed in words (a variable) instead of having to verifying the type of the object being accessed, the properties it possesses and then which condition is being used.
 
@@ -100,7 +100,7 @@ return (
 )
 ```
 
-### 3. Prefer function declaration to function expressions and arrow functions
+## 3. Prefer function declaration to function expressions and arrow functions
 
 Despite this being somewhat of a personal preference, the readability of the code improves when function declarations are used since the developer can immediately understand what it is through the keyword right at the start of the line.
 
@@ -114,7 +114,7 @@ const generateReport = () => {...};
 function generateReport() {...}
 ```
 
-### 4. Have the function caller right after the caller
+## 4. Have the function caller right after the callee
 
 Being able quickly visit the function responsible for the value of a variable is great for quick debugging whenever its value does not match what's expected.
 
@@ -134,7 +134,7 @@ const mozambicanUsers = filterUsers(users, "MZ");
 /* insert lines and lines of code */
 ```
 
-### 5. Avoid variable/function hoisting
+## 5. Avoid variable/function hoisting
 
 This resource of the language allows you to access/call variables/functions before they are declared. This can lead to unexpected errors, and is not generally recommended. And even if this was no issue, seeing the variable/function declaration only after its use can affect our understanding of the logic of the codebase.
 
@@ -149,7 +149,7 @@ function getUsers() {...};
 const users = getUsers();
 ```
 
-### 6. Avoid complex anonymous callbacks
+## 6. Avoid complex anonymous callbacks
 
 With ES6 the arrow functions and new Array methods (map, filter, reduce, etc) combination became a "standard" when interacting with object collections. But something happened while this combination became wildly adopted: this combination, usually acting as a **callback**, became extremely complex.
 
@@ -172,7 +172,7 @@ const onlineUsersInEurope = users.filter(filterByStatusAndRegion);
 
 While the code is virtually the same, it became much easier to understand how the *onlineUsersInEurope* are filtered.
 
-### 7. Internalize one-off functions
+## 7. Internalize one-off functions
 
 Functions represent blocks of code that execute a certain task. Usually functions are declared so that the functionality they encompass can be accessed without repeating the within them. But sometimes functions are only called once and by a single caller.
 
@@ -207,7 +207,7 @@ const groupedUsers = groupOnlineUsers(users, region);
 By moving the *filterOnlineUsers* function inside the *groupOnlineUsersByRegion* we remove it from the global namespace, create it only when the parent function is created and contextualize the code execution. This is also called **a closure**. Check <ArticleLink text="this MDN link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" /> to learn more.
 
 
-### 8. Avoid unnecessary conditional structures
+## 8. Avoid unnecessary conditional structures
 
 If there is no further action to be taken after the comparison, and the function is expected to return a boolean value, just return it.
 
@@ -228,7 +228,7 @@ function filterByStatus(user) {
 const onlineUsers = users.filter(filterByStatus);
 ```
 
-### 9. Avoid using the ternary operator for chained conditionals
+## 9. Avoid using the ternary operator for chained conditionals
 
 There is a misconception among developers that promotes the idea that *"the more complex your codebase is, the clever you are*. The result of this mindset are unintelligible codebases that confuse the authors and contributors. Coding is like communication, it's not what we write (and perceive as clear) but what others understand after reading our code.  
 
@@ -268,7 +268,7 @@ if (users.length > 0) {
 
 This is much easier to follow and understand when compared to that *mumbo jumbo* of a one-liner we saw before.
 
-### 10. Use more variables
+## 10. Use more variables
 
 Variables are not "free". They add up to the memory our programs use during their execution. But contrary to the popular belief (or at least I think), most programming languages do an amazing job in <ArticleLink href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" text="garbage collection"/>. Therefore, we should use as many variables as we need towards simplifying our code and prevent the rerun of expensive calculations.
 We'll use the previous snippet.
@@ -297,6 +297,6 @@ if (users.length > 0) {
 
 Imagine that the *users* array had more than 10000 items, filtering the online users from it twice would be an unnecessary computation if we simply memoized the value of the first computation.
 
-### Conclusion
+## Conclusion
 
 I hope you enjoyed the read and managed to pick something up for your daily coding activities.

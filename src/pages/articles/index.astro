@@ -2,18 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import Quote from "../../components/Quote.astro";
 import ArticleList from "../../components/ArticleList.astro";
-import ArticleTopicList from "../../components/ArticleTopicList.astro";
 import { getCollection } from "astro:content";
 
-function dedupeTopics(topics: Array<string>) {
-  const setOfTopics = new Set<string>();
-  topics.forEach((topic) => setOfTopics.add(topic));
-
-  return [...setOfTopics];
-}
 const articles = await getCollection("articles");
-const articleTopics = articles.map((article) => article.data.topics);
-const uniqueArticleTopics = dedupeTopics(articleTopics.flat());
 
 // PS: change this quote every other week
 export const currentQuote = {
@@ -33,7 +24,6 @@ export const pageDescription = "Articles written by Milton.";
     <header class="my-10">
       <Quote text={currentQuote.text} author={currentQuote.author} />
     </header>
-    <ArticleTopicList topics={uniqueArticleTopics} />
     <ArticleList articles={articles} />
   </main>
 </Layout>
