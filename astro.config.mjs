@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 
@@ -8,10 +8,13 @@ import rehypeSlug from "rehype-slug";
 // https://astro.build/config
 export default defineConfig({
   output: "static",
+  image: {
+    service: passthroughImageService()
+  },
   integrations: [mdx({
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
   }), tailwind()],
   redirects: {
-    "/blog/[...slug]": "/articles/[...slug]"
+    "/blog/[slug]": "/articles/[slug]"
   }
 });
