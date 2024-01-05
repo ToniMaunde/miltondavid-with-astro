@@ -20,6 +20,9 @@ export default {
         "overpass-regular": ['"Overpass Regular"', "sans"],
         "overpass-medium": ['"Overpass Medium"', "sans"],
       },
+      screens: {
+        "xs": "600px",
+      }
     },
 	},
 	plugins: [
