@@ -5,7 +5,7 @@ import logoText from "../images/logo_text.svg";
 ---
 
 <nav class="flex items-center pt-6 px-4">
-  <a href="/">
+  <a href="/" class="flex items-center gap-2">
     <Image
       src={logo}
       alt="The website's logo"
@@ -13,13 +13,13 @@ import logoText from "../images/logo_text.svg";
       height="24"
       class="my-0"
     />
+    <Image
+      src={logoText}
+      alt="The website's logo but in text"
+      height="24"
+      class="my-0"
+    />
   </a>
-  <Image
-    src={logoText}
-    alt="The website's logo but in text"
-    height="24"
-    class="ml-2 my-0"
-  />
   <a
     href="/articles"
     class="font-overpass-medium text-supporting-gunmetal-500 ml-auto"
