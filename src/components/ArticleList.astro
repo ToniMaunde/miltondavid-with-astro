@@ -28,18 +28,18 @@ const orderedArticles = articles.sort((prev, next) => {
     orderedArticles.map((article) => (
       <li class="flex flex-col gap-2">
         <a href={`/articles/${article.slug}`}>
-          <h3 class="font-overpass-mono text-supporting-gunmetal-600 text-lg/6">
+          <h3 class="font-overpass-mono text-supporting-gunmetal-600 dark:text-primary-300 text-lg/6">
             {article.data.title}
           </h3>
         </a>
-        <p class="font-overpass-medium text-supporting-gunmetal-300 text-sm/4">
+        <p class="font-overpass-medium text-supporting-gunmetal-300 dark:text-neutral-300 text-sm/4">
           {article.data.description}
         </p>
-        <p class="text-supporting-gunmetal-100 text-xs/4">
+        <p class="text-supporting-gunmetal-100 dark:text-neutral-500 text-xs/4">
           ~{computeReadingTime(article.body)} min read <span>&nbsp⦁&nbsp;</span>{" "}
           {articleDate(article.data.createdAt, article.data.updatedAt)}
         </p>
-        <p class="text-supporting-gunmetal-300 text-sm/4">
+        <p class="text-supporting-gunmetal-300 dark:text-neutral-300 text-sm/4">
           Topics: {article.data.topics.join(", ")}
         </p>
       </li>

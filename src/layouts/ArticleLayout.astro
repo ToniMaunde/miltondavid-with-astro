@@ -5,7 +5,7 @@ import arrowBack from "../images/back.svg";
 import { getEntry } from "astro:content";
 import ArticleMeta from "../components/ArticleMeta.astro";
 import ArticleLink from "../components/articles/Link.astro";
-import ArticleTOC from "../components/articles/TableOfContents.astro";
+import TableOfContents from "../components/articles/TableOfContents.astro";
 import type { MarkdownLayoutProps } from "astro";
 
 function slugifyTitle(title: string) {
@@ -39,7 +39,7 @@ const article = await getEntry("articles", ARTICLE_SLUG);
   <main class="px-4">
     <a
       href="/articles"
-      class="flex items-center text-supporting-gunmetal-500 no-underline w-fit my-10"
+      class="flex items-center text-supporting-gunmetal-500 dark:text-neutral-300 no-underline w-fit my-10"
     >
       <Image
         src={arrowBack}
@@ -51,7 +51,9 @@ const article = await getEntry("articles", ARTICLE_SLUG);
        Read other articles
     </a>
     <header>
-      <h1 class="font-overpass-mono text-supporting-gunmetal-700 text-2xl">
+      <h1
+        class="font-overpass-mono text-supporting-gunmetal-700 dark:text-primary-300 text-2xl"
+      >
         {frontmatter.title}
       </h1>
       <ArticleMeta
@@ -60,25 +62,27 @@ const article = await getEntry("articles", ARTICLE_SLUG);
         createdAt={frontmatter.createdAt}
         updatedAt={frontmatter.updatedAt}
       />
-      <hr class="my-4 border-supporting-gunmetal-300" />
+      <hr class="my-4 border-supporting-gunmetal-300 dark:border-neutral-300" />
     </header>
-    <ArticleTOC headings={headings} />
+    <TableOfContents headings={headings} />
   </main>
   <article
-    class="px-4 flex flex-col text-supporting-gunmetal-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 prose-headings:text-lg/6 prose-blockquote:bg-neutral-100 prose-blockquote:border-l-supporting-gunmetal-200 prose-blockquote:rounded-r-md prose-ul:my-0 prose-em:bg-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700"
+    class="px-4 flex flex-col text-supporting-gunmetal-300 dark:text-neutral-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-100 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700 dark:prose-a:text-neutral-100"
   >
     <slot />
-    <hr class="my-0 border-supporting-gunmetal-300" />
-    <p class="bg-neutral-200 text-supporting-gunmetal-300 rounded-md p-4 my-6">
-      <span class="text-supporting-gunmetal-500">Share this article:</span>
+    <hr class="my-0 border-supporting-gunmetal-300 dark:border-neutral-300" />
+    <p
+      class="bg-neutral-200 dark:bg-supporting-gunmetal-300 rounded-md p-4 my-6"
+    >
+      <span class="text-supporting-gunmetal-500 dark:text-neutral-100"
+        >Share this article:</span
+      >
       <ArticleLink
-        className="text-supporting-gunmetal-300"
         href={`${TWITTER_SHARING_URL}?url=${href}&text=${frontmatter.title}&via=tonimaunde`}
         text="Twitter"
       />
       {"  |  "}
       <ArticleLink
-        className="text-supporting-gunmetal-300"
         href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${frontmatter.title}&source=Milton Alberto`}
         text="Linkedin"
       />

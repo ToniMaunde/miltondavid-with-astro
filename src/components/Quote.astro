@@ -3,10 +3,13 @@ interface Props {
   text: string;
   author: string;
 }
-const { text , author } = Astro.props;
+const { text, author } = Astro.props;
 ---
-<h1 class="font-overpass-mono text-supporting-gunmetal-700 text-lg/6">
+
+<h1
+  class="font-overpass-mono text-supporting-gunmetal-700 dark:text-neutral-100 text-lg/6"
+>
   "{text}"
-  <br>
-  - {author}
+  <br />
+   - {author}
 </h1>

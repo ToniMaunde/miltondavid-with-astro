@@ -19,14 +19,14 @@ const { headings } = Astro.props;
 
 <details class="mb-4">
   <summary
-    class="font-overpass-mono text-supporting-gunmetal-500 cursor-pointer w-fit text-lg/6"
+    class="font-overpass-mono text-supporting-gunmetal-500 dark:text-neutral-100 cursor-pointer w-fit text-lg/6"
     >{" "}In this article</summary
   >
   <ol class="px-2 pt-1 grid gap-2">
     {
       headings.map((heading) => (
         <li
-          class={`text-supporting-gunmetal-500 text-base/8 ${PADDING_LEFT_TAILWINDCSS_CLASSES.get(
+          class={`text-supporting-gunmetal-500 dark:text-neutral-200 text-base/8 ${PADDING_LEFT_TAILWINDCSS_CLASSES.get(
             heading.depth - 2
           )}`}
         >

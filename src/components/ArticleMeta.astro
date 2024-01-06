@@ -10,16 +10,17 @@ interface Props {
 const props = Astro.props;
 ---
 
-<p class="text-supporting-gunmetal-100 text-xs/4 my-2">
+<p class="text-supporting-gunmetal-100 dark:text-neutral-500 text-xs/4 my-2">
   ~{computeReadingTime(props.articleBody)} min read <span>&nbsp⦁&nbsp;</span>{
     " "
   }
   {articleDate(props.createdAt, props.updatedAt)}
 </p>
-<p class="text-supporting-gunmetal-300 text-base/6 mb-0">
+<p class="text-supporting-gunmetal-300 dark:text-neutral-300 text-base/6 mb-0">
   <span
     aria-label="Summary:"
-    class="text-supporting-gunmetal-500 font-overpass-mono">Summary:</span
+    class="text-supporting-gunmetal-500 dark:text-neutral-100 font-overpass-mono"
+    >Summary:</span
   >
   {props.description}
 </p>
