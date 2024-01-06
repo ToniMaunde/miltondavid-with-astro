@@ -1,54 +1,45 @@
-# Astro Starter Kit: Basics
+# Milton David's personal website
+This is my website/blog's built with Astro. It is a static website that uses MDX for the blog articles.
 
+# Figma design file
+I designed the website in Figma. Here's [the link](https://www.figma.com/file/etOc5Yb0qFn77WxCQCPCCc/miltondavid.com?type=design&node-id=0%3A1&mode=design&t=Wqq5znrSeCk093fv-1) if you want to see it.
+
+# Changelog
+Jan 6 2024
+- website's "complete" version
+
+## Installing
+Clone the repository
 ```sh
-npm create astro@latest -- --template basics
+git clone https://github.com/ToniMaunde/miltondavid-with-astro.git
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+Then navigate inside the folder
+```sh
+cd miltondavid-with-astro
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Install the dependencies with
+```sh
+pnpm install
+```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+And then run
+```sh
+pnpm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## The gist
+An Astro powered static website using the MDX integration for handling the articles, and the tailwindcss integration for the styling. It's pretty simple, really: 2 static routes (/ and /articles) and 1 dynamic route (/articles/[slug]). I moved away from Remix because it was too powerful of a tool for a simple personal website/blog like mine.
 
-## 🧞 Commands
+## Built with
+I used [Astro](https://astro.build/) since I wanted to move away from the SSR approach with Remix in the [previous version](https://github.com/ToniMaunde/miltondavid) of my website/blog.
 
-All commands are run from the root of the project, from a terminal:
+## Contributing
+if you want to contribute in any way (articles, refactoring), please do.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Authors
+Milton David
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+The MIT license.
