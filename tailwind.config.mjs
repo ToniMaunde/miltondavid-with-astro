@@ -12,7 +12,12 @@ export default {
         "supporting-gunmetal-600": "#202833",
         "supporting-gunmetal-700": "#1A212B",
         "supporting-peach-500": "#FFEDB1",
+        "neutral-100": "#FFFFFF",
         "neutral-200": "#E6E6E6",
+        "neutral-300": "#D9D9D9",
+        "neutral-400": "#CCCCCC",
+        "neutral-500": "#BFBFBF",
+        "primary-300": "#F7B34F",
         "primary-500": "#F89B13",
       },
       fontFamily: {
