@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+const pageDescription = "The page you are looking for does not expertise";
+---
+
+<Layout
+  title="Page not found - Milton David"
+  description={pageDescription}
+  isArticle={false}
+>
+  <main class="px-4 flex flex-col gap-10 text-supporting-gunmetal-300">
+    <header class="mt-10">
+      <h1 class="font-overpass-mono text-supporting-gunmetal-700 text-2xl mb-2">
+        Page not found
+      </h1>
+      <p class="font-overpass-medium text-supporting-gunmetal-200">
+        Sadly, this page does not exist.
+      </p>
+    </header>
+    <section class="flex flex-col gap-2">
+      <p>
+        Consider visiting the <a href="/" class="underline underline-offset-2"
+          >home</a
+        > page or the <a href="/articles" class="underline underline-offset-2"
+          >articles</a
+        > page for a nice read.
+      </p>
+    </section>
+  </main>
+</Layout>
