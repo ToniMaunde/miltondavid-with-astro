@@ -39,20 +39,20 @@ const article = await getEntry("articles", ARTICLE_SLUG);
   <main class="px-4">
     <a
       href="/articles"
-      class="flex items-center text-supporting-gunmetal-500 dark:text-neutral-300 no-underline w-fit my-10"
+      class="relative flex items-center text-lg/6 text-supporting-gunmetal-500 dark:text-neutral-300 no-underline w-fit my-10"
     >
       <Image
         src={arrowBack}
         alt="Arrow back icon"
         aria-hidden="true"
         height="16"
-        class="my-0 mr-1"
+        class="my-0 mr-1 mb-1"
       />
        Read other articles
     </a>
     <header>
       <h1
-        class="font-overpass-mono text-supporting-gunmetal-700 dark:text-primary-300 text-2xl"
+        class="font-overpass-mono text-supporting-gunmetal-700 dark:text-primary-300 text-[32px]/10"
       >
         {frontmatter.title}
       </h1>
@@ -67,7 +67,7 @@ const article = await getEntry("articles", ARTICLE_SLUG);
     <TableOfContents headings={headings} />
   </main>
   <article
-    class="px-4 flex flex-col text-supporting-gunmetal-300 dark:text-neutral-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-100 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700 dark:prose-a:text-neutral-100"
+    class="px-4 flex flex-col text-lg/6 text-supporting-gunmetal-300 dark:text-neutral-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-100 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700 dark:prose-a:text-neutral-100"
   >
     <slot />
     <hr class="my-0 border-supporting-gunmetal-300 dark:border-neutral-300" />

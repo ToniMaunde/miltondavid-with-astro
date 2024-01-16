@@ -12,6 +12,11 @@ interface Props {
   }>;
 }
 
+function formatTopics(topics: Array<string>) {
+  const topicsWithHashes = topics.map((topic) => `#${topic}`);
+  return topicsWithHashes.join(" ");
+}
+
 const { articles } = Astro.props;
 const orderedArticles = articles.sort((prev, next) => {
   const prevTime = new Date(prev.data.updatedAt).getTime();
@@ -23,25 +28,29 @@ const orderedArticles = articles.sort((prev, next) => {
 });
 ---
 
-<ul class="flex flex-col gap-6">
+<ul class="flex flex-col gap-4">
   {
     orderedArticles.map((article) => (
-      <li class="flex flex-col gap-2">
-        <a href={`/articles/${article.slug}`}>
-          <h3 class="font-overpass-mono text-supporting-gunmetal-600 dark:text-primary-300 text-lg/6">
+      <li>
+        <a
+          href={`/articles/${article.slug}`}
+          class="flex flex-col gap-2 bg-neutral-200 transition-shadow ease-in-out hover:md:ring hover:md:ring-supporting-gunmetal-300 p-4 rounded-lg"
+        >
+          <h3 class="font-overpass-mono text-supporting-gunmetal-300 dark:text-primary-300 text-2xl/8">
             {article.data.title}
           </h3>
+          <p class="font-overpass-regular text-supporting-gunmetal-300 text-base/4 dark:text-neutral-300">
+            {article.data.description}
+          </p>
+          <p class="text-supporting-gunmetal-100 dark:text-neutral-500 text-sm/4">
+            ~{computeReadingTime(article.body)} min read{" "}
+            <span>&nbsp⦁&nbsp;</span>{" "}
+            {articleDate(article.data.createdAt, article.data.updatedAt)}
+          </p>
+          <p class="text-supporting-gunmetal-300 dark:text-neutral-300 text-sm/4">
+            {formatTopics(article.data.topics)}
+          </p>
         </a>
-        <p class="font-overpass-medium text-supporting-gunmetal-300 dark:text-neutral-300 text-sm/4">
-          {article.data.description}
-        </p>
-        <p class="text-supporting-gunmetal-100 dark:text-neutral-500 text-xs/4">
-          ~{computeReadingTime(article.body)} min read <span>&nbsp⦁&nbsp;</span>{" "}
-          {articleDate(article.data.createdAt, article.data.updatedAt)}
-        </p>
-        <p class="text-supporting-gunmetal-300 dark:text-neutral-300 text-sm/4">
-          Topics: {article.data.topics.join(", ")}
-        </p>
       </li>
     ))
   }
