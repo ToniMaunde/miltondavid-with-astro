@@ -4,7 +4,6 @@ import Layout from "../layouts/Layout.astro";
 import arrowBack from "../images/back.svg";
 import { getEntry } from "astro:content";
 import ArticleMeta from "../components/ArticleMeta.astro";
-import ArticleLink from "../components/articles/Link.astro";
 import TableOfContents from "../components/articles/TableOfContents.astro";
 import type { MarkdownLayoutProps } from "astro";
 
@@ -67,32 +66,44 @@ const article = await getEntry("articles", ARTICLE_SLUG);
     <TableOfContents headings={headings} />
   </main>
   <article
-    class="px-4 flex flex-col text-lg/6 text-supporting-gunmetal-300 dark:text-neutral-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-100 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-700 dark:prose-a:text-neutral-100"
+    class="px-4 flex flex-col text-lg/6 text-supporting-gunmetal-300 dark:text-neutral-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-100 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-400 dark:prose-a:text-neutral-100"
   >
     <slot />
-    <hr class="my-0 border-supporting-gunmetal-300 dark:border-neutral-300" />
-    <p
-      class="bg-neutral-200 dark:bg-supporting-gunmetal-300 rounded-md p-4 my-6"
-    >
+    <hr
+      class="mt-0 mb-5 border-supporting-gunmetal-100 dark:border-neutral-300"
+    />
+    <p class="text-supporting-gunmetal-300 mb-0">
+      Did you find a typo, or would like to contribute to the article? Here's
+      the <a
+        href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
+        target="_blank"
+        rel="noreferrer"
+        class=""
+      >
+        Github Link
+      </a> for this article.
+    </p>
+    <p class="bg-neutral-200 dark:bg-supporting-gunmetal-300 rounded-md p-4">
       <span class="text-supporting-gunmetal-500 dark:text-neutral-100"
         >Share this article:</span
       >
-      <ArticleLink
+      <a
         href={`${TWITTER_SHARING_URL}?url=${href}&text=${frontmatter.title}&via=tonimaunde`}
-        text="Twitter"
-      />
+        target="_blank"
+        rel="noreferrer"
+        class="no-underline"
+      >
+        Twitter
+      </a>
       {"  |  "}
-      <ArticleLink
+      <a
         href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${frontmatter.title}&source=Milton Alberto`}
-        text="Linkedin"
-      />
-    </p>
-    <p>
-      Did you find a typo, or would like to contribute to the article? Here's
-      the <ArticleLink
-        href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
-        text="Github Link"
-      /> for this article.
+        target="_blank"
+        rel="noreferrer"
+        class="no-underline"
+      >
+        Linkedin
+      </a>
     </p>
   </article>
 </Layout>

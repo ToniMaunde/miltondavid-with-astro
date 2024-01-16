@@ -2,17 +2,11 @@
 interface Props {
   href: string;
   text: string;
-  className?: string;
 }
 
-const { href, text, className } = Astro.props;
+const { href, text } = Astro.props;
 ---
 
-<a
-  href={href}
-  target="_blank"
-  rel="noreferrer"
-  class={`underline ${className ?? ""}`}
->
+<a href={href} target="_blank" rel="noreferrer" class="underline text-inherit">
   {text}
 </a>
