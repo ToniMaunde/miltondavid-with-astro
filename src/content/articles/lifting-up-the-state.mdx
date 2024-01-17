@@ -49,12 +49,12 @@ In a normal HTML **form** element the default method is GET and when we submit t
 </form>
 ```
 
-When the form is filled and submitted, the browser's default behaviour will be to navigate to the current URL + the fields of the form as search parameters; if this form was in your current page, **https://www.miltondavid.com/blog/lifting-up-the-state**, when submitted the new URL would be
-**https://www.miltondavid.com/blog/lifting-up-the-state?name=A%20name%20here&nationality=A%20nationality%20here**. 
+When the form is filled and submitted, the browser's default behaviour will be to navigate to the current URL + the fields of the form as search parameters; if this form was in your current page, `https://www.miltondavid.com/blog/lifting-up-the-state`, when submitted the new URL would be
+`https://www.miltondavid.com/blog/lifting-up-the-state?name=A%20name%20here&nationality=A%20nationality%20here`. 
 
 How we would deal with the form submission and/or use these search parameters would depend on many factors (rendering strategy (SSR, CSR, ISR, SSG, etc), goal and routing choice). The focus of this article lies on the client, so let's see how we can take advantage of the search parameters to manage our application state.
 
-## The typical state management on the client
+{/* ## The typical state management on the client
 
 In a common React.js Todo app, that allows you to add, edit and remove todos as well as sort, filter and display them as list or grid, the code would be similar to the one you can find in <ArticleLink text="this repository" href="https://github.com/ToniMaunde/lifting-up-the-state" />. It uses useState() to manage the list of todos (add, delete, edit), and to set the filter for the list of todos.
 
@@ -65,11 +65,11 @@ The alternative to the previous approach consists in:
 - capture click events on the filter component and update the URL accordingly;
 - have a setState that is called every time the filter component is clicked to force React to re-render the TodoList component (in order to **derive once more** the filter value and alter the displayed todos). This is necessary since React does not watch for changes in the page's URL.
 
-You can see this in detail in the same repository, just on a <ArticleLink text="different branch" href="https://github.com/ToniMaunde/lifting-up-the-state/tree/urlsearchparams" />.
+You can see this in detail in the same repository, just on a <ArticleLink text="different branch" href="https://github.com/ToniMaunde/lifting-up-the-state/tree/urlsearchparams" />. */}
 
-
+{/* 
 ## Conclusion
 
 Combining the *insert your framework here* state hook and the URLSearchParams can greatly simplify the state management in web applications, re-introduce the shareability of URLs (even in web applications), and, probably, improve the performance of applications with several setStateActions on each re(re)nder. Tanner Linsley takes this even further by advocating, when applicable, the storing of a JSON stringified state in the URL, here's a <ArticleLink text="youtube video" href="https://youtu.be/qUZm3gbMOeo?si=oU6vYUKZCs8nw_q7" /> about it.
 
-I hope you can find interesting ways to apply this approach in your current/next application.
+I hope you can find interesting ways to apply this approach in your current/next application. */}
