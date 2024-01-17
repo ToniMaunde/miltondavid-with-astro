@@ -6,6 +6,7 @@ import { getEntry } from "astro:content";
 import ArticleMeta from "../components/ArticleMeta.astro";
 import TableOfContents from "../components/articles/TableOfContents.astro";
 import type { MarkdownLayoutProps } from "astro";
+import Share from "../components/articles/Share.astro";
 
 function slugifyTitle(title: string) {
   return title.toLowerCase().split(" ").join("-");
@@ -21,8 +22,6 @@ type Props = MarkdownLayoutProps<{
 
 const GITHUB_CONTENT_URL =
   "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles";
-const TWITTER_SHARING_URL = "https://twitter.com/intent/tweet";
-const LINKEDIN_SHARING_URL = "http://www.linkedin.com/shareArticle";
 
 const { frontmatter, headings } = Astro.props;
 const { href } = Astro.url;
@@ -38,7 +37,7 @@ const article = await getEntry("articles", ARTICLE_SLUG);
   <main class="px-4">
     <a
       href="/articles"
-      class="relative flex items-center text-lg/6 text-supporting-gunmetal-500 dark:text-neutral-300 no-underline w-fit my-10"
+      class="relative flex items-center text-lg/6 text-supporting-gunmetal-500 dark:text-neutral-600 no-underline w-fit my-10"
     >
       <Image
         src={arrowBack}
@@ -51,7 +50,7 @@ const article = await getEntry("articles", ARTICLE_SLUG);
     </a>
     <header>
       <h1
-        class="font-overpass-mono text-supporting-gunmetal-700 dark:text-primary-300 text-[32px]/10"
+        class="font-overpass-mono text-supporting-gunmetal-700 dark:text-neutral-100 text-[32px]/10"
       >
         {frontmatter.title}
       </h1>
@@ -61,18 +60,20 @@ const article = await getEntry("articles", ARTICLE_SLUG);
         createdAt={frontmatter.createdAt}
         updatedAt={frontmatter.updatedAt}
       />
-      <hr class="my-4 border-supporting-gunmetal-300 dark:border-neutral-300" />
+      <hr
+        class="my-4 border-supporting-gunmetal-300 dark:border-supporting-gunmetal-600"
+      />
     </header>
     <TableOfContents headings={headings} />
   </main>
   <article
-    class="px-4 flex flex-col text-lg/6 prose-p:break-words text-supporting-gunmetal-300 dark:text-neutral-300 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-100 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-400 dark:prose-a:text-neutral-100"
+    class="px-4 flex flex-col text-lg/6 prose-code:text-supporting-gunmetal-500 dark:prose-code:text-neutral-300 prose-p:break-words text-supporting-gunmetal-300 dark:text-neutral-600 prose prose-headings:font-overpass-mono prose-headings:text-supporting-gunmetal-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-gunmetal-300 prose-blockquote:border-l-supporting-gunmetal-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-gunmetal-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-200 dark:prose-em:bg-supporting-gunmetal-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-gunmetal-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-gunmetal-400 dark:prose-a:text-primary-300"
   >
     <slot />
     <hr
-      class="mt-0 mb-5 border-supporting-gunmetal-100 dark:border-neutral-300"
+      class="mt-0 mb-5 border-supporting-gunmetal-100 dark:border-neutral-600"
     />
-    <p class="text-supporting-gunmetal-300 mb-0">
+    <p class="text-supporting-gunmetal-300 dark:text-neutral-600 mb-0">
       Did you find a typo, or would like to contribute to the article? Here's
       the <a
         href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
@@ -83,27 +84,6 @@ const article = await getEntry("articles", ARTICLE_SLUG);
         Github Link
       </a> for this article.
     </p>
-    <p class="bg-neutral-200 dark:bg-supporting-gunmetal-300 rounded-md p-4">
-      <span class="text-supporting-gunmetal-500 dark:text-neutral-100"
-        >Share this article:</span
-      >
-      <a
-        href={`${TWITTER_SHARING_URL}?url=${href}&text=${frontmatter.title}&via=tonimaunde`}
-        target="_blank"
-        rel="noreferrer"
-        class="no-underline"
-      >
-        Twitter
-      </a>
-      {"  |  "}
-      <a
-        href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${frontmatter.title}&source=Milton Alberto`}
-        target="_blank"
-        rel="noreferrer"
-        class="no-underline"
-      >
-        Linkedin
-      </a>
-    </p>
+    <Share title={frontmatter.title} href={href} />
   </article>
 </Layout>

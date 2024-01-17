@@ -8,23 +8,25 @@ const pageDescription = "The page you are looking for does not expertise";
   description={pageDescription}
   isArticle={false}
 >
-  <main class="px-4 flex flex-col gap-10 text-supporting-gunmetal-300">
+  <main
+    class="px-4 flex flex-col gap-10 text-supporting-gunmetal-300 dark:text-neutral-600"
+  >
     <header class="mt-10">
-      <h1 class="font-overpass-mono text-supporting-gunmetal-700 text-2xl mb-2">
+      <h1
+        class="font-overpass-mono text-supporting-gunmetal-600 dark:text-neutral-100 text-[32px]/10"
+      >
         Page not found
       </h1>
-      <p class="font-overpass-medium text-supporting-gunmetal-200">
-        Sadly, this page does not exist.
-      </p>
-    </header>
-    <section class="flex flex-col gap-2">
-      <p>
-        Consider visiting the <a href="/" class="underline underline-offset-2"
-          >home</a
-        > page or the <a href="/articles" class="underline underline-offset-2"
-          >articles</a
+      <p class="font-overpass-medium">
+        Sadly, this page does not exist. <br />
+         Consider visiting the <a
+          href="/"
+          class="dark:text-primary-300 underline underline-offset-2">home</a
+        > page or the <a
+          href="/articles"
+          class="dark:text-primary-300 underline underline-offset-2">articles</a
         > page for a nice read.
       </p>
-    </section>
+    </header>
   </main>
 </Layout>

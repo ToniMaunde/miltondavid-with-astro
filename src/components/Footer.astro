@@ -38,24 +38,30 @@ export const socialProfiles = [
 ];
 ---
 
-<footer class="px-4 py-8 mt-auto grid grid-cols-1">
+<footer class="px-4 py-8 mt-auto grid grid-cols-1 xs:grid-cols-3">
   <Image
     src={logoText}
     alt="The website's logo but in text"
     height="24"
     class="my-0"
   />
-  <ul
-    class="mt-4 mb-2 flex gap-4 list-none pl-0 text-supporting-gunmetal-300 dark:text-neutral-400"
-  >
+  <ul class="my-4 xs:my-0 xs:justify-center flex gap-4 list-none pl-0">
     <li class="pl-0 my-0">
-      <a href="/" class="no-underline">home</a>
+      <a
+        href="/"
+        class="no-underline text-supporting-gunmetal-300 hover:text-supporting-gunmetal-700 dark:text-neutral-200 dark:hover:text-primary-300 transition-colors ease-in-out"
+        >home</a
+      >
     </li>
     <li class="pl-0 my-0">
-      <a href="/articles" class="no-underline">articles</a>
+      <a
+        href="/articles"
+        class="no-underline text-supporting-gunmetal-300 hover:text-supporting-gunmetal-700 dark:text-neutral-200 dark:hover:text-primary-300 transition-colors ease-in-out"
+        >articles</a
+      >
     </li>
   </ul>
-  <ul class="flex gap-4 mt-0 mb-4 list-none pl-0">
+  <ul class="flex gap-4 mt-0 mb-4 xs:mb-6 list-none pl-0">
     {
       socialProfiles.map((profile) => (
         <li class="pl-0 my-0">
@@ -70,7 +76,9 @@ export const socialProfiles = [
       ))
     }
   </ul>
-  <p class="text-supporting-gunmetal-300 dark:text-neutral-500 my-0">
+  <p
+    class="text-supporting-gunmetal-300 dark:text-neutral-500 my-0 xs:col-span-3 xs:text-center"
+  >
     ©{currentYear} Milton David. All Rights Reserved.
   </p>
 </footer>

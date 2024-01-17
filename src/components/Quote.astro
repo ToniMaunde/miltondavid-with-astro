@@ -6,7 +6,9 @@ interface Props {
 const { text, author } = Astro.props;
 ---
 
-<h1 class="font-overpass-mono text-2xl/8">
+<h1
+  class="font-overpass-mono text-supporting-gunmetal-700 dark:text-neutral-600 text-lg/6"
+>
   "{text}"
 </h1>
-<p>- {author}</p>
+<p class="text-supporting-gunmetal-700 dark:text-neutral-600">- {author}</p>

@@ -28,26 +28,26 @@ const orderedArticles = articles.sort((prev, next) => {
 });
 ---
 
-<ul class="flex flex-col gap-4">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
   {
     orderedArticles.map((article) => (
       <li>
         <a
           href={`/articles/${article.slug}`}
-          class="flex flex-col gap-2 bg-neutral-200 transition-shadow ease-in-out hover:md:ring hover:md:ring-supporting-gunmetal-300 p-4 rounded-lg"
+          class="h-full flex flex-col gap-2 bg-neutral-200 dark:bg-supporting-gunmetal-600 transition-shadow ease-in-out hover:md:ring hover:md:ring-supporting-gunmetal-100 p-4 rounded-lg"
         >
-          <h3 class="font-overpass-mono text-supporting-gunmetal-300 dark:text-primary-300 text-2xl/8">
+          <h3 class="font-overpass-mono text-supporting-gunmetal-300 dark:text-neutral-100 text-lg/6">
             {article.data.title}
           </h3>
-          <p class="font-overpass-regular text-supporting-gunmetal-300 text-base/4 dark:text-neutral-300">
+          <p class="font-overpass-regular text-supporting-gunmetal-300 text-base/4 dark:text-neutral-600">
             {article.data.description}
           </p>
-          <p class="text-supporting-gunmetal-100 dark:text-neutral-500 text-sm/4">
+          <p class="text-supporting-gunmetal-100 dark:text-neutral-700 text-sm/4">
             ~{computeReadingTime(article.body)} min read{" "}
             <span>&nbsp⦁&nbsp;</span>{" "}
             {articleDate(article.data.createdAt, article.data.updatedAt)}
           </p>
-          <p class="text-supporting-gunmetal-300 dark:text-neutral-300 text-sm/4">
+          <p class="text-supporting-gunmetal-300 dark:text-neutral-700 text-sm/4">
             {formatTopics(article.data.topics)}
           </p>
         </a>

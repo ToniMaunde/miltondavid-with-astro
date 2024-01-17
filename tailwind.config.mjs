@@ -2,6 +2,9 @@
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
+    screens: {
+      "md": "600px"
+    },
     extend: {
       colors: {
         "supporting-gunmetal-100": "#515C6E",
@@ -17,6 +20,8 @@ export default {
         "neutral-300": "#D9D9D9",
         "neutral-400": "#CCCCCC",
         "neutral-500": "#BFBFBF",
+        "neutral-600": "#ADADAD",
+        "neutral-700": "#999999",
         "primary-300": "#F7B34F",
         "primary-500": "#F89B13",
       },
@@ -26,7 +31,7 @@ export default {
         "overpass-medium": ['"Overpass Medium"', "sans"],
       },
       screens: {
-        "xs": "600px",
+        "xs": "512px",
       }
     },
 	},
