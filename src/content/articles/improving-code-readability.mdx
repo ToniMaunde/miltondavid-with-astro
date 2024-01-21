@@ -67,7 +67,7 @@ if (thereAreOnlineUsers) {...}
 
 ## 2. Avoiding the dot notation in conditional rendering
 
-It is far easier to understand the condtion driving the render of an element if it expressed in words (a variable) instead of having to verifying the type of the object being accessed, the properties it possesses and then which condition is being used.
+I believe to be easier to understand the condition driving the render inside JSX if the condition is extracted outside of it, and expressed as boolean variable instead of verifying the condition within it (the JSX).
 
 ```jsx
 // ❌
@@ -100,7 +100,7 @@ return (
 
 ## 3. Prefer function declaration to function expressions and arrow functions
 
-Despite this being somewhat of a personal preference, the readability of the code improves when function declarations are used since the developer can immediately understand what it is through the keyword right at the start of the line.
+I believe that using the *traditional* function declaration (if possible) reduces the cognitive load when trying to understand whether a **const** contains a value (primitive/object) or a functio, since the function keyword declares right from the start what we will find next.
 
 ```js
 // ⚠️
@@ -114,7 +114,7 @@ function generateReport() {...}
 
 ## 4. Have the function caller right after the callee
 
-Being able quickly visit the function responsible for the value of a variable is great for quick debugging whenever its value does not match what's expected.
+This approach alleviates the need of CTRL + Click (or gd if you Vim) to check the logic driving the function, and improves the structure of the file. 
 
 ```js
 // ⚠️
@@ -134,7 +134,7 @@ const mozambicanUsers = filterUsers(users, "MZ");
 
 ## 5. Avoid variable/function hoisting
 
-This resource of the language allows you to access/call variables/functions before they are declared. This can lead to unexpected errors, and is not generally recommended. And even if this was no issue, seeing the variable/function declaration only after its use can affect our understanding of the logic of the codebase.
+This resource of the language allows you to access variables and functions before they are declared. This can lead to unexpected errors, and is not generally recommended. And even if this was no issue, the reading of a file with hoisted variables is never top-down and f-shaped.
 
 ```js
 // ❌
@@ -149,7 +149,7 @@ const users = getUsers();
 
 ## 6. Avoid complex anonymous callbacks
 
-With ES6 the arrow functions and new Array methods (map, filter, reduce, etc) combination became a "standard" when interacting with object collections. But something happened while this combination became wildly adopted: this combination, usually acting as a **callback**, became extremely complex.
+With ES6 the arrow functions and new Array methods (map, filter, reduce, etc) combination became a "standard" when interacting with object collections. Unfortunately, we, developers, started writing complex logic inside callbacks these methods take as arguments. That has led to convoluted, and hard to debug codebases.
 
 ```js
 // ❌
@@ -172,7 +172,7 @@ While the code is virtually the same, it became much easier to understand how th
 
 ## 7. Internalize one-off functions
 
-Functions represent blocks of code that execute a certain task. Usually functions are declared so that the functionality they encompass can be accessed without repeating the within them. But sometimes functions are only called once and by a single caller.
+Functions represent blocks of code that execute a certain task. Usually functions are declared so that the functionality they encompass can be accessed without repeating the code within them. But sometimes functions are only called once.
 
 ```js
 // ⚠️
@@ -187,7 +187,7 @@ const groupedUsers = groupOnlineUsers(users, region);
 /* insert lines of code */
 ```
 
-In the example, the *filterOnlineUsers* function is located in the outer scope of the "file" despite only being used by the *groupOnlineUsersByRegion* function. This pollutes the file's global namespace and misses out on the opportunity to make the code a little bit more succinct. Here's a better approach.
+In the example, the *filterOnlineUsers* function is located in the outer scope  despite only being called by the *groupOnlineUsersByRegion* function. This pollutes the  global namespace, and misses out on the opportunity to make the code a little bit more succinct. Here's a better approach.
 
 ```js
 // ✅
@@ -202,10 +202,10 @@ const groupedUsers = groupOnlineUsers(users, region);
 /* insert lines of code */
 ```
 
-By moving the *filterOnlineUsers* function inside the *groupOnlineUsersByRegion* we remove it from the global namespace, create it only when the parent function is created and contextualize the code execution. This is also called **a closure**. Check <ArticleLink text="this MDN link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" /> to learn more.
+By moving the *filterOnlineUsers* function inside the *groupOnlineUsersByRegion* we remove it from the global namespace, and create it only when the parent function is created and contextualize the code execution. This is also called **a closure**. Check <ArticleLink text="this MDN link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" /> to learn more.
 
 
-## 8. Avoid unnecessary conditional structures
+## 8. Avoid unnecessary conditional comparisons
 
 If there is no further action to be taken after the comparison, and the function is expected to return a boolean value, just return it.
 
@@ -228,7 +228,7 @@ const onlineUsers = users.filter(filterByStatus);
 
 ## 9. Avoid using the ternary operator for chained conditionals
 
-There is a misconception among developers that promotes the idea that *"the more complex your codebase is, the clever you are*. The result of this mindset are unintelligible codebases that confuse the authors and contributors. Coding is like communication, it's not what we write (and perceive as clear) but what others understand after reading our code.  
+There is a misconception among developers that promotes the idea that *"the more complex your codebase is, the smarter you are*. This leads to unintelligible codebases that confuse themselves and future contributors. Coding is like communication, it's not what we write (and perceive as clear) but what others understand after reading our code.
 
 ```js
 // ❌
@@ -266,9 +266,9 @@ if (users.length > 0) {
 
 This is much easier to follow and understand when compared to that *mumbo jumbo* of a one-liner we saw before.
 
-## 10. Use more variables
+## 10. Declare more variables
 
-Variables are not "free". They add up to the memory our programs use during their execution. But contrary to the popular belief (or at least I think), most programming languages do an amazing job in <ArticleLink href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" text="garbage collection"/>. Therefore, we should use as many variables as we need towards simplifying our code and prevent the rerun of expensive calculations.
+Variables are not "free". They are part of the memory our programs use. But contrary to the popular belief (or at least I think), most programming languages do an amazing job in <ArticleLink href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" text="garbage collecting them"/>. Some, like Rust, do not even have a garbage collector. Therefore, we should use as many variables as we need towards simplifying our code and prevent the rerun of expensive calculations.
 We'll use the previous snippet.
 
 ```js
