@@ -26,12 +26,11 @@ export default {
         "primary-500": "#F89B13",
       },
       fontFamily: {
-        "overpass-mono": ['"Overpass Mono"', "sans"],
-        "overpass-regular": ['"Overpass Regular"', "sans"],
-        "overpass-medium": ['"Overpass Medium"', "sans"],
-      },
-      screens: {
-        "xs": "512px",
+        "inter-light": ['"Inter Light"', "sans"],
+        "inter-regular": ['"Inter Regular"', "sans"],
+        "inter-medium": ['"Inter Medium"', "sans"],
+        "inter-semibold": ['"Inter Semibold"', "sans"],
+        "lora-bold": ['"Lora Bold"', "serif"]
       }
     },
 	},

@@ -12,6 +12,10 @@ import { ViewTransitions } from "astro:transitions";
 
 const { title, description, isArticle } = Astro.props;
 
+const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID;
+
+export { umamiSecret };
+
 function computeTwitterMeta(
   title: string,
   description: string
@@ -58,7 +62,7 @@ function computeTwitterMeta(
     <script
       defer
       src="https://analytics.eu.umami.is/script.js"
-      data-website-id="3ae45fd5-b8f1-48d0-8a33-b9832878edf1"></script>
+      data-website-id={umamiSecret}></script>
     <title>{title}</title>
     <ViewTransitions />
   </head>
@@ -73,25 +77,41 @@ function computeTwitterMeta(
         color-scheme: light dark;
       }
       @font-face {
-        font-family: "Overpass Mono";
-        src: url("/fonts/overpassmono_bold.woff2") format("woff2");
-        font-weight: bold;
+        font-family: "Inter Light";
+        src: url("/fonts/inter_light.woff2") format("woff2");
+        font-weight: 300;
         font-style: normal;
         font-display: swap;
       }
 
       @font-face {
-        font-family: "Overpass Regular";
-        src: url("/fonts/overpass_regular.woff2") format("woff2");
-        font-weight: normal;
+        font-family: "Inter Regular";
+        src: url("/fonts/inter_regular.woff2") format("woff2");
+        font-weight: 400;
         font-style: normal;
         font-display: swap;
       }
 
       @font-face {
-        font-family: "Overpass Medium";
-        src: url("/fonts/overpass_medium.woff2") format("woff2");
+        font-family: "Inter Medium";
+        src: url("/fonts/inter_medium.woff2") format("woff2");
         font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Inter Semibold";
+        src: url("/fonts/inter_semibold.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Lora Bold";
+        src: url("/fonts/lora_bold.woff2") format("woff2");
+        font-weight: 700;
         font-style: normal;
         font-display: swap;
       }
