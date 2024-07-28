@@ -1,29 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../images/logo.svg";
-import logoText from "../images/logo_text.svg";
+import { Icon } from "astro-icon/components";
 ---
 
-<nav class="flex items-center pt-6 px-4">
+<nav class="flex justify-between p-6">
   <a href="/" class="flex items-center gap-2">
-    <Image
-      src={logo}
-      alt="The website's logo"
-      width="24"
-      height="24"
-      class="my-0"
-    />
-    <Image
-      src={logoText}
-      alt="The website's logo but in text"
-      height="24"
-      class="my-0"
-    />
+    <Icon name="logomark" class="w-8 h-auto" />
+    <p class="font-lora-bold text-supporting-600 text-lg/6">milton_david</p>
   </a>
-  <a
-    href="/articles"
-    class="font-overpass-medium transition-colors ease-in-out text-supporting-gunmetal-500 hover:text-supporting-gunmetal-700 dark:text-neutral-100 dark:hover:text-primary-300 ml-auto"
-  >
-    Articles
-  </a>
+  <button>
+    <Icon name="theme_light" class="w-8 h-auto" />
+  </button>
 </nav>

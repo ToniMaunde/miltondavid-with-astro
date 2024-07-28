@@ -1,6 +1,6 @@
 ---
 import type { TArticle } from "../content/config";
-import { articleDate, computeReadingTime } from "../util";
+import { computeReadingTime } from "../util";
 
 interface Props {
   articles: Array<{
@@ -10,11 +10,6 @@ interface Props {
     collection: string;
     data: TArticle;
   }>;
-}
-
-function formatTopics(topics: Array<string>) {
-  const topicsWithHashes = topics.map((topic) => `#${topic}`);
-  return topicsWithHashes.join(" ");
 }
 
 const { articles } = Astro.props;
@@ -32,23 +27,14 @@ const orderedArticles = articles.sort((prev, next) => {
   {
     orderedArticles.map((article) => (
       <li>
-        <a
-          href={`/articles/${article.slug}`}
-          class="h-full flex flex-col gap-2 bg-neutral-200 dark:bg-supporting-gunmetal-600 transition-shadow ease-in-out hover:md:ring hover:md:ring-supporting-gunmetal-100 p-4 rounded-lg"
-        >
-          <h3 class="font-overpass-mono text-supporting-gunmetal-300 dark:text-neutral-100 text-lg/6">
+        <a href={`/articles/${article.slug}`} class="h-full flex flex-col">
+          <h3 class="font-inter-semibold text-supporting-400 tracking-wider">
             {article.data.title}
           </h3>
-          <p class="font-overpass-regular text-supporting-gunmetal-300 text-base/4 dark:text-neutral-600">
-            {article.data.description}
-          </p>
-          <p class="text-supporting-gunmetal-100 dark:text-neutral-700 text-sm/4">
-            ~{computeReadingTime(article.body)} min read{" "}
-            <span>&nbsp⦁&nbsp;</span>{" "}
-            {articleDate(article.data.createdAt, article.data.updatedAt)}
-          </p>
-          <p class="text-supporting-gunmetal-300 dark:text-neutral-700 text-sm/4">
-            {formatTopics(article.data.topics)}
+          <p class="text-supporting-300">{article.data.description}</p>
+          <p class="text-supporting-200">
+            {computeReadingTime(article.body)} minutes read{" "}
+            <span>&nbsp;|&nbsp;</span> {article.data.updatedAt}
           </p>
         </a>
       </li>

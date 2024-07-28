@@ -1,11 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import logoText from "../images/logo_text.svg";
-import codepenIcon from "../images/codepen.svg";
-import githubIcon from "../images/github.svg";
-import dribbbleIcon from "../images/dribbble.svg";
-import twitterIcon from "../images/twitter.svg";
-import linkedinIcon from "../images/linkedin.svg";
+import { Icon } from "astro-icon/components";
 
 export const currentYear = new Date().getFullYear();
 
@@ -13,72 +7,54 @@ export const socialProfiles = [
   {
     href: "https://github.com/ToniMaunde",
     alt: "Github",
-    icon: githubIcon,
+    icon: "socials/github",
   },
   {
     href: "https://dribbble.com/ToniMaunde",
     alt: "Dribbble",
-    icon: dribbbleIcon,
+    icon: "socials/dribbble",
   },
   {
     href: "https://www.linkedin.com/in/tonimaunde/",
     alt: "Linkedin",
-    icon: linkedinIcon,
+    icon: "socials/linkedin",
   },
   {
     href: "https://twitter.com/tonimaunde",
     alt: "Twitter",
-    icon: twitterIcon,
+    icon: "socials/twitter",
   },
   {
     href: "https://codepen.io/ToniMaunde",
     alt: "Codepen",
-    icon: codepenIcon,
+    icon: "socials/codepen",
   },
 ];
 ---
 
-<footer class="px-4 py-8 mt-auto grid grid-cols-1 xs:grid-cols-3">
-  <Image
-    src={logoText}
-    alt="The website's logo but in text"
-    height="24"
-    class="my-0"
-  />
-  <ul class="my-4 xs:my-0 xs:justify-center flex gap-4 list-none pl-0">
-    <li class="pl-0 my-0">
-      <a
-        href="/"
-        class="no-underline text-supporting-gunmetal-300 hover:text-supporting-gunmetal-700 dark:text-neutral-200 dark:hover:text-primary-300 transition-colors ease-in-out"
-        >home</a
-      >
-    </li>
-    <li class="pl-0 my-0">
-      <a
-        href="/articles"
-        class="no-underline text-supporting-gunmetal-300 hover:text-supporting-gunmetal-700 dark:text-neutral-200 dark:hover:text-primary-300 transition-colors ease-in-out"
-        >articles</a
-      >
-    </li>
-  </ul>
-  <ul class="flex gap-4 mt-0 mb-4 xs:mb-6 list-none pl-0">
+<footer class="p-6">
+  <a href="/" class="flex items-center gap-2">
+    <Icon name="logomark" class="w-8 h-auto" />
+    <p class="font-lora-bold text-supporting-600 text-lg/6">milton_david</p>
+  </a>
+  <ul class="flex flex-wrap gap-2 text-supporting-300 fill-supporting-300">
     {
       socialProfiles.map((profile) => (
-        <li class="pl-0 my-0">
-          <a href={profile.href} target="_blank" rel="noreferrer">
-            <Image
-              src={profile.icon}
-              alt={`Milton's ${profile.alt}`}
-              class="my-0"
-            />
+        <li>
+          <a
+            class="flex gap-2 items-center"
+            target="_blank"
+            rel="noreferrer"
+            href={profile.href}
+          >
+            <Icon name={profile.icon} />
+            <span class="lowercase">{profile.alt}</span>
           </a>
         </li>
       ))
     }
   </ul>
-  <p
-    class="text-supporting-gunmetal-300 dark:text-neutral-500 my-0 xs:col-span-3 xs:text-center"
-  >
+  <p class="text-supporting-300">
     ©{currentYear} Milton David. All Rights Reserved.
   </p>
 </footer>

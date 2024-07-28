@@ -1,6 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
 const pageDescription = "Milton David's personal website";
+import { getCollection } from "astro:content";
+import ArticleList from "../components/ArticleList.astro";
+import { Icon } from "astro-icon/components";
+
+// TODO: filter the drafts on render
+const articles = await getCollection("articles");
+
+const projects: Array<{
+  name: string;
+  description: string;
+  link: string;
+}> = [
+  {
+    name: "minhamola",
+    link: "https://minhamola.com",
+    description:
+      "A web-based personal finance management application. Built with Vue.js and Express.js.",
+  },
+  {
+    name: "typed-formdata",
+    link: "https://github.com/ToniMaunde/typed-formdata",
+    description:
+      "An experiment on parsing and validating the native formdata object based on a schema. Built with TypeScript and Zod.",
+  },
+  {
+    name: "react-svg-icon",
+    link: "https://github.com/ToniMaunde/react-svg-component",
+    description:
+      "A tree-shakeable approach to rendering SVGs (in React.js). All without the use of a library or using the HTMLImageElement. Built with React.js and TypeScript.",
+  },
+];
 ---
 
 <Layout
@@ -8,72 +39,44 @@ const pageDescription = "Milton David's personal website";
   description={pageDescription}
   isArticle={false}
 >
-  <main class="px-4 flex flex-col gap-10">
-    <header class="mt-10">
-      <h1
-        class="font-overpass-mono text-supporting-gunmetal-700 dark:text-neutral-100 text-[32px]/10 mb-2"
-      >
-        Building software he needs...
+  <main class="px-6 flex flex-col">
+    <header class="">
+      <h1 class="font-lora-bold text-supporting-600">
+        Building tools that I need
       </h1>
-      <p
-        class="font-overpass-medium text-lg/6 text-supporting-gunmetal-200 dark:text-neutral-600"
-      >
-        hoping that someone benefits from it too.
+      <p class="text-supporting-500">expecting to benefit others as well.</p>
+      <p class="text-supporting-300">
+        I’m a Software Engineer and an UI Designer. I combine these skills to
+        create digital solutions to solve everyday problems. I use neovim btw.
       </p>
     </header>
-    <section class="flex flex-col gap-2">
-      <h2
-        class="font-overpass-mono text-supporting-gunmetal-600 dark:text-neutral-200 text-2xl/8"
-      >
-        Writing
-      </h2>
-      <p class="text-lg/6 text-supporting-gunmetal-300 dark:text-neutral-600">
-        He writes about software engineering, UI design, and life.
-      </p>
-      <a
-        href="/articles"
-        class="underline text-lg/6 text-supporting-gunmetal-300 dark:text-primary-300 underline-offset-2"
-        >Read Articles</a
-      >
+    <section class="flex flex-col">
+      <h2 class="font-lora-bold text-supporting-600">Projects</h2>
+      <ul class="projects">
+        {
+          projects.map((project) => (
+            <li>
+              <a
+                class="flex items-center gap-1 mb-2"
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h3 class="text-supporting-400 font-inter-medium">
+                  {project.name}
+                </h3>
+                <Icon name="new_window" />
+              </a>
+              <p class="text-supporting-300 mb-4">{project.description}</p>
+              <hr class="border-neutral-300 mb-4" />
+            </li>
+          ))
+        }
+      </ul>
     </section>
-    <section class="flex flex-col gap-2">
-      <h2
-        class="font-overpass-mono text-supporting-gunmetal-600 dark:text-neutral-200 text-2xl/8"
-      >
-        About Him
-      </h2>
-      <p class="text-lg/6 text-supporting-gunmetal-300 dark:text-neutral-600">
-        He’s a Software Engineer and an UI Designer. He works mostly on the web
-        platform and recently he has developed an interest in systems
-        programming and native development.
-      </p>
-      <p class="text-lg/6 text-supporting-gunmetal-300 dark:text-neutral-600">
-        He built/is building
-        <a
-          class="dark:text-primary-300 underline underline-offset-2"
-          href="https://github.com/ToniMaunde/react-svg-component"
-          target="_blank"
-          rel="noreferrer">react-svg-component</a
-        >,
-        <a
-          class="dark:text-primary-300 underline underline-offset-2"
-          href="https://github.com/ToniMaunde/array-group-polyfill"
-          target="_blank"
-          rel="noreferrer">array-group-polyfill</a
-        >,
-        <a
-          class="dark:text-primary-300 underline underline-offset-2"
-          href="https://github.com/ToniMaunde/typed-formdata"
-          target="_blank"
-          rel="noreferrer">typed-formdata</a
-        >, and
-        <a
-          class="dark:text-primary-300 underline underline-offset-2"
-          href="https://minhamola.com"
-          target="_blank"
-          rel="noreferrer">minhamola</a
-        >.
-      </p>
+    <section class="flex flex-col">
+      <h2 class="font-lora-bold text-supporting-600">Articles</h2>
+      <ArticleList articles={articles} />
     </section>
   </main>
 </Layout>

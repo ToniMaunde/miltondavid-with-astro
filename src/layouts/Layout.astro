@@ -67,7 +67,7 @@ function computeTwitterMeta(
     <ViewTransitions />
   </head>
   <body
-    class="max-w-[672px] xs:mx-auto h-full flex flex-col bg-white dark:bg-supporting-gunmetal-700 font-overpass-regular"
+    class="max-w-[688px] h-full flex flex-col bg-white dark:bg-supporting-gunmetal-700 font-inter-regular"
   >
     <Navbar />
     <slot />
@@ -114,6 +114,10 @@ function computeTwitterMeta(
         font-weight: 700;
         font-style: normal;
         font-display: swap;
+      }
+
+      ul.projects li:last-child hr {
+        display: none;
       }
     </style>
   </body>

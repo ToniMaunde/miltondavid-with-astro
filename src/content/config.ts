@@ -6,6 +6,7 @@ const ZArticleSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   topics: z.string().array(),
+  isDraft: z.boolean(),
 });
 
 export type TArticle = z.infer<typeof ZArticleSchema>;
