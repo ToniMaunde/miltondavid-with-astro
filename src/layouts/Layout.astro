@@ -67,7 +67,7 @@ function computeTwitterMeta(
     <ViewTransitions />
   </head>
   <body
-    class="max-w-[688px] h-full flex flex-col bg-white dark:bg-supporting-gunmetal-700 font-inter-regular"
+    class="max-w-[688px] h-full flex flex-col bg-white dark:bg-supporting-700 font-inter-regular"
   >
     <Navbar />
     <slot />
@@ -118,6 +118,10 @@ function computeTwitterMeta(
 
       ul.projects li:last-child hr {
         display: none;
+      }
+
+      ul.projects li:last-child p {
+        margin-block-end: 0;
       }
     </style>
   </body>

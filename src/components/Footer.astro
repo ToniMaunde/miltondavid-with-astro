@@ -32,12 +32,12 @@ export const socialProfiles = [
 ];
 ---
 
-<footer class="p-6">
+<footer class="flex flex-col gap-6 pb-6 px-6 mt-12">
   <a href="/" class="flex items-center gap-2">
     <Icon name="logomark" class="w-8 h-auto" />
     <p class="font-lora-bold text-supporting-600 text-lg/6">milton_david</p>
   </a>
-  <ul class="flex flex-wrap gap-2 text-supporting-300 fill-supporting-300">
+  <ul class="flex flex-wrap gap-4 text-supporting-300 fill-supporting-300">
     {
       socialProfiles.map((profile) => (
         <li>
