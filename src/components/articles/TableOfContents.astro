@@ -1,37 +1,25 @@
 ---
 import type { MarkdownHeading } from "astro";
+import { Icon } from "astro-icon/components";
 interface Props {
   headings: Array<MarkdownHeading>;
+  classes: string;
 }
 
-const PADDING_LEFT_TAILWINDCSS_CLASSES = new Map<number, string>([
-  [0, "pl-0"],
-  [1, "pl-4"],
-  [2, "pl-5"],
-  [3, "pl-6"],
-  [4, "pl-7"],
-  [5, "pl-8"],
-  [6, "pl-9"],
-]) satisfies Map<number, string>;
-
-const { headings } = Astro.props;
+const { headings, classes } = Astro.props;
 ---
 
-<details class="mb-4">
-  <summary
-    class="font-overpass-mono text-supporting-gunmetal-500 dark:text-neutral-100 cursor-pointer w-fit text-lg/6"
-    >{" "}In this article</summary
-  >
-  <ol class="px-2 pt-1 grid gap-2">
+<details class=`font-inter-medium bg-supporting-400 px-6 py-4 ${classes}`>
+  <summary class="flex w-fit text-neutral-200 cursor-pointer">
+    In this article
+    <Icon name="chevron" class="w-6 h-auto" />
+  </summary>
+  <ol start="1" class="grid gap-2 mt-2">
     {
       headings.map((heading) => (
-        <li
-          class={`text-supporting-gunmetal-500 dark:text-neutral-400 text-lg/8 ${PADDING_LEFT_TAILWINDCSS_CLASSES.get(
-            heading.depth - 2
-          )}`}
-        >
+        <li>
           <a
-            class="font-overpass-regular underline underline-offset-2"
+            class="text-lg/8 hover:underline hover:text-dark-link-hover-focus focus:text-dark-link-hover-focus text-dark-link visited:text-dark-link-visited active:text-dark-link-active"
             href={`#${heading.slug}`}
           >
             {heading.text}
@@ -41,3 +29,13 @@ const { headings } = Astro.props;
     }
   </ol>
 </details>
+<style>
+  details > summary {
+    list-style: none;
+  }
+
+  details > summary::marker,
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

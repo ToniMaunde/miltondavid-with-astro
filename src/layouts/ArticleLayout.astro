@@ -1,14 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getEntry } from "astro:content";
-import ArticleMeta from "../components/ArticleMeta.astro";
 import TableOfContents from "../components/articles/TableOfContents.astro";
 import type { MarkdownLayoutProps } from "astro";
 import Share from "../components/articles/Share.astro";
 import { Icon } from "astro-icon/components";
+import { format } from "date-fns";
 
 function slugifyTitle(title: string) {
   return title.toLowerCase().split(" ").join("-");
+}
+
+function articleDate(createdAt: string, updatedAt: string, isDraft: boolean) {
+  const datePattern = "MMM dd yyyy";
+
+  if (isDraft) {
+    return `Started on ${format(new Date(createdAt), datePattern)}`;
+  } else {
+    if (createdAt === updatedAt) {
+      return format(new Date(createdAt), datePattern);
+    }
+    return `Updated on ${format(new Date(updatedAt), datePattern)}`;
+  }
 }
 
 type Props = MarkdownLayoutProps<{
@@ -16,6 +28,7 @@ type Props = MarkdownLayoutProps<{
   description: string;
   createdAt: string;
   updatedAt: string;
+  isDraft: boolean;
   topics: Array<string>;
 }>;
 
@@ -25,7 +38,6 @@ const GITHUB_CONTENT_URL =
 const { frontmatter, headings } = Astro.props;
 const { href } = Astro.url;
 const ARTICLE_SLUG = slugifyTitle(frontmatter.title);
-const article = await getEntry("articles", ARTICLE_SLUG);
 ---
 
 <Layout
@@ -33,26 +45,33 @@ const article = await getEntry("articles", ARTICLE_SLUG);
   description={frontmatter.description}
   isArticle={true}
 >
-  <main class="px-6">
+  <main>
     <a
       href="/"
-      class="relative flex gap-2 items-center text-lg/6 text-supporting-500"
+      class="relative flex gap-2 items-center text-lg/6 text-supporting-500 px-6"
     >
-      <Icon name="arrow_left" />
+      <Icon name="arrow_left" class="w-4 h-auto" />
        Go back
     </a>
-    <header class="mt-6">
+    <header class="flex flex-col my-6 px-6">
       <h1 class="font-lora-bold text-supporting-600 text-[32px]/10 mb-2">
         {frontmatter.title}
       </h1>
-      <ArticleMeta
-        articleBody={article!.body}
-        description={frontmatter.description}
-        createdAt={frontmatter.createdAt}
-        updatedAt={frontmatter.updatedAt}
-      />
+      <p class="text-supporting-300 text-sm/4">
+        {
+          articleDate(
+            frontmatter.createdAt,
+            frontmatter.updatedAt,
+            frontmatter.isDraft
+          )
+        }
+      </p>
     </header>
-    <TableOfContents headings={headings} />
+    <p class="font-inter-light text-supporting-400 mb-6 px-6">
+      <span class="font-inter-medium">Summary:</span>
+      {frontmatter.description}
+    </p>
+    <TableOfContents headings={headings} classes="mb-6" />
   </main>
   <article
     class="px-6 flex flex-col text-lg/[150%] prose-code:text-supporting-500 dark:prose-code:text-neutral-300 prose-p:break-words text-supporting-300 dark:text-neutral-600 prose prose-headings:font-overpass-mono prose-headings:text-supporting-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-300 prose-blockquote:border-l-supporting-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-200 dark:prose-em:bg-supporting-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-400 dark:prose-a:text-primary-300"
