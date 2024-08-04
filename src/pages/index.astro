@@ -1,10 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
-const pageDescription = "Milton David's personal website";
+import { format } from "date-fns";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+const pageDescription = "Milton David's personal website";
 
-// TODO: filter the drafts
+function formatDate(date: string) {
+  const datePattern = "MMM dd yyyy";
+
+  return format(new Date(date), datePattern);
+}
+
 const articles = await getCollection("articles");
 
 const orderedArticles = articles.sort((prev, next) => {
@@ -15,6 +21,8 @@ const orderedArticles = articles.sort((prev, next) => {
 
   return 0;
 });
+
+const drafts = orderedArticles.filter((article) => article.data.isDraft);
 
 const projects: Array<{
   name: string;
@@ -48,7 +56,7 @@ const projects: Array<{
   isArticle={false}
 >
   <main class="px-6 flex flex-col gap-12">
-    <header class="">
+    <header>
       <h1 class="font-lora-bold text-supporting-600 text-[2rem]/10 mb-2">
         Building tools that I need
       </h1>
@@ -60,7 +68,7 @@ const projects: Array<{
         create digital solutions to solve everyday problems. I use neovim btw.
       </p>
     </header>
-    <section class="flex flex-col mb-2">
+    <section class="flex flex-col">
       <h2 class="font-lora-bold text-lg/6 text-supporting-600 mb-4">
         Projects
       </h2>
@@ -69,12 +77,12 @@ const projects: Array<{
           projects.map((project) => (
             <li>
               <a
-                class="flex items-center gap-1 mb-2"
+                class="flex items-center gap-1 mb-2 w-fit"
                 href={project.link}
                 target="_blank"
                 rel="noreferrer"
               >
-                <h3 class="font-inter-medium text-lg/6 text-supporting-400">
+                <h3 class="font-inter-medium text-lg/6 text-supporting-400 hover:underline">
                   {project.name}
                 </h3>
                 <Icon name="new_window" />
@@ -93,20 +101,47 @@ const projects: Array<{
             <li class="flex flex-col gap-2">
               <a
                 href={`/articles/${article.slug}`}
-                class="h-full flex flex-col"
+                class="h-full flex flex-col w-fit"
               >
-                <h3 class="font-inter-medium text-lg/6 w-fit text-supporting-400">
+                <h3 class="font-inter-medium text-lg/6 text-supporting-400 hover:underline">
                   {article.data.title}
                 </h3>
               </a>
               <p class="text-supporting-300">{article.data.description}</p>
               <p class="text-sm/4 text-supporting-200">
-                {article.data.updatedAt}
+                {formatDate(article.data.updatedAt)}
               </p>
             </li>
           ))
         }
       </ul>
+    </section>
+    <section class="flex flex-col gap-4 mb-8">
+      <h2 class="font-lora-bold text-lg/6 text-supporting-600">Drafts</h2>
+      {
+        drafts.length > 0 ? (
+          <ul class="flex flex-col gap-6">
+            {drafts.map((article) => (
+              <li class="flex flex-col gap-2 w-fit">
+                <a
+                  href={`/articles/${article.slug}`}
+                  class="h-full flex flex-col"
+                >
+                  <h3 class="font-inter-medium text-lg/6 text-supporting-400 hover:underline">
+                    {article.data.title}
+                  </h3>
+                </a>
+                <p class="text-supporting-300">{article.data.description}</p>
+                <p class="text-sm/4 text-supporting-200">
+                  {formatDate(article.data.updatedAt)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-supporting-300">Oh no, I'm not writing enough.</p>
+        )
+      }
     </section>
   </main>
 </Layout>

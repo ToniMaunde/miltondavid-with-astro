@@ -32,8 +32,8 @@ export const socialProfiles = [
 ];
 ---
 
-<footer class="flex flex-col gap-6 pb-6 px-6 mt-12">
-  <a href="/" class="flex items-center gap-2">
+<footer class="flex flex-col gap-6 pb-6 px-6 mt-auto">
+  <a href="/" class="flex items-center gap-2 w-fit">
     <Icon name="logomark" class="w-8 h-auto" />
     <p class="font-lora-bold text-supporting-600 text-lg/6">milton_david</p>
   </a>
@@ -42,7 +42,7 @@ export const socialProfiles = [
       socialProfiles.map((profile) => (
         <li>
           <a
-            class="flex gap-2 items-center"
+            class="flex gap-2 items-center hover:underline"
             target="_blank"
             rel="noreferrer"
             href={profile.href}

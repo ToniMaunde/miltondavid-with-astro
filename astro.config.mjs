@@ -17,5 +17,6 @@ export default defineConfig({
   }), tailwind(), icon()],
   redirects: {
     "/blog/[slug]": "/articles/[slug]"
-  }
+  },
+  site: "https://miltondavid.com",
 });

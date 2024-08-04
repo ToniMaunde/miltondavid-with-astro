@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  title: string;
+}
+
+const TWITTER_SHARING_URL = "https://twitter.com/intent/tweet";
+const LINKEDIN_SHARING_URL = "http://www.linkedin.com/shareArticle";
+
+const { href, title } = Astro.props;
+---
+
+<div>
+  <p class="text-supporting-300 fill-supporting-300 my-0 mb-2">
+    Share this article:
+  </p>
+  <ul class="list-none flex gap-6 pl-0">
+    <li class="p-0">
+      <a
+        class="flex items-center gap-2 no-underline hover:underline hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
+        href={`${TWITTER_SHARING_URL}?url=${href}&text=${title}&via=tonimaunde`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Icon name="socials/twitter" class="w-6 h-auto" /> X | twitter
+      </a>
+    </li>
+    <li class="p-0">
+      <a
+        class="flex items-center gap-2 no-underline hover:underline hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
+        href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${title}&source=Milton Alberto`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Icon name="socials/linkedin" class="w-6 h-auto" /> linkedin
+      </a>
+    </li>
+  </ul>
+</div>

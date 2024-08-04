@@ -1,12 +1,23 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import TableOfContents from "../components/articles/TableOfContents.astro";
-import type { MarkdownLayoutProps } from "astro";
-import Share from "../components/articles/Share.astro";
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { format } from "date-fns";
+import type { MarkdownLayoutProps } from "astro";
+import Layout from "../layouts/Layout.astro";
+import TableOfContents from "../components/articles/TableOfContents.astro";
+import ShareArticle from "../components/articles/ShareArticle.astro";
+import RelatedArticles from "../components/articles/RelatedArticles.astro";
 
-function slugifyTitle(title: string) {
+type Props = MarkdownLayoutProps<{
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  isDraft: boolean;
+  topics: Array<string>;
+}>;
+
+function slugify(title: string) {
   return title.toLowerCase().split(" ").join("-");
 }
 
@@ -23,21 +34,22 @@ function articleDate(createdAt: string, updatedAt: string, isDraft: boolean) {
   }
 }
 
-type Props = MarkdownLayoutProps<{
-  title: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-  isDraft: boolean;
-  topics: Array<string>;
-}>;
+const { frontmatter, headings } = Astro.props;
+const { href } = Astro.url;
+
+const listOfArticles = await getCollection("articles");
+const relatedArticles = listOfArticles
+  .filter((article) => article.data.title != frontmatter.title)
+  .filter((article) => article.data.isDraft != true)
+  .filter(
+    (article) =>
+      article.data.topics.filter((topic) => frontmatter.topics.includes(topic))
+        .length > 0
+  );
 
 const GITHUB_CONTENT_URL =
   "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles";
-
-const { frontmatter, headings } = Astro.props;
-const { href } = Astro.url;
-const ARTICLE_SLUG = slugifyTitle(frontmatter.title);
+const ARTICLE_SLUG = slugify(frontmatter.title);
 ---
 
 <Layout
@@ -53,8 +65,8 @@ const ARTICLE_SLUG = slugifyTitle(frontmatter.title);
       <Icon name="arrow_left" class="w-4 h-auto" />
        Go back
     </a>
-    <header class="flex flex-col my-6 px-6">
-      <h1 class="font-lora-bold text-supporting-600 text-[32px]/10 mb-2">
+    <header class="flex flex-col gap-4 my-6 px-6">
+      <h1 class="font-lora-bold text-supporting-600 text-[32px]/10">
         {frontmatter.title}
       </h1>
       <p class="text-supporting-300 text-sm/4">
@@ -66,6 +78,18 @@ const ARTICLE_SLUG = slugifyTitle(frontmatter.title);
           )
         }
       </p>
+      <p class="flex flex-wrap gap-4 text-supporting-300 text-sm/4">
+        {
+          frontmatter.topics.map((topic) => (
+            <a
+              class="inline-block underline underline-offset-2 hover:text-light-link-hover-focus cursor-pointer"
+              href={`topic/${slugify(topic)}`}
+            >
+              #{topic}
+            </a>
+          ))
+        }
+      </p>
     </header>
     <p class="font-inter-light text-supporting-400 mb-6 px-6">
       <span class="font-inter-medium">Summary:</span>
@@ -74,21 +98,28 @@ const ARTICLE_SLUG = slugifyTitle(frontmatter.title);
     <TableOfContents headings={headings} classes="mb-6" />
   </main>
   <article
-    class="px-6 flex flex-col text-lg/[150%] prose-code:text-supporting-500 dark:prose-code:text-neutral-300 prose-p:break-words text-supporting-300 dark:text-neutral-600 prose prose-headings:font-overpass-mono prose-headings:text-supporting-500 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-neutral-200 dark:prose-blockquote:bg-supporting-300 prose-blockquote:border-l-supporting-200 dark:prose-blockquote:border-l-primary-300 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-300 dark:prose-blockquote:text-neutral-300 prose-ul:my-0 prose-em:bg-neutral-200 dark:prose-em:bg-supporting-300 dark:prose-em:text-neutral-100 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2 prose-a:text-supporting-400 dark:prose-a:text-primary-300"
+    class="px-6 flex flex-col text-base/[150%] prose prose-code:text-supporting-500 prose-p:break-words text-supporting-300 prose-headings:font-lora-bold prose-headings:text-supporting-600 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-neutral-200 prose-blockquote:border-l-supporting-200 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-300 prose-ul:my-0 prose-em:bg-neutral-200 prose-em:px-1 prose-em:rounded-md prose-strong:text-supporting-500 prose-a:underline-offset-2"
   >
     <slot />
-    <hr class="mt-0 mb-5 border-supporting-100 dark:border-neutral-600" />
-    <p class="text-supporting-300 dark:text-neutral-600 mb-0">
+    <hr class="mt-3 mb-8 border-neutral-200" />
+  </article>
+  <div class="px-6 mb-8">
+    <p class="text-supporting-300 mb-6">
       Did you find a typo, or would like to contribute to the article? Here's
       the <a
         href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
         target="_blank"
         rel="noreferrer"
-        class=""
+        class="inline-block underline text-light-link hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
       >
         Github Link
       </a> for this article.
     </p>
-    <Share title={frontmatter.title} href={href} />
-  </article>
+    <ShareArticle title={frontmatter.title} href={href} />
+    {
+      relatedArticles.length > 0 && (
+        <RelatedArticles list={relatedArticles} classes="mt-8" />
+      )
+    }
+  </div>
 </Layout>

@@ -1,32 +1,54 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-const pageDescription = "The page you are looking for does not expertise";
+
+const listOfArticles = await getCollection("articles");
+const randomIndex = Math.floor(Math.random() * (listOfArticles.length - 1));
+
+const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
 ---
 
 <Layout
   title="Page not found - Milton David"
-  description={pageDescription}
+  description="Oh no. The page you’re looking for does not exist"
   isArticle={false}
 >
-  <main
-    class="px-6 flex flex-col gap-10 text-supporting-gunmetal-300 dark:text-neutral-600"
-  >
-    <header class="mt-10">
-      <h1
-        class="font-overpass-mono text-supporting-gunmetal-600 dark:text-neutral-100 text-[32px]/10"
-      >
+  <main class="px-6">
+    <header>
+      <h1 class="font-lora-bold text-supporting-600 text-[2rem]/10 mb-2">
         Page not found
       </h1>
-      <p class="font-overpass-medium">
-        Sadly, this page does not exist. <br />
-         Consider visiting the <a
-          href="/"
-          class="dark:text-primary-300 underline underline-offset-2">home</a
-        > page or the <a
-          href="/articles"
-          class="dark:text-primary-300 underline underline-offset-2">articles</a
-        > page for a nice read.
+      <p class="mb-2">Oh no. The page you’re looking for does not exist.</p>
+      <p>
+        You can <a href="/">Go Home</a> or check this article about <a
+          href=`/articles/${randomlyPickedArticle.slug}`
+          >{randomlyPickedArticle.data.title}</a
+        >.
       </p>
     </header>
   </main>
 </Layout>
+<style>
+  p {
+    color: theme("colors.supporting-300");
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: underline;
+    color: theme(colors.light-link);
+
+    &:visited {
+      color: theme(colors.light-link-visited);
+    }
+
+    &:hover,
+    &:focus {
+      color: theme(colors.light-link-hover-focus);
+    }
+
+    &:active {
+      color: theme(colors.light-link-active);
+    }
+  }
+</style>

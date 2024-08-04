@@ -1,0 +1,40 @@
+---
+import type { TArticle } from "../../content/config";
+
+type TArticleEntry = {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: TArticle;
+};
+
+type Props = {
+  list: Array<TArticleEntry>;
+  classes: string;
+};
+
+const { list, classes } = Astro.props;
+---
+
+<section class={classes}>
+  <>
+    <h2 class="font-lora-bold text-lg/6 text-supporting-600 mb-2">
+      Related Articles
+    </h2>
+    <ul class="list-disc py-0 pl-6 marker: flex flex-col gap-2">
+      {
+        list.map((article) => (
+          <li class="py-0 my-0 marker:text-light-link">
+            <a
+              class="inline leading-8 underline text-light-link hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
+              href={`/articles/${article.slug}`}
+            >
+              {article.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </>
+</section>
