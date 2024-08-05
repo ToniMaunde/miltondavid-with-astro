@@ -27,7 +27,7 @@ const { list, classes } = Astro.props;
         list.map((article) => (
           <li class="py-0 my-0 marker:text-light-link">
             <a
-              class="inline leading-8 underline text-light-link hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
+              class="inline leading-8 underline text-link-light-default hover:text-link-light-hover-or-focus focus:text-link-light-hover-or-focus visited:text-link-light-visited active:text-link-light-active"
               href={`/articles/${article.slug}`}
             >
               {article.data.title}

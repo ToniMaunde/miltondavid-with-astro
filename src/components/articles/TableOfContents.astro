@@ -9,7 +9,7 @@ interface Props {
 const { headings, classes } = Astro.props;
 ---
 
-<details class=`font-inter-medium bg-supporting-400 px-6 py-4 ${classes}`>
+<details class={`font-inter-medium bg-supporting-400 px-6 py-4 ${classes}`}>
   <summary class="flex w-fit text-neutral-200 cursor-pointer">
     In this article
     <Icon name="chevron" class="w-6 h-auto" />
@@ -18,10 +18,7 @@ const { headings, classes } = Astro.props;
     {
       headings.map((heading) => (
         <li>
-          <a
-            class="text-lg/8 hover:underline hover:text-dark-link-hover-focus focus:text-dark-link-hover-focus text-dark-link visited:text-dark-link-visited active:text-dark-link-active"
-            href={`#${heading.slug}`}
-          >
+          <a class="text-lg/8" href={`#${heading.slug}`}>
             {heading.text}
           </a>
         </li>
@@ -29,7 +26,7 @@ const { headings, classes } = Astro.props;
     }
   </ol>
 </details>
-<style>
+<style scoped>
   details > summary {
     list-style: none;
   }
@@ -37,5 +34,30 @@ const { headings, classes } = Astro.props;
   details > summary::marker,
   details > summary::-webkit-details-marker {
     display: none;
+  }
+
+  a {
+    text-decoration-line: none;
+    color: theme(colors.link.dark.default);
+
+    &:visited,
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration-line: underline;
+    }
+
+    &:visited {
+      color: theme(colors.link.dark.visited);
+    }
+
+    &:hover,
+    &:focus {
+      color: theme(colors.link.dark.hover-or-focus);
+    }
+
+    &:active {
+      color: theme(colors.link.dark.active);
+    }
   }
 </style>

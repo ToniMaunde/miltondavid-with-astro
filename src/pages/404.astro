@@ -28,27 +28,27 @@ const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
     </header>
   </main>
 </Layout>
-<style>
+<style scoped>
   p {
-    color: theme("colors.supporting-300");
+    color: theme(colors.supporting.300);
   }
 
   a {
     display: inline-block;
     text-decoration: underline;
-    color: theme(colors.light-link);
+    color: theme(colors.link.light.default);
 
     &:visited {
-      color: theme(colors.light-link-visited);
+      color: theme(colors.link.light.visited);
     }
 
     &:hover,
     &:focus {
-      color: theme(colors.light-link-hover-focus);
+      color: theme(colors.link.light.hover-or-focus);
     }
 
     &:active {
-      color: theme(colors.light-link-active);
+      color: theme(colors.link.light.active);
     }
   }
 </style>

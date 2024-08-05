@@ -82,8 +82,8 @@ const ARTICLE_SLUG = slugify(frontmatter.title);
         {
           frontmatter.topics.map((topic) => (
             <a
-              class="inline-block underline underline-offset-2 hover:text-light-link-hover-focus cursor-pointer"
-              href={`topic/${slugify(topic)}`}
+              class="inline-block underline underline-offset-2 cursor-pointer hover:text-link-light-hover-or-focus"
+              href={`topics/${slugify(topic)}`}
             >
               #{topic}
             </a>
@@ -110,7 +110,7 @@ const ARTICLE_SLUG = slugify(frontmatter.title);
         href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
         target="_blank"
         rel="noreferrer"
-        class="inline-block underline text-light-link hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
+        class="inline-block underline text-link-light-default hover:text-link-light-hover-or-focus focus:text-link-light-hover-or-focus visited:text-link-light-visited active:text-link-light-active"
       >
         Github Link
       </a> for this article.

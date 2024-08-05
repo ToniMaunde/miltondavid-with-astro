@@ -19,7 +19,6 @@ const { href, title } = Astro.props;
   <ul class="list-none flex gap-6 pl-0">
     <li class="p-0">
       <a
-        class="flex items-center gap-2 no-underline hover:underline hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
         href={`${TWITTER_SHARING_URL}?url=${href}&text=${title}&via=tonimaunde`}
         target="_blank"
         rel="noreferrer"
@@ -29,7 +28,6 @@ const { href, title } = Astro.props;
     </li>
     <li class="p-0">
       <a
-        class="flex items-center gap-2 no-underline hover:underline hover:text-light-link-hover-focus focus:text-light-link-hover-focus visited:text-light-link-visited active:text-light-link-active"
         href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${title}&source=Milton Alberto`}
         target="_blank"
         rel="noreferrer"
@@ -39,3 +37,31 @@ const { href, title } = Astro.props;
     </li>
   </ul>
 </div>
+<style scoped>
+  a {
+    display: flex;
+    gap: theme(gap.2);
+    align-items: center;
+    text-decoration-line: none;
+
+    &:visited,
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration-line: underline;
+    }
+
+    &:visited {
+      color: theme(colors.link.light.visited);
+    }
+
+    &:hover,
+    &:focus {
+      color: theme(colors.link.light.hover-or-focus);
+    }
+
+    &:active {
+      color: theme(colors.link.light.active);
+    }
+  }
+</style>

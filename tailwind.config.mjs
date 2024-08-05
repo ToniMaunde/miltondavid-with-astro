@@ -7,28 +7,38 @@ export default {
     },
     extend: {
       colors: {
-        "supporting-100": "#515C6E",
-        "supporting-200": "#444E5E",
-        "supporting-300": "#394352",
-        "supporting-400": "#303947",
-        "supporting-500": "#28313E",
-        "supporting-600": "#202833",
-        "supporting-700": "#1A212B",
-        "neutral-100": "#FFFFFF",
-        "neutral-200": "#E6E6E6",
-        "neutral-300": "#D9D9D9",
-        "neutral-400": "#CCCCCC",
-        "neutral-500": "#BFBFBF",
-        "neutral-600": "#ADADAD",
-        "neutral-700": "#999999",
-        "light-link": "#1F58B2",
-        "light-link-visited": "#5C32C8",
-        "light-link-hover-focus": "#3278E7",
-        "light-link-active": "#0051D1",
-        "dark-link": "#FFDBF1",
-        "dark-link-visited": "#FF75A5",
-        "dark-link-hover-focus": "#E5A9CE",
-        "dark-link-active": "#FF75C9"
+        "supporting": {
+          "100": "#515C6E",
+          "200": "#444E5E",
+          "300": "#394352",
+          "400": "#303947",
+          "500": "#28313E",
+          "600": "#202833",
+          "700": "#1A212B"
+        },
+        "neutral": {
+          "100": "#FFFFFF",
+          "200": "#E6E6E6",
+          "300": "#D9D9D9",
+          "400": "#CCCCCC",
+          "500": "#BFBFBF",
+          "600": "#ADADAD",
+          "700": "#999999",
+        },
+        "link": {
+          "light": {
+            "default": "#1F58B2",
+            "visited": "#5C32C8",
+            "hover-or-focus": "#3278E7",
+            "active": "#0051D1",
+          },
+          "dark": {
+            "default": "#FFDBF1",
+            "visited": "#FF75A5",
+            "hover-or-focus": "#E5A9CE",
+            "active": "#FF75C9"
+          }
+        },
       },
       fontFamily: {
         "inter-light": ['"Inter Light"', "sans"],
