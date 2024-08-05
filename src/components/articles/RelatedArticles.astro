@@ -1,13 +1,5 @@
 ---
-import type { TArticle } from "../../content/config";
-
-type TArticleEntry = {
-  id: string;
-  slug: string;
-  body: string;
-  collection: string;
-  data: TArticle;
-};
+import type { TArticleEntry } from "../../types";
 
 type Props = {
   list: Array<TArticleEntry>;

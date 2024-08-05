@@ -1,0 +1,84 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import type { TArticleEntry } from "../../types";
+import { formatDate } from "../../util";
+
+export async function getStaticPaths() {
+  function slugifyTopic(topic: string) {
+    return topic.toLowerCase().replaceAll(".", "").split(" ").join("-");
+  }
+
+  function deduplicateTopics(listOfArticles: Array<TArticleEntry>) {
+    const set = new Set<string>();
+
+    listOfArticles.forEach((article) => {
+      article.data.topics.forEach((topic) => {
+        set.add(topic);
+      });
+    });
+
+    return Array.from(set);
+  }
+
+  const listOfArticleEntries = await getCollection("articles");
+  const listOfUniqueTopics = deduplicateTopics(listOfArticleEntries);
+
+  return listOfUniqueTopics.map((topic) => {
+    const listOfArticleEntriesFromTopic = listOfArticleEntries.filter(
+      (articleEntry) =>
+        articleEntry.data.topics.includes(topic) &&
+        articleEntry.data.isDraft != true
+    );
+
+    return {
+      params: {
+        slug: slugifyTopic(topic),
+      },
+      props: {
+        pageTopic: topic,
+        listOfArticleEntries: listOfArticleEntriesFromTopic,
+      },
+    };
+  });
+}
+
+const { pageTopic, listOfArticleEntries } = Astro.props;
+---
+
+<Layout
+  title={`Articles related to '${pageTopic}' - Milton David`}
+  description={`These are the articles that are related to the '${pageTopic}' topic`}
+  isArticle={false}
+>
+  <main class="px-6">
+    <header class="mb-4">
+      <h1 class="font-lora-bold text-supporting-600 text-[2rem]/10 mb-2">
+        Articles related to '{pageTopic}'
+      </h1>
+      <p>These are the articles that are related to the topic you selected.</p>
+    </header>
+    <section>
+      <ol class="flex flex-col pl-6 gap-6 list-decimal">
+        {
+          listOfArticleEntries.map((article) => (
+            <li class="list-item marker:text-supporting-400">
+              <a
+                href={`/articles/${article.slug}`}
+                class="h-full flex flex-col w-fit mb-2"
+              >
+                <h3 class="font-inter-medium text-lg/6 text-supporting-400 hover:underline">
+                  {article.data.title}
+                </h3>
+              </a>
+              <p class="text-supporting-300 mb-2">{article.data.description}</p>
+              <p class="text-sm/4 text-supporting-200">
+                {formatDate(article.data.updatedAt)}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </main>
+</Layout>

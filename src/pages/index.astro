@@ -1,15 +1,9 @@
 ---
-import { format } from "date-fns";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
+import { formatDate } from "../util";
 const pageDescription = "Milton David's personal website";
-
-function formatDate(date: string) {
-  const datePattern = "MMM dd yyyy";
-
-  return format(new Date(date), datePattern);
-}
 
 const articles = await getCollection("articles");
 
