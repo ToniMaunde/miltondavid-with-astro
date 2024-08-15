@@ -1,43 +1,54 @@
 ---
-import { Icon } from "astro-icon/components";
+import logomark from "../icons/logomark.svg";
+import github from "../icons/socials/github.svg";
+import dribbble from "../icons/socials/dribbble.svg";
+import linkedin from "../icons/socials/linkedin.svg";
+import twitter from "../icons/socials/twitter.svg";
+import codepen from "../icons/socials/codepen.svg";
 
 export const currentYear = new Date().getFullYear();
 
 export const socialProfiles = [
   {
     href: "https://github.com/ToniMaunde",
-    alt: "Github",
-    icon: "socials/github",
+    name: "Github",
+    icon: github,
   },
   {
     href: "https://dribbble.com/ToniMaunde",
-    alt: "Dribbble",
-    icon: "socials/dribbble",
+    name: "Dribbble",
+    icon: dribbble,
   },
   {
     href: "https://www.linkedin.com/in/tonimaunde/",
-    alt: "Linkedin",
-    icon: "socials/linkedin",
+    name: "Linkedin",
+    icon: linkedin,
   },
   {
     href: "https://twitter.com/tonimaunde",
-    alt: "Twitter",
-    icon: "socials/twitter",
+    name: "Twitter",
+    icon: twitter,
   },
   {
     href: "https://codepen.io/ToniMaunde",
-    alt: "Codepen",
-    icon: "socials/codepen",
+    name: "Codepen",
+    icon: codepen,
   },
 ];
 ---
 
 <footer class="flex flex-col gap-6 pb-6 px-6 mt-auto">
   <a href="/" class="flex items-center gap-2 w-fit">
-    <Icon name="logomark" class="w-8 h-auto" />
-    <p class="font-lora-bold text-supporting-600 text-lg/6">milton_david</p>
+    <img class="w-6 h-auto" src={logomark.src} />
+    <p
+      class="font-lora-bold text-supporting-600 dark:text-neutral-200 text-lg/6"
+    >
+      milton_david
+    </p>
   </a>
-  <ul class="flex flex-wrap gap-4 text-supporting-300 fill-supporting-300">
+  <ul
+    class="flex flex-wrap gap-4 text-supporting-300 dark:text-neutral-300 dark:fill-neutral-300"
+  >
     {
       socialProfiles.map((profile) => (
         <li>
@@ -47,14 +58,14 @@ export const socialProfiles = [
             rel="noreferrer"
             href={profile.href}
           >
-            <Icon name={profile.icon} class="w-6 h-auto" />
-            <span class="lowercase">{profile.alt}</span>
+            <img src={profile.icon.src} class="w-6 h-auto" />
+            <span class="lowercase">{profile.name}</span>
           </a>
         </li>
       ))
     }
   </ul>
-  <p class="text-supporting-300">
+  <p class="text-supporting-300 dark:text-neutral-300">
     ©{currentYear} Milton David. All Rights Reserved.
   </p>
 </footer>

@@ -9,18 +9,15 @@ import Layout from "../layouts/Layout.astro";
 >
   <main class="px-6">
     <header>
-      <h1 class="font-lora-bold text-supporting-600 text-[2rem]/10 mb-2">
+      <h1
+        class="font-lora-bold text-supporting-600 dark:text-neutral-100 text-[2rem]/10 mb-2"
+      >
         Error on the Server
       </h1>
-      <p class="mb-2">
+      <p class="mb-2 text-supporting-300 dark:text-neutral-200">
         I'm sorry. Unfortunately the server is facing difficulties. Please visit
         the website later.
       </p>
     </header>
   </main>
 </Layout>
-<style scoped>
-  p {
-    color: theme(colors.supporting.300);
-  }
-</style>

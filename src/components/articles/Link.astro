@@ -11,7 +11,7 @@ const { href, text } = Astro.props;
   href={href}
   target="_blank"
   rel="noreferrer"
-  class="inline-block underline text-inherit hover:text-link-light-hover-or-focus focus:text-link-light-hover-or-focus visited:text-link-light-visited active:text-link-light-active"
+  class="inline-block underline text-inherit hover:text-link-light-hover-or-focus dark:hover:text-link-dark-hover-or-focus focus:text-link-light-hover-or-focus dark:focus:text-link-dark-hover-or-focus visited:text-link-light-visited dark:visited:text-link-dark-visited active:text-link-light-active dark:active:text-link-dark-active"
 >
   {text}
 </a>

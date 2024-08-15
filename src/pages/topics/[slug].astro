@@ -53,26 +53,32 @@ const { pageTopic, listOfArticleEntries } = Astro.props;
 >
   <main class="px-6">
     <header class="mb-4">
-      <h1 class="font-lora-bold text-supporting-600 text-[2rem]/10 mb-2">
+      <h1
+        class="font-lora-bold text-supporting-600 dark:text-neutral-100 text-[2rem]/10 mb-2"
+      >
         Articles related to '{pageTopic}'
       </h1>
-      <p>These are the articles that are related to the topic you selected.</p>
+      <p class="text-supporting-300 dark:text-neutral-200">
+        These are the articles that are related to the topic you selected.
+      </p>
     </header>
     <section>
       <ol class="flex flex-col pl-6 gap-6 list-decimal">
         {
           listOfArticleEntries.map((article) => (
-            <li class="list-item marker:text-supporting-400">
+            <li class="list-item marker:text-supporting-400 dark:marker:text-neutral-200">
               <a
                 href={`/articles/${article.slug}`}
                 class="h-full flex flex-col w-fit mb-2"
               >
-                <h3 class="font-inter-medium text-lg/6 text-supporting-400 hover:underline">
+                <h3 class="font-inter-medium text-lg/6 text-supporting-400 dark:text-neutral-200 hover:underline">
                   {article.data.title}
                 </h3>
               </a>
-              <p class="text-supporting-300 mb-2">{article.data.description}</p>
-              <p class="text-sm/4 text-supporting-200">
+              <p class="text-supporting-300 dark:text-neutral-200 mb-2">
+                {article.data.description}
+              </p>
+              <p class="text-sm/4 text-supporting-200 dark:text-neutral-500">
                 {formatDate(article.data.updatedAt)}
               </p>
             </li>

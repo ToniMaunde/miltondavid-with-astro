@@ -11,15 +11,17 @@ const { list, classes } = Astro.props;
 
 <section class={classes}>
   <>
-    <h2 class="font-lora-bold text-lg/6 text-supporting-600 mb-2">
+    <h2
+      class="font-lora-bold text-lg/6 text-supporting-600 dark:text-neutral-100 mb-2"
+    >
       Related Articles
     </h2>
     <ul class="list-disc py-0 pl-6 marker: flex flex-col gap-2">
       {
         list.map((article) => (
-          <li class="py-0 my-0 marker:text-light-link">
+          <li class="py-0 my-0 marker:text-supporting-300 dark:marker:text-neutral-200">
             <a
-              class="inline leading-8 underline text-link-light-default hover:text-link-light-hover-or-focus focus:text-link-light-hover-or-focus visited:text-link-light-visited active:text-link-light-active"
+              class="inline leading-8 underline text-link-light-default dark:text-link-dark-default hover:text-link-light-hover-or-focus dark:hover:text-link-dark-hover-or-focus focus:text-link-light-hover-or-focus dark:focus:text-link-dark-hover-or-focus visited:text-link-light-visited dark:visited:text-link-dark-visited active:text-link-light-active dark:active:text-link-dark-active"
               href={`/articles/${article.slug}`}
             >
               {article.data.title}

@@ -15,7 +15,9 @@ const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
 >
   <main class="px-6">
     <header>
-      <h1 class="font-lora-bold text-supporting-600 text-[2rem]/10 mb-2">
+      <h1
+        class="font-lora-bold text-supporting-600 dark:text-neutral-100 text-[2rem]/10 mb-2"
+      >
         Page not found
       </h1>
       <p class="mb-2">Oh no. The page you’re looking for does not exist.</p>
@@ -49,6 +51,29 @@ const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
 
     &:active {
       color: theme(colors.link.light.active);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    p {
+      color: theme(colors.neutral.200);
+    }
+
+    a {
+      color: theme(colors.link.dark.default);
+
+      &:visited {
+        color: theme(colors.link.dark.visited);
+      }
+
+      &:hover,
+      &:focus {
+        color: theme(colors.link.dark.hover-or-focus);
+      }
+
+      &:active {
+        color: theme(colors.link.dark.active);
+      }
     }
   }
 </style>

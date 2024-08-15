@@ -35,8 +35,8 @@ export default {
           "dark": {
             "default": "#FFDBF1",
             "visited": "#FF75A5",
-            "hover-or-focus": "#E5A9CE",
-            "active": "#FF75C9"
+            "hover-or-focus": "#FF75C9",
+            "active": "#E5A9CE"
           }
         },
       },
