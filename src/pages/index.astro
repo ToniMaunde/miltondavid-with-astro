@@ -49,43 +49,43 @@ const projects: Array<{
   description={pageDescription}
   isArticle={false}
 >
-  <main class="px-6 flex flex-col gap-12">
+  <main class="">
     <header>
       <h1
-        class="font-lora-bold text-supporting-600 dark:text-neutral-100 text-[2rem]/10 mb-2"
+        class=""
       >
         Building tools that I need
       </h1>
-      <p class="text-supporting-500 dark:text-neutral-200 text-lg/6 mb-6">
+      <p class="">
         expecting to benefit others as well.
       </p>
-      <p class="text-supporting-300 dark:text-neutral-200 leading-[150%]">
+      <p class="">
         I’m a Software Engineer and an UI Designer. I combine these skills to
         create digital solutions to solve everyday problems. I use neovim btw.
       </p>
     </header>
-    <section class="flex flex-col">
+    <section class="">
       <h2
-        class="font-lora-bold text-lg/6 text-supporting-600 dark:text-neutral-100 mb-4"
+        class=""
       >
         Projects
       </h2>
-      <ul class="projects flex flex-col gap-6">
+      <ul class="">
         {
           projects.map((project) => (
             <li>
               <a
-                class="flex items-center gap-1 mb-2 w-fit"
+                class=""
                 href={project.link}
                 target="_blank"
                 rel="noreferrer"
               >
-                <h3 class="font-inter-medium text-lg/6 text-supporting-400 dark:text-neutral-200 hover:underline">
+                <h3 class="">
                   {project.name}
                 </h3>
-                <img src={newWindow.src} class="w-4 h-auto" />
+                <img src={newWindow.src} class="" />
               </a>
-              <p class="text-supporting-300 dark:text-neutral-200">
+              <p class="">
                 {project.description}
               </p>
             </li>
@@ -93,28 +93,28 @@ const projects: Array<{
         }
       </ul>
     </section>
-    <section class="flex flex-col gap-4">
+    <section class="">
       <h2
-        class="font-lora-bold text-lg/6 text-supporting-600 dark:text-neutral-100"
+        class=""
       >
         Articles
       </h2>
-      <ul class="flex flex-col gap-6">
+      <ul class="">
         {
           orderedArticles.map((article) => (
-            <li class="flex flex-col gap-2">
+            <li class="">
               <a
                 href={`/articles/${article.slug}`}
-                class="h-full flex flex-col w-fit"
+                class=""
               >
-                <h3 class="font-inter-medium text-lg/6 text-supporting-400 dark:text-neutral-200 hover:underline">
+                <h3 class="">
                   {article.data.title}
                 </h3>
               </a>
-              <p class="text-supporting-300 dark:text-neutral-200">
+              <p class="">
                 {article.data.description}
               </p>
-              <p class="text-sm/4 text-supporting-200 dark:text-neutral-500">
+              <p class="">
                 {formatDate(article.data.updatedAt)}
               </p>
             </li>
@@ -122,36 +122,36 @@ const projects: Array<{
         }
       </ul>
     </section>
-    <section class="flex flex-col gap-4 mb-8">
+    <section class="">
       <h2
-        class="font-lora-bold text-lg/6 text-supporting-600 dark:text-neutral-100"
+        class=""
       >
         Drafts
       </h2>
       {
         drafts.length > 0 ? (
-          <ul class="flex flex-col gap-6">
+          <ul class="">
             {drafts.map((article) => (
-              <li class="flex flex-col gap-2 w-fit">
+              <li class="">
                 <a
                   href={`/articles/${article.slug}`}
-                  class="h-full flex flex-col"
+                  class=""
                 >
-                  <h3 class="font-inter-medium text-lg/6 text-supporting-400 dark:text-neutral-200 hover:underline">
+                  <h3 class="">
                     {article.data.title}
                   </h3>
                 </a>
-                <p class="text-supporting-300 dark:text-neutral-200">
+                <p class="">
                   {article.data.description}
                 </p>
-                <p class="text-sm/4 text-supporting-200 dark:text-neutral-500">
+                <p class="">
                   {formatDate(article.data.updatedAt)}
                 </p>
               </li>
             ))}
           </ul>
         ) : (
-          <p class="text-supporting-300 dark:text-neutral-300">
+          <p class="">
             Oh no, I'm not writing enough.
           </p>
         )

@@ -10,20 +10,20 @@ const { headings, classes } = Astro.props;
 ---
 
 <details
-  class={`font-inter-medium bg-supporting-400 dark:bg-neutral-200 px-6 py-4 ${classes}`}
+  class=""
 >
   <summary
-    class="flex w-fit text-neutral-200 dark:text-supporting-300 cursor-pointer"
+    class=""
   >
     In this article
-    <img src={chevron.src} class="w-6 h-auto" />
+    <img src={chevron.src} class="" />
   </summary>
-  <ol start="1" class="grid gap-2 mt-2">
+  <ol start="1" class="">
     {
       headings.map((heading) => (
         <li>
           <a
-            class="text-lg/8 underline-offset-4 outline-offset-4 hover:underline text-link-dark-default dark:text-supporting-600 outline-link-dark-hover-or-focus dark:outline-link-light-hover-or-focus hover:text-link-dark-hover-or-focus dark:hover:text-link-light-hover-or-focus focus:text-link-dark-hover-or-focus dark:focus:text-link-light-hover-or-focus active:text-link-dark-active dark:active:text-link-light-active"
+            class=""
             href={`#${heading.slug}`}
           >
             {heading.text}

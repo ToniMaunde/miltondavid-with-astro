@@ -46,7 +46,7 @@ function computeTwitterMeta(
 ---
 
 <!doctype html>
-<html lang="en" class="w-full h-full text-base">
+<html lang="en" class="">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -67,7 +67,7 @@ function computeTwitterMeta(
     <ViewTransitions />
   </head>
   <body
-    class="max-w-[688px] h-full flex flex-col bg-white dark:bg-supporting-400 font-inter-regular"
+    class=""
   >
     <Navbar />
     <slot />
@@ -75,45 +75,6 @@ function computeTwitterMeta(
     <style is:global>
       :root {
         color-scheme: light dark;
-      }
-      @font-face {
-        font-family: "Inter Light";
-        src: url("/fonts/inter_light.woff2") format("woff2");
-        font-weight: 300;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Inter Regular";
-        src: url("/fonts/inter_regular.woff2") format("woff2");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Inter Medium";
-        src: url("/fonts/inter_medium.woff2") format("woff2");
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Inter Semibold";
-        src: url("/fonts/inter_semibold.woff2") format("woff2");
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Lora Bold";
-        src: url("/fonts/lora_bold.woff2") format("woff2");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
       }
     </style>
   </body>

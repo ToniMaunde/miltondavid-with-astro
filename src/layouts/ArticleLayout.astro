@@ -60,18 +60,18 @@ const ARTICLE_SLUG = slugify(frontmatter.title);
   <main>
     <a
       href="/"
-      class="relative flex gap-2 items-center text-lg/6 text-supporting-500 dark:text-neutral-200 px-6"
+      class=""
     >
-      <img src={arrowLeft.src} class="w-4 h-auto" />
+      <img src={arrowLeft.src} class="" />
        Go back
     </a>
-    <header class="flex flex-col gap-4 my-6 px-6">
+    <header class="">
       <h1
-        class="font-lora-bold text-supporting-600 dark:text-neutral-100 text-[32px]/10"
+        class=""
       >
         {frontmatter.title}
       </h1>
-      <p class="text-supporting-300 dark:text-neutral-500 text-sm/4">
+      <p class="">
         {
           articleDate(
             frontmatter.createdAt,
@@ -81,12 +81,12 @@ const ARTICLE_SLUG = slugify(frontmatter.title);
         }
       </p>
       <p
-        class="flex flex-wrap gap-4 text-supporting-300 dark:text-neutral-500 text-sm/4"
+        class=""
       >
         {
           frontmatter.topics.map((topic) => (
             <a
-              class="inline-block underline underline-offset-2 cursor-pointer hover:text-link-light-hover-or-focus dark:hover:text-link-dark-hover-or-focus"
+              class=""
               href={`/topics/${slugify(topic)}`}
             >
               #{topic}
@@ -96,27 +96,27 @@ const ARTICLE_SLUG = slugify(frontmatter.title);
       </p>
     </header>
     <p
-      class="font-inter-light text-supporting-400 dark:text-neutral-200 mb-6 px-6"
+      class=""
     >
-      <span class="font-inter-medium">Summary:</span>
+      <span class="">Summary:</span>
       {frontmatter.description}
     </p>
-    <TableOfContents headings={headings} classes="mb-6" />
+    <TableOfContents headings={headings} classes="" />
   </main>
   <article
-    class="px-6 flex flex-col text-base/[150%] prose prose-code:text-supporting-500 dark:prose-code:text-neutral-100 prose-p:break-words text-supporting-300 dark:text-neutral-200 prose-headings:font-lora-bold prose-headings:text-supporting-600 dark:prose-headings:text-neutral-100 prose-headings:text-lg/6 prose-headings:mt-4 prose-blockquote:bg-supporting-600 prose-blockquote:border-l-supporting-300 dark:prose-blockquote:border-l-neutral-600 prose-blockquote:rounded-r-md prose-blockquote:text-supporting-300 dark:prose-blockquote:text-neutral-200 prose-ul:my-0 prose-em:bg-neutral-200 dark:prose-em:bg-supporting-500 prose-em:p-1 prose-em:rounded-md prose-strong:text-supporting-500 dark:prose-strong:text-neutral-100 prose-a:underline-offset-2"
+    class=""
   >
     <slot />
-    <hr class="mt-3 mb-8 border-neutral-200 dark:border-neutral-700" />
+    <hr class="" />
   </article>
-  <div class="px-6 mb-8">
-    <p class="text-supporting-300 dark:text-neutral-200 mb-6">
+  <div class="">
+    <p class="">
       Did you find a typo, or would like to contribute to the article? Here's
       the <a
         href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
         target="_blank"
         rel="noreferrer"
-        class="inline-block underline underline-offset-2 text-inherit hover:text-link-light-hover-or-focus dark:hover:text-link-dark-hover-or-focus focus:text-link-light-hover-or-focus dark:focus:text-link-dark-hover-or-focus visited:text-link-light-visited dark:visited:text-link-dark-visited active:text-link-light-active dark:active:text-link-dark-active"
+        class=""
       >
         Github Link
       </a> for this article.
@@ -124,7 +124,7 @@ const ARTICLE_SLUG = slugify(frontmatter.title);
     <ShareArticle title={frontmatter.title} href={href} />
     {
       relatedArticles.length > 0 && (
-        <RelatedArticles list={relatedArticles} classes="mt-8" />
+        <RelatedArticles list={relatedArticles} classes="" />
       )
     }
   </div>

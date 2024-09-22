@@ -14,28 +14,28 @@ const { href, title } = Astro.props;
 ---
 
 <div>
-  <p class="text-supporting-300 dark:text-neutral-200 my-0 mb-2">
+  <p class="">
     Share this article:
   </p>
-  <ul class="list-none flex gap-6 pl-0">
-    <li class="p-0">
+  <ul class="">
+    <li class="">
       <a
         href={`${TWITTER_SHARING_URL}?url=${href}&text=${title}&via=tonimaunde`}
         target="_blank"
         rel="noreferrer"
-        class="text-supporting-300 dark:text-neutral-200"
+        class=""
       >
-        <img src={twitter.src} class="w-6 h-auto" /> X | twitter
+        <img src={twitter.src} class="" /> X | twitter
       </a>
     </li>
-    <li class="p-0">
+    <li class="">
       <a
         href={`${LINKEDIN_SHARING_URL}?mini=true&url=${href}&title=${title}&source=Milton Alberto`}
         target="_blank"
         rel="noreferrer"
-        class="text-supporting-300 dark:text-neutral-200"
+        class=""
       >
-        <img src={linkedin.src} class="w-6 h-auto" /> linkedin
+        <img src={linkedin.src} class="" /> linkedin
       </a>
     </li>
   </ul>
