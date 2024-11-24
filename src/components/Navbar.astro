@@ -1,18 +1,11 @@
 ---
 import logomark from "../icons/logomark.svg";
-import themeLight from "../icons/theme_light.svg";
+import logotype from "../icons/logotype.svg";
 ---
 
-<nav class="">
-  <a href="/" class="">
-    <img src={logomark.src} class="" />
-    <p
-      class=""
-    >
-      milton_david
-    </p>
+<nav class="region" data-region="navbar">
+  <a href="/" >
+    <img src={logomark.src} data-type="logomark" />
+    <img src={logotype.src} data-type="logotype" />
   </a>
-  <button>
-    <icon src={themeLight.src} class=""></icon>
-  </button>
 </nav>

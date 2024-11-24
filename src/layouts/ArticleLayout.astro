@@ -1,8 +1,13 @@
 ---
+import "../style.css";
 import { getCollection } from "astro:content";
 import { format } from "date-fns";
+import { formatDate } from "../util";
 import type { MarkdownLayoutProps } from "astro";
-import Layout from "../layouts/Layout.astro";
+import type { TTwitterMeta } from "../types.ts";
+import { ViewTransitions } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 import TableOfContents from "../components/articles/TableOfContents.astro";
 import ShareArticle from "../components/articles/ShareArticle.astro";
 import RelatedArticles from "../components/articles/RelatedArticles.astro";
@@ -11,11 +16,39 @@ import arrowLeft from "../icons/arrow_left.svg";
 type Props = MarkdownLayoutProps<{
   title: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   isDraft: boolean;
   topics: Array<string>;
 }>;
+
+function generateTwitterMeta(
+  title: string,
+  description: string
+): Array<TTwitterMeta> {
+  return [
+    {
+      name: "twitter:card",
+      content: "summary",
+    },
+    {
+      name: "twitter:site",
+      content: "@tonimaunde",
+    },
+    {
+      name: "twitter:creator",
+      content: "@tonimaunde",
+    },
+    {
+      name: "twitter:title",
+      content: title,
+    },
+    {
+      name: "twitter:description",
+      content: description,
+    },
+  ];
+}
 
 function slugify(title: string) {
   return title.toLowerCase().replaceAll(".", "").split(" ").join("-");
@@ -50,82 +83,67 @@ const relatedArticles = listOfArticles
 const GITHUB_CONTENT_URL =
   "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles";
 const ARTICLE_SLUG = slugify(frontmatter.title);
+const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID;
+
+export { umamiSecret };
 ---
 
-<Layout
-  title={frontmatter.title + " - Milton David"}
-  description={frontmatter.description}
-  isArticle={true}
->
-  <main>
-    <a
-      href="/"
-      class=""
-    >
-      <img src={arrowLeft.src} class="" />
-       Go back
-    </a>
-    <header class="">
-      <h1
-        class=""
-      >
-        {frontmatter.title}
-      </h1>
-      <p class="">
-        {
-          articleDate(
-            frontmatter.createdAt,
-            frontmatter.updatedAt,
-            frontmatter.isDraft
-          )
-        }
-      </p>
-      <p
-        class=""
-      >
-        {
-          frontmatter.topics.map((topic) => (
-            <a
-              class=""
-              href={`/topics/${slugify(topic)}`}
-            >
-              #{topic}
-            </a>
-          ))
-        }
-      </p>
-    </header>
-    <p
-      class=""
-    >
-      <span class="">Summary:</span>
-      {frontmatter.description}
-    </p>
-    <TableOfContents headings={headings} classes="" />
-  </main>
-  <article
-    class=""
-  >
-    <slot />
-    <hr class="" />
-  </article>
-  <div class="">
-    <p class="">
-      Did you find a typo, or would like to contribute to the article? Here's
-      the <a
-        href={`${GITHUB_CONTENT_URL}/${ARTICLE_SLUG}.mdx`}
-        target="_blank"
-        rel="noreferrer"
-        class=""
-      >
-        Github Link
-      </a> for this article.
-    </p>
-    <ShareArticle title={frontmatter.title} href={href} />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={frontmatter.description} />
     {
-      relatedArticles.length > 0 && (
-        <RelatedArticles list={relatedArticles} classes="" />
+      generateTwitterMeta(frontmatter.title, frontmatter.description).map(
+        (meta) => <meta name={meta.name} content={meta.content} />
       )
     }
-  </div>
-</Layout>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <script
+      defer
+      src="https://analytics.eu.umami.is/script.js"
+      is:inline
+      data-website-id={umamiSecret}></script>
+    <title>{frontmatter.title} - Milton David</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <Navbar />
+    <aside class="region" data-region="article-navigation">
+      <a href="/">
+        <img src={arrowLeft.src} data-type="icon" />
+        <span>Go back</span>
+      </a>
+    </aside>
+    <main class="region" data-region="article">
+      <header>
+        <h1>{frontmatter.title}</h1>
+        <time datetime={formatDate(frontmatter.updatedAt, "yyyy-MM-dd")}>
+          {formatDate(frontmatter.updatedAt, "MMM dd yyyy")}
+        </time>
+        <ul role="list">
+          {
+            frontmatter.topics.map((topic) => (
+              <li>
+                <a href={`topics/${topic}`}>
+                  #{topic}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </header>
+      <article class="region" data-role="summary">
+        <p>
+          <strong>Summary</strong>:{frontmatter.description}
+        </p>
+      </article>
+      <article>
+        <slot />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

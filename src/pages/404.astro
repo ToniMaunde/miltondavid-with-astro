@@ -11,16 +11,13 @@ const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
 <Layout
   title="Page not found - Milton David"
   description="Oh no. The page you’re looking for does not exist"
-  isArticle={false}
 >
-  <main class="px-6">
+  <main class="region" data-region="content">
     <header>
-      <h1
-        class="font-lora-bold text-supporting-600 dark:text-neutral-100 text-[2rem]/10 mb-2"
-      >
+      <h1>
         Page not found
       </h1>
-      <p class="mb-2">Oh no. The page you’re looking for does not exist.</p>
+      <p>Oh no. The page you’re looking for does not exist.</p>
       <p>
         You can <a href="/">Go Home</a> or check this article about <a
           href=`/articles/${randomlyPickedArticle.slug}`
@@ -30,50 +27,3 @@ const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
     </header>
   </main>
 </Layout>
-<style scoped>
-  p {
-    color: theme(colors.supporting.300);
-  }
-
-  a {
-    display: inline-block;
-    text-decoration: underline;
-    color: theme(colors.link.light.default);
-
-    &:visited {
-      color: theme(colors.link.light.visited);
-    }
-
-    &:hover,
-    &:focus {
-      color: theme(colors.link.light.hover-or-focus);
-    }
-
-    &:active {
-      color: theme(colors.link.light.active);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    p {
-      color: theme(colors.neutral.200);
-    }
-
-    a {
-      color: theme(colors.link.dark.default);
-
-      &:visited {
-        color: theme(colors.link.dark.visited);
-      }
-
-      &:hover,
-      &:focus {
-        color: theme(colors.link.dark.hover-or-focus);
-      }
-
-      &:active {
-        color: theme(colors.link.dark.active);
-      }
-    }
-  }
-</style>

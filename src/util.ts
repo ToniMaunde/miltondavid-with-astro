@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
-export function formatDate(date: string) {
-  const datePattern = "MMM dd yyyy";
+type TDatePattern = "MMM dd yyyy" | "yyyy-MM-dd";
 
-  return format(new Date(date), datePattern);
+export function formatDate(date: Date, pattern: TDatePattern) {
+  return format(date, pattern);
 }

@@ -44,116 +44,74 @@ const projects: Array<{
 ];
 ---
 
-<Layout
-  title="Home - Milton David"
-  description={pageDescription}
-  isArticle={false}
->
-  <main class="">
+<Layout title="Home - Milton David" description={pageDescription}>
+  <main class="region" data-region="content">
     <header>
-      <h1
-        class=""
-      >
-        Building tools that I need
-      </h1>
-      <p class="">
-        expecting to benefit others as well.
+      <h1>Building handy tools for others and I</h1>
+      <p>
+        I’m a software engineer and a UI designer. I combine these specialties
+        to create apps that are useful.
       </p>
-      <p class="">
-        I’m a Software Engineer and an UI Designer. I combine these skills to
-        create digital solutions to solve everyday problems. I use neovim btw.
+      <p>
+        Below are a few tools I created and articles I wrote on topics worth
+        pondering.
       </p>
     </header>
-    <section class="">
-      <h2
-        class=""
-      >
-        Projects
-      </h2>
-      <ul class="">
+    <section data-content-type="projects">
+      <h2>Projects</h2>
+      <ul role="list">
         {
           projects.map((project) => (
             <li>
-              <a
-                class=""
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <h3 class="">
-                  {project.name}
-                </h3>
-                <img src={newWindow.src} class="" />
+              <a href={project.link} target="_blank" rel="noreferrer">
+                <h3>{project.name}</h3>
+                <img src={newWindow.src} />
               </a>
-              <p class="">
-                {project.description}
-              </p>
+              <p>{project.description}</p>
             </li>
           ))
         }
       </ul>
     </section>
-    <section class="">
-      <h2
-        class=""
-      >
-        Articles
-      </h2>
-      <ul class="">
+    <section>
+      <h2>Articles</h2>
+      <ul role="list">
         {
           orderedArticles.map((article) => (
             <li class="">
-              <a
-                href={`/articles/${article.slug}`}
-                class=""
-              >
-                <h3 class="">
-                  {article.data.title}
-                </h3>
+              <a href={`/articles/${article.slug}`}>
+                <h3>{article.data.title}</h3>
               </a>
-              <p class="">
-                {article.data.description}
-              </p>
-              <p class="">
-                {formatDate(article.data.updatedAt)}
-              </p>
+              <p>{article.data.description}</p>
+              <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
+                {formatDate(article.data.updatedAt, "MMM dd yyyy")}
+              </time>
             </li>
           ))
         }
       </ul>
     </section>
-    <section class="">
-      <h2
-        class=""
-      >
-        Drafts
-      </h2>
+    <section>
+      <h2>Drafts</h2>
       {
         drafts.length > 0 ? (
-          <ul class="">
+          <ul role="list">
             {drafts.map((article) => (
-              <li class="">
-                <a
-                  href={`/articles/${article.slug}`}
-                  class=""
-                >
-                  <h3 class="">
-                    {article.data.title}
-                  </h3>
+              <li>
+                <a href={`/articles/${article.slug}`}>
+                  <h3>{article.data.title}</h3>
                 </a>
-                <p class="">
-                  {article.data.description}
-                </p>
-                <p class="">
-                  {formatDate(article.data.updatedAt)}
-                </p>
+                <p>{article.data.description}</p>
+                <time
+                  datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}
+                >
+                  {formatDate(article.data.updatedAt, "MMM dd yyyy")}
+                </time>
               </li>
             ))}
           </ul>
         ) : (
-          <p class="">
-            Oh no, I'm not writing enough.
-          </p>
+          <p>Oh no, I'm not writing enough.</p>
         )
       }
     </section>

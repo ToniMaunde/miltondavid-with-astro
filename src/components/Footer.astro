@@ -1,5 +1,6 @@
 ---
 import logomark from "../icons/logomark.svg";
+import logotype from "../icons/logotype.svg";
 import github from "../icons/socials/github.svg";
 import dribbble from "../icons/socials/dribbble.svg";
 import linkedin from "../icons/socials/linkedin.svg";
@@ -37,35 +38,28 @@ export const socialProfiles = [
 ];
 ---
 
-<footer class="">
-  <a href="/" class="">
-    <img class="" src={logomark.src} />
-    <p
-      class=""
-    >
-      milton_david
-    </p>
+<footer class="region" data-region="footer">
+  <a href="/">
+    <img src={logomark.src} data-type="logomark" />
+    <img src={logotype.src} data-type="logotype" />
   </a>
-  <ul
-    class=""
-  >
+  <ul role="list">
     {
       socialProfiles.map((profile) => (
         <li>
           <a
-            class=""
             target="_blank"
             rel="noreferrer"
             href={profile.href}
           >
-            <img src={profile.icon.src} class="" />
-            <span class="">{profile.name}</span>
+            <img src={profile.icon.src} />
+            <span>{profile.name}</span>
           </a>
         </li>
       ))
     }
   </ul>
-  <p class="">
+  <p>
     ©{currentYear} Milton David. All Rights Reserved.
   </p>
 </footer>

@@ -49,38 +49,32 @@ const { pageTopic, listOfArticleEntries } = Astro.props;
 <Layout
   title={`Articles related to '${pageTopic}' - Milton David`}
   description={`These are the articles that are related to the '${pageTopic}' topic`}
-  isArticle={false}
 >
-  <main class="">
+  <main class="region" data-region="content">
     <header class="">
-      <h1
-        class=""
-      >
+      <h1>
         Articles related to '{pageTopic}'
       </h1>
-      <p class="">
+      <p>
         These are the articles that are related to the topic you selected.
       </p>
     </header>
     <section>
-      <ol class="">
+      <ol>
         {
           listOfArticleEntries.map((article) => (
-            <li class="">
-              <a
-                href={`/articles/${article.slug}`}
-                class=""
-              >
-                <h3 class="">
+            <li>
+              <a href={`/articles/${article.slug}`}>
+                <h3>
                   {article.data.title}
                 </h3>
               </a>
-              <p class="">
+              <p> 
                 {article.data.description}
               </p>
-              <p class="">
-                {formatDate(article.data.updatedAt)}
-              </p>
+              <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
+                {formatDate(article.data.updatedAt, "MMM dd yyyy")}
+              </time>
             </li>
           ))
         }

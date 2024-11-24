@@ -3,8 +3,8 @@ import { defineCollection, z } from "astro:content";
 const ZArticleSchema = z.object({
   title: z.string(),
   description: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
   topics: z.string().array(),
   isDraft: z.boolean(),
 });

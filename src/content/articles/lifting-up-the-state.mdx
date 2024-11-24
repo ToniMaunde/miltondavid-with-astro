@@ -2,8 +2,8 @@
 layout: ../../layouts/ArticleLayout.astro
 title: Lifting up the state
 description: native state management
-createdAt: 10/07/2023
-updatedAt: 01/21/2024
+createdAt: 2023-10-07
+updatedAt: 2024-09-28
 topics:
   - React.js
   - App state
@@ -50,8 +50,7 @@ In a normal HTML **form** element the default method is GET and when we submit t
 </form>
 ```
 
-Upon the submission of the form above, the browser's default behaviour would be to navigate to the current URL + the fields of the form as search parameters; if the form was in the current page, `https://www.miltondavid.com/blog/lifting-up-the-state`, after the submission the new URL would be 
-`https://www.miltondavid.com/blog/lifting-up-the-state?name=A%20name%20here&nationality=A%20nationality%20here`. 
+Upon the submission of the form above, the browser's default behaviour would be to navigate to the current URL + the fields of the form as search parameters; if the form was in the current page, **/articles/lifting-up-the-state**, after the submission the new URL would be **/articles/lifting-up-the-state?name=A%20name%20here&nationality=A%20nationality%20here**. 
 
 How we would deal with the form submission and/or use these search parameters would depend on many factors (rendering strategy (SSR, CSR, ISR, SSG, etc), goal and routing choice). The focus of this article lies on the client, so let's see how we can take advantage of the search parameters to manage our application state.
 

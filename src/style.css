@@ -1,0 +1,309 @@
+:root {
+	color-scheme: light dark;
+	--color-neutral-100: #fff;
+	--color-primary-200: #444E5E;
+	--color-primary-300: #394352;
+	--color-primary-400: #303947;
+	--color-primary-500: #28313E;
+	--color-primary-600: #202833;
+	--tracking: -0.03ch;
+	--tracking-heading: -0.075ch;
+	--flow-space: clamp(3rem, 2.7143rem + 1.4286vw, 4rem);
+	--flow-space-sm: clamp(1.5rem, 1.2143rem + 1.4286vw, 2.5rem);
+	--flow-space-xsm: clamp(0.75rem, 0.6429rem + 0.5357vw, 1.125rem);
+	--text-fluid-16-20: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
+	--text-fluid-24-32: clamp(1.5rem, 1.3571rem + 0.7143vw, 2rem);
+	--text-fluid-32-56: clamp(2rem, 1.5714rem + 2.1429vw, 3.5rem);
+	--text-fluid-18-24: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.5rem);
+}
+
+/* Reset */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Prevent font size inflation + aliasing */
+html {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	font-size: 100%;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+li,
+pre,
+code {
+	margin-block: 0;
+	margin-inline: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+	list-style: none;
+	padding: 0;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	line-height: 1.6;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+	line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4,
+h5 {
+	text-wrap: balance;
+	width: fit-content;
+	max-width: 26ch;
+}
+
+/* Keep the line width accessible */
+p,
+li,
+ul,
+blockquote:not([class]) {
+	max-width: 52ch;
+}
+
+pre {
+	max-width: calc(52ch - 1ch);
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+	color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+	min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+	scroll-margin-block: 5ex;
+}
+
+/* End of Reset */
+
+body {
+	background: var(--color-neutral-100, inherit);
+	color: var(--color-primary-300, inherit);
+	font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	font-size: 1rem;
+	letter-spacing: var(--tracking);
+
+	display: grid;
+	grid-template-columns: 1fr fit-content(90vw) 1fr;
+
+	>*+* {
+		margin-block-start: var(--flow-space);
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+	letter-spacing: var(--tracking-heading);
+	color: var(--color-primary-600);
+}
+
+/* Fluid typography */
+h1 {
+	font-size: var(--text-fluid-32-56);
+}
+
+h2 {
+	font-size: var(--text-fluid-24-32);
+}
+
+h3 {
+	font-size: var(--text-fluid-18-24);
+}
+
+p,
+span,
+strong,
+a,
+h5,
+h5,
+h6 {
+	font-size: var(--text-fluid-16-20);
+}
+
+pre,
+code {
+	font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+a {
+	text-decoration: transparent;
+	width: fit-content;
+
+	:hover,
+	:focus-visible {
+		text-decoration: underline;
+		text-underline-offset: 0.25rem;
+	}
+}
+
+/* Utilities */
+.region {
+	grid-column: 2/3;
+	max-width: 90vw;
+}
+
+/* Exceptions */
+.region[data-region='navbar'] {
+	margin-block-start: var(--flow-space-sm);
+	display: flex;
+
+	a {
+		display: flex;
+		align-items: center;
+
+		[data-type='logomark'] {
+			margin-inline-end: 0.5rem;
+			width: clamp(1.5rem, 1.2143rem + 1.4286vw, 2.5rem);
+			height: auto;
+		}
+
+		[data-type='logotype'] {
+			/* width: 6rem; */
+			width: auto;
+			height: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.5rem);
+		}
+	}
+}
+
+.region[data-region='content']>*+* {
+	margin-block-start: var(--flow-space);
+}
+
+.region[data-region='content'] {
+	header>*+* {
+		margin-block-start: var(--flow-space-sm);
+	}
+
+	header p:last-child {
+		margin-block-start: var(--flow-space-xsm);
+	}
+
+	section {
+		h2 {
+			margin-block-end: var(--flow-space-sm);
+			font-weight: 500;
+		}
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--flow-space-sm);
+
+			li {
+				display: flex;
+				flex-direction: column;
+				gap: var(--flow-space-xsm);
+
+
+				h3 {
+					font-weight: 400;
+				}
+
+				time {
+					font-size: 0.88rem;
+				}
+			}
+		}
+	}
+
+	[data-content-type='projects'] ul li {
+		a {
+			display: flex;
+			gap: 0.5rem;
+		}
+	}
+}
+
+.region[data-region='footer'] {
+	margin-block-end: var(--flow-space-sm);
+
+	a {
+		display: flex;
+
+		[data-type='logomark'] {
+			margin-inline-end: 0.5rem;
+			width: 24px;
+			height: auto;
+		}
+
+		[data-type='logotype'] {
+			width: 6rem;
+			height: auto;
+		}
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.25rem;
+		margin-block: var(--flow-space-sm);
+
+		li a {
+			display: flex;
+			gap: 0.5rem;
+		}
+	}
+}
