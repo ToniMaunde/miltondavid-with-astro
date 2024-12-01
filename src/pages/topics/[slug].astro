@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import type { TArticleEntry } from "../../types";
+import { formatDate, slugify } from "../../util";
+
+export async function getStaticPaths() {
+  function deduplicateTopics(listOfArticles: Array<TArticleEntry>) {
+    const set = new Set<string>();
+
+    listOfArticles.forEach((article) => {
+      article.data.topics.forEach((topic) => {
+        set.add(topic);
+      });
+    });
+
+    return Array.from(set);
+  }
+
+  const listOfArticleEntries = await getCollection("articles");
+  const listOfUniqueTopics = deduplicateTopics(listOfArticleEntries);
+
+  return listOfUniqueTopics.map((topic) => {
+    const listOfArticleEntriesFromTopic = listOfArticleEntries.filter(
+      (articleEntry) =>
+        articleEntry.data.topics.includes(topic) &&
+        articleEntry.data.isDraft != true
+    );
+
+    return {
+      params: {
+        slug: slugify(topic),
+      },
+      props: {
+        pageTopic: topic,
+        listOfArticleEntries: listOfArticleEntriesFromTopic,
+      },
+    };
+  });
+}
+
+const { pageTopic, listOfArticleEntries } = Astro.props;
+---
+
+<Layout
+  title={`Articles related to '${pageTopic}' - Milton David`}
+  description={`These are the articles that are related to the '${pageTopic}' topic`}
+>
+  <main class="region" data-region="content">
+    <header data-page="topics">
+      <h1>
+        Articles related to <span>{pageTopic}</span>
+      </h1>
+      <p>
+        These are the articles that are related to the topic you selected.
+      </p>
+    </header>
+    <section data-role="topic-articles">
+      <ol role="list">
+        {
+          listOfArticleEntries.map((article) => (
+            <li>
+              <a href={`/articles/${article.slug}`}>
+                <h3>{article.data.title}</h3>
+              </a>
+              <p>{article.data.summary}</p>
+              <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
+                {formatDate(article.data.updatedAt, "MMM dd yyyy")}
+              </time>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </main>
+</Layout>

@@ -1,32 +1,29 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-const pageDescription = "The page you are looking for does not expertise";
+
+const listOfArticles = await getCollection("articles");
+const randomIndex = Math.floor(Math.random() * (listOfArticles.length - 1));
+
+const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
 ---
 
 <Layout
   title="Page not found - Milton David"
-  description={pageDescription}
-  isArticle={false}
+  description="Oh no. The page you’re looking for does not exist"
 >
-  <main
-    class="px-4 flex flex-col gap-10 text-supporting-gunmetal-300 dark:text-neutral-600"
-  >
-    <header class="mt-10">
-      <h1
-        class="font-overpass-mono text-supporting-gunmetal-600 dark:text-neutral-100 text-[32px]/10"
-      >
-        Page not found
-      </h1>
-      <p class="font-overpass-medium">
-        Sadly, this page does not exist. <br />
-         Consider visiting the <a
-          href="/"
-          class="dark:text-primary-300 underline underline-offset-2">home</a
-        > page or the <a
-          href="/articles"
-          class="dark:text-primary-300 underline underline-offset-2">articles</a
-        > page for a nice read.
-      </p>
+  <main class="region" data-region="content">
+    <header>
+      <h1>Page not found</h1>
     </header>
+    <article data-role="error-page">
+      <p>Oh no. The page you’re looking for does not exist.</p>
+      <p>
+        You can <a href="/">go home</a> or check this article about <a
+          href={`/articles/${randomlyPickedArticle.slug}`}
+          >{randomlyPickedArticle.data.title}</a
+        >.
+      </p>
+    </article>
   </main>
 </Layout>

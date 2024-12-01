@@ -1,15 +1,11 @@
 import { format } from "date-fns";
 
-export function computeReadingTime(articleBody: string) {
-  // the average
-  const wordsPerMinute = 200;
-  const textLength = articleBody.split(" ").length;
+type TDatePattern = "MMM dd yyyy" | "yyyy-MM-dd";
 
-  return Math.ceil(textLength / wordsPerMinute);
+export function formatDate(date: Date, pattern: TDatePattern) {
+  return format(date, pattern);
 }
 
-export function articleDate(createdAt: string, updatedAt: string) {
-  const datePattern = "MMM dd yyyy"
-  if (createdAt === updatedAt) return format(new Date(createdAt), datePattern);
-  return `Updated on ${format(new Date(updatedAt), datePattern)}` ;
+export function slugify(topic: string) {
+  return topic.toLowerCase().replaceAll(".", "").split(" ").join("-");
 }

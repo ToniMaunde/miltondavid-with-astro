@@ -1,29 +1,9 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../images/logo.svg";
-import logoText from "../images/logo_text.svg";
+import Logo from "../components/icons/Logo.astro";
 ---
 
-<nav class="flex items-center pt-6 px-4">
-  <a href="/" class="flex items-center gap-2">
-    <Image
-      src={logo}
-      alt="The website's logo"
-      width="24"
-      height="24"
-      class="my-0"
-    />
-    <Image
-      src={logoText}
-      alt="The website's logo but in text"
-      height="24"
-      class="my-0"
-    />
-  </a>
-  <a
-    href="/articles"
-    class="font-overpass-medium transition-colors ease-in-out text-supporting-gunmetal-500 hover:text-supporting-gunmetal-700 dark:text-neutral-100 dark:hover:text-primary-300 ml-auto"
-  >
-    Articles
+<nav class="region" data-region="navbar">
+  <a href="/" >
+    <Logo />
   </a>
 </nav>

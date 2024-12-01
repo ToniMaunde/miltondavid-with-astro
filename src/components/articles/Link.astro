@@ -7,6 +7,10 @@ interface Props {
 const { href, text } = Astro.props;
 ---
 
-<a href={href} target="_blank" rel="noreferrer" class="underline text-inherit">
+<a
+  href={href}
+  target="_blank"
+  rel="noreferrer"
+>
   {text}
 </a>

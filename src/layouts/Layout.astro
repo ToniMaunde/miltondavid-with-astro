@@ -1,100 +1,55 @@
 ---
-import type { TTwitterMeta } from "../types";
+import '../style.css';
 interface Props {
   title: string;
   description: string;
-  isArticle: boolean;
 }
 
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
 
-const { title, description, isArticle } = Astro.props;
+const { title, description } = Astro.props;
+const { href } = Astro.url;
 
-function computeTwitterMeta(
-  title: string,
-  description: string
-): Array<TTwitterMeta> {
-  return [
-    {
-      name: "twitter:card",
-      content: "summary",
-    },
-    {
-      name: "twitter:site",
-      content: "@tonimaunde",
-    },
-    {
-      name: "twitter:creator",
-      content: "@tonimaunde",
-    },
-    {
-      name: "twitter:title",
-      content: title,
-    },
-    {
-      name: "twitter:description",
-      content: description,
-    },
-  ];
-}
+const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID;
+
+export { umamiSecret };
+
 ---
 
 <!doctype html>
-<html lang="en" class="w-full h-full text-base">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    {
-      isArticle &&
-        computeTwitterMeta(title, description).map((meta) => (
-          <meta name={meta.name} content={meta.content} />
-        ))
-    }
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:determiner" content="auto" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Milton David" />
+    <meta property="al:web:url" content={href} />
+    <meta name="twitter:card" content="homepage" />
+    <meta name="twitter:site" content="@tonimaunde" />
+    <meta name="twitter:url" content={href} />
+    <meta name="twitter:title" content={title} />
     <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="personal website, software engineering, articles, thoughts" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <script
       defer
       src="https://analytics.eu.umami.is/script.js"
-      data-website-id="3ae45fd5-b8f1-48d0-8a33-b9832878edf1"></script>
+      is:inline
+      data-website-id={umamiSecret}></script>
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body
-    class="max-w-[672px] xs:mx-auto h-full flex flex-col bg-white dark:bg-supporting-gunmetal-700 font-overpass-regular"
-  >
+  <body>
     <Navbar />
     <slot />
     <Footer />
-    <style is:global>
-      :root {
-        color-scheme: light dark;
-      }
-      @font-face {
-        font-family: "Overpass Mono";
-        src: url("/fonts/overpassmono_bold.woff2") format("woff2");
-        font-weight: bold;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Overpass Regular";
-        src: url("/fonts/overpass_regular.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Overpass Medium";
-        src: url("/fonts/overpass_medium.woff2") format("woff2");
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-    </style>
   </body>
 </html>
