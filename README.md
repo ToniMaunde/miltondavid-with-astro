@@ -7,8 +7,11 @@ I designed the website in Figma. Here's [the link](https://www.figma.com/file/et
 # Changelog
 Dec 1 2024
 - new website version
+  
 Jan 17 2024
+
 - align the website to the improved design
+  
 Jan 6 2024
 - website's "complete" version
 
