@@ -63,7 +63,7 @@ const { pageTopic, listOfArticleEntries } = Astro.props;
               <a href={`/articles/${article.slug}`}>
                 <h3>{article.data.title}</h3>
               </a>
-              <p>{article.data.description}</p>
+              <p>{article.data.summary}</p>
               <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
                 {formatDate(article.data.updatedAt, "MMM dd yyyy")}
               </time>
