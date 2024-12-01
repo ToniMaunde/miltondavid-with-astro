@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import newWindow from "../icons/new_window.svg";
 import Layout from "../layouts/Layout.astro";
 import { formatDate } from "../util";
 const pageDescription = "Milton David's personal website";
@@ -46,7 +45,7 @@ const projects: Array<{
 
 <Layout title="Home - Milton David" description={pageDescription}>
   <main class="region" data-region="content">
-    <header>
+    <header data-page="home">
       <h1>Building handy tools for others and I</h1>
       <p>
         I’m a software engineer and a UI designer. I combine these specialties
@@ -65,7 +64,6 @@ const projects: Array<{
             <li>
               <a href={project.link} target="_blank" rel="noreferrer">
                 <h3>{project.name}</h3>
-                <img src={newWindow.src} />
               </a>
               <p>{project.description}</p>
             </li>
@@ -73,16 +71,16 @@ const projects: Array<{
         }
       </ul>
     </section>
-    <section>
+    <section data-content-type="articles">
       <h2>Articles</h2>
       <ul role="list">
         {
           orderedArticles.map((article) => (
-            <li class="">
+            <li>
               <a href={`/articles/${article.slug}`}>
                 <h3>{article.data.title}</h3>
               </a>
-              <p>{article.data.description}</p>
+              <p>{article.data.summary}</p>
               <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
                 {formatDate(article.data.updatedAt, "MMM dd yyyy")}
               </time>
@@ -91,7 +89,7 @@ const projects: Array<{
         }
       </ul>
     </section>
-    <section>
+    <section data-content-type="article-drafts">
       <h2>Drafts</h2>
       {
         drafts.length > 0 ? (
@@ -101,7 +99,7 @@ const projects: Array<{
                 <a href={`/articles/${article.slug}`}>
                   <h3>{article.data.title}</h3>
                 </a>
-                <p>{article.data.description}</p>
+                <p>article.data.summary</p>
                 <time
                   datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}
                 >

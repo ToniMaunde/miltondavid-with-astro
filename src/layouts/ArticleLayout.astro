@@ -1,21 +1,20 @@
 ---
 import "../style.css";
 import { getCollection } from "astro:content";
-import { format } from "date-fns";
-import { formatDate } from "../util";
+import { formatDate, slugify } from "../util";
 import type { MarkdownLayoutProps } from "astro";
 import type { TTwitterMeta } from "../types.ts";
 import { ViewTransitions } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import TableOfContents from "../components/articles/TableOfContents.astro";
-import ShareArticle from "../components/articles/ShareArticle.astro";
-import RelatedArticles from "../components/articles/RelatedArticles.astro";
-import arrowLeft from "../icons/arrow_left.svg";
+import Arrow from "../components/icons/Arrow.astro";
+import Chevron from "../components/icons/Chevron.astro";
+import X from "../components/icons/X.astro";
+import Linkedin from "../components/icons/Linkedin.astro";
 
 type Props = MarkdownLayoutProps<{
   title: string;
-  description: string;
+  summary: string;
   createdAt: Date;
   updatedAt: Date;
   isDraft: boolean;
@@ -24,7 +23,7 @@ type Props = MarkdownLayoutProps<{
 
 function generateTwitterMeta(
   title: string,
-  description: string
+  description: string,
 ): Array<TTwitterMeta> {
   return [
     {
@@ -50,25 +49,33 @@ function generateTwitterMeta(
   ];
 }
 
-function slugify(title: string) {
-  return title.toLowerCase().replaceAll(".", "").split(" ").join("-");
+function generateLinkedinMeta(
+  title: string,
+  description: string,
+  url: string,
+): Array<{ property: string; content: string }> {
+  return [
+    {
+      property: "og:title",
+      content: title,
+    },
+    {
+      property: "og:description",
+      content: description,
+    },
+    {
+      property: "og:url",
+      content: url,
+    },
+  ];
 }
 
-function articleDate(createdAt: string, updatedAt: string, isDraft: boolean) {
-  const datePattern = "MMM dd yyyy";
-
-  if (isDraft) {
-    return `Started on ${format(new Date(createdAt), datePattern)}`;
-  } else {
-    if (createdAt === updatedAt) {
-      return format(new Date(createdAt), datePattern);
-    }
-    return `Updated on ${format(new Date(updatedAt), datePattern)}`;
-  }
+function generateKeywords(topics: Array<string>) {
+  return topics.join(", ");
 }
 
 const { frontmatter, headings } = Astro.props;
-const { href } = Astro.url;
+const { href, origin } = Astro.url;
 
 const listOfArticles = await getCollection("articles");
 const relatedArticles = listOfArticles
@@ -77,27 +84,49 @@ const relatedArticles = listOfArticles
   .filter(
     (article) =>
       article.data.topics.filter((topic) => frontmatter.topics.includes(topic))
-        .length > 0
+        .length > 0,
   );
 
+const TWITTER_SHARING_URL = "https://twitter.com/intent/tweet";
+const LINKEDIN_SHARING_URL =
+  "https://www.linkedin.com/sharing/share-offsite/?url=";
 const GITHUB_CONTENT_URL =
   "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles";
-const ARTICLE_SLUG = slugify(frontmatter.title);
+
 const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID;
 
 export { umamiSecret };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={frontmatter.description} />
+    <meta name="description" content={frontmatter.summary} />
     {
-      generateTwitterMeta(frontmatter.title, frontmatter.description).map(
-        (meta) => <meta name={meta.name} content={meta.content} />
+      generateTwitterMeta(frontmatter.title, frontmatter.summary).map(
+        (meta) => <meta name={meta.name} content={meta.content} />,
       )
     }
+    {
+      generateLinkedinMeta(
+        frontmatter.title,
+        frontmatter.summary,
+        href,
+      ).map((meta) => <meta property={meta.property} content={meta.content} />)
+    }
+    <meta property="og:title" content={frontmatter.title} />
+    <meta property="og:description" content={frontmatter.summary} />
+    <meta property="og:url" content={href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:determiner" content="auto" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Milton David" />
+    <meta
+      name="keywords"
+    content={generateKeywords(frontmatter.topics)}
+    />
+    <meta property="al:web:url" content={href} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
@@ -113,7 +142,7 @@ export { umamiSecret };
     <Navbar />
     <aside class="region" data-region="article-navigation">
       <a href="/">
-        <img src={arrowLeft.src} data-type="icon" />
+        <Arrow />
         <span>Go back</span>
       </a>
     </aside>
@@ -127,23 +156,101 @@ export { umamiSecret };
           {
             frontmatter.topics.map((topic) => (
               <li>
-                <a href={`topics/${topic}`}>
-                  #{topic}
-                </a>
+                <a href={`${origin}/topics/${slugify(topic)}`}>#{topic}</a>
               </li>
             ))
           }
         </ul>
       </header>
-      <article class="region" data-role="summary">
+      <article data-role="summary">
         <p>
-          <strong>Summary</strong>:{frontmatter.description}
+          <span>Summary</span>: {frontmatter.summary}
         </p>
       </article>
-      <article>
+      <article data-role="toc-large">
+        <p>Table of Contents</p>
+        <ul role="list">
+          {
+            headings.map((heading) => (
+              <li>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+      <article data-role="toc-small">
+        <details>
+          <summary>
+            Table of Contents
+            <Chevron />
+          </summary>
+          <ul role="list">
+            {
+              headings.map((heading) => (
+                <li>
+                  <a class="" href={`#${heading.slug}`}>
+                    {heading.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </details>
+      </article>
+      <article data-role="content">
         <slot />
       </article>
     </main>
+    <hr class="region" data-region="meta" />
+    <article class="region" data-region="meta">
+      <p>
+        Did you find a typo or want to contribute to this article? Here's the <a
+          href={GITHUB_CONTENT_URL}
+          target="_blank"
+          rel="noreferrer">Github link</a
+        >.
+      </p>
+      <section>
+        <p>Share article on</p>
+        <ul role="list">
+          <li>
+            <a
+              href={`${TWITTER_SHARING_URL}?url=${href}&text=${frontmatter.title}&via=tonimaunde`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <X />
+              twitter
+            </a>
+          </li>
+          <li class="">
+            <a
+              href={`${LINKEDIN_SHARING_URL}${href}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Linkedin />
+              linkedin
+            </a>
+          </li>
+        </ul>
+      </section>
+    </article>
+    {
+      relatedArticles.length > 0 && (
+        <article class="region" data-region="related-content">
+          <h2>Related articles</h2>
+          <ul>
+            {relatedArticles.map((article) => (
+              <li>
+                <a href={`/articles/${article.slug}`}>{article.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </article>
+      )
+    }
     <Footer />
   </body>
 </html>

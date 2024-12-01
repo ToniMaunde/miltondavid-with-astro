@@ -14,16 +14,16 @@ const randomlyPickedArticle = listOfArticles.at(randomIndex)!;
 >
   <main class="region" data-region="content">
     <header>
-      <h1>
-        Page not found
-      </h1>
+      <h1>Page not found</h1>
+    </header>
+    <article data-role="error-page">
       <p>Oh no. The page you’re looking for does not exist.</p>
       <p>
-        You can <a href="/">Go Home</a> or check this article about <a
-          href=`/articles/${randomlyPickedArticle.slug}`
+        You can <a href="/">go home</a> or check this article about <a
+          href={`/articles/${randomlyPickedArticle.slug}`}
           >{randomlyPickedArticle.data.title}</a
         >.
       </p>
-    </header>
+    </article>
   </main>
 </Layout>

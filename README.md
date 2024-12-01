@@ -5,6 +5,8 @@ This is my website/blog's built with Astro. It is a static website that uses MDX
 I designed the website in Figma. Here's [the link](https://www.figma.com/file/etOc5Yb0qFn77WxCQCPCCc/miltondavid.com?type=design&node-id=0%3A1&mode=design&t=Wqq5znrSeCk093fv-1) if you want to see it.
 
 # Changelog
+Dec 1 2024
+- new website version
 Jan 17 2024
 - align the website to the improved design
 Jan 6 2024

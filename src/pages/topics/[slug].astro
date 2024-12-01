@@ -2,13 +2,9 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import type { TArticleEntry } from "../../types";
-import { formatDate } from "../../util";
+import { formatDate, slugify } from "../../util";
 
 export async function getStaticPaths() {
-  function slugifyTopic(topic: string) {
-    return topic.toLowerCase().replaceAll(".", "").split(" ").join("-");
-  }
-
   function deduplicateTopics(listOfArticles: Array<TArticleEntry>) {
     const set = new Set<string>();
 
@@ -33,7 +29,7 @@ export async function getStaticPaths() {
 
     return {
       params: {
-        slug: slugifyTopic(topic),
+        slug: slugify(topic),
       },
       props: {
         pageTopic: topic,
@@ -51,27 +47,23 @@ const { pageTopic, listOfArticleEntries } = Astro.props;
   description={`These are the articles that are related to the '${pageTopic}' topic`}
 >
   <main class="region" data-region="content">
-    <header class="">
+    <header data-page="topics">
       <h1>
-        Articles related to '{pageTopic}'
+        Articles related to <span>{pageTopic}</span>
       </h1>
       <p>
         These are the articles that are related to the topic you selected.
       </p>
     </header>
-    <section>
-      <ol>
+    <section data-role="topic-articles">
+      <ol role="list">
         {
           listOfArticleEntries.map((article) => (
             <li>
               <a href={`/articles/${article.slug}`}>
-                <h3>
-                  {article.data.title}
-                </h3>
+                <h3>{article.data.title}</h3>
               </a>
-              <p> 
-                {article.data.description}
-              </p>
+              <p>{article.data.description}</p>
               <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
                 {formatDate(article.data.updatedAt, "MMM dd yyyy")}
               </time>

@@ -1,11 +1,10 @@
 ---
-import logomark from "../icons/logomark.svg";
-import logotype from "../icons/logotype.svg";
-import github from "../icons/socials/github.svg";
-import dribbble from "../icons/socials/dribbble.svg";
-import linkedin from "../icons/socials/linkedin.svg";
-import twitter from "../icons/socials/twitter.svg";
-import codepen from "../icons/socials/codepen.svg";
+import Logo from "./icons/Logo.astro";
+import Github from "../components/icons/Github.astro";
+import Dribbble from "../components/icons/Dribbble.astro";
+import Linkedin from "../components/icons/Linkedin.astro";
+import X from "../components/icons/X.astro";
+import Codepen from "../components/icons/Codepen.astro";
 
 export const currentYear = new Date().getFullYear();
 
@@ -13,51 +12,61 @@ export const socialProfiles = [
   {
     href: "https://github.com/ToniMaunde",
     name: "Github",
-    icon: github,
   },
   {
     href: "https://dribbble.com/ToniMaunde",
     name: "Dribbble",
-    icon: dribbble,
   },
   {
     href: "https://www.linkedin.com/in/tonimaunde/",
     name: "Linkedin",
-    icon: linkedin,
   },
   {
     href: "https://twitter.com/tonimaunde",
     name: "Twitter",
-    icon: twitter,
   },
   {
     href: "https://codepen.io/ToniMaunde",
     name: "Codepen",
-    icon: codepen,
   },
 ];
 ---
 
 <footer class="region" data-region="footer">
   <a href="/">
-    <img src={logomark.src} data-type="logomark" />
-    <img src={logotype.src} data-type="logotype" />
+    <Logo />
   </a>
   <ul role="list">
-    {
-      socialProfiles.map((profile) => (
-        <li>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={profile.href}
-          >
-            <img src={profile.icon.src} />
-            <span>{profile.name}</span>
-          </a>
-        </li>
-      ))
-    }
+    <li>
+      <a href="https://github.com/ToniMaunde" target="_blank" rel="noreferrer">
+        <Github />
+        <span>Github</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://codepen.io/ToniMaunde" target="_blank" rel="noreferrer">
+        <Codepen />
+        <span>Codepen</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://dribbble.com/ToniMaunde" target="_blank" rel="noreferrer">
+        <Dribbble />
+        <span>Dribbble</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://linkedin.com/in/toniMaunde" target="_blank" rel="noreferrer">
+        <Linkedin />
+        <span>Linkedin</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://twitter.com/ToniMaunde" target="_blank" rel="noreferrer">
+        <X />
+        <span>X</span>
+      </a>
+    </li>
   </ul>
   <p>
     ©{currentYear} Milton David. All Rights Reserved.
