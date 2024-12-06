@@ -109,11 +109,9 @@ export { umamiSecret };
       )
     }
     {
-      generateLinkedinMeta(
-        frontmatter.title,
-        frontmatter.summary,
-        href,
-      ).map((meta) => <meta property={meta.property} content={meta.content} />)
+      generateLinkedinMeta(frontmatter.title, frontmatter.summary, href).map(
+        (meta) => <meta property={meta.property} content={meta.content} />,
+      )
     }
     <meta property="og:title" content={frontmatter.title} />
     <meta property="og:description" content={frontmatter.summary} />
@@ -122,10 +120,7 @@ export { umamiSecret };
     <meta property="og:determiner" content="auto" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Milton David" />
-    <meta
-      name="keywords"
-    content={generateKeywords(frontmatter.topics)}
-    />
+    <meta name="keywords" content={generateKeywords(frontmatter.topics)} />
     <meta property="al:web:url" content={href} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -141,7 +136,7 @@ export { umamiSecret };
   <body>
     <Navbar />
     <aside class="region" data-region="article-navigation">
-      <a href="/">
+      <a href="/" aria-label="Go back to the home page">
         <Arrow />
         <span>Go back</span>
       </a>
@@ -156,7 +151,12 @@ export { umamiSecret };
           {
             frontmatter.topics.map((topic) => (
               <li>
-                <a href={`${origin}/topics/${slugify(topic)}`}>#{topic}</a>
+                <a
+                  href={`${origin}/topics/${slugify(topic)}`}
+                  aria-label={`See articles related to ${topic}`}
+                >
+                  #{topic}
+                </a>
               </li>
             ))
           }
@@ -168,7 +168,7 @@ export { umamiSecret };
         </p>
       </article>
       <article data-role="toc-large">
-        <p>Table of Contents</p>
+        <h2>Table of Contents</h2>
         <ul role="list">
           {
             headings.map((heading) => (
@@ -208,7 +208,9 @@ export { umamiSecret };
         Did you find a typo or want to contribute to this article? Here's the <a
           href={GITHUB_CONTENT_URL}
           target="_blank"
-          rel="noreferrer">Github link</a
+          rel="noreferrer"
+          aria-label="Contribute to the improvement of the article on Github"
+        >Github link</a
         >.
       </p>
       <section>
@@ -219,9 +221,10 @@ export { umamiSecret };
               href={`${TWITTER_SHARING_URL}?url=${href}&text=${frontmatter.title}&via=tonimaunde`}
               target="_blank"
               rel="noreferrer"
+              aria-label="Share on X (former Twitter)"
             >
               <X />
-              twitter
+               twitter
             </a>
           </li>
           <li class="">
@@ -229,9 +232,10 @@ export { umamiSecret };
               href={`${LINKEDIN_SHARING_URL}${href}`}
               target="_blank"
               rel="noreferrer"
+              aria-label="Share on LinkedIn"
             >
               <Linkedin />
-              linkedin
+               linkedin
             </a>
           </li>
         </ul>

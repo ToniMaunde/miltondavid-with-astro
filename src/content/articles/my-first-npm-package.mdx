@@ -11,11 +11,11 @@ isDraft: false
 ---
 import ArticleLink from "../../components/articles/Link.astro";
 
-One day I was reading the MDN docs when I came accross the experimental <ArticleLink text="Array.prototype.group" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/group" /> function. It peaked my interest since once I had to write a several lines of code to accomplish a similar result when working on <ArticleLink text="minhamola" href="https://www.minhamola.com" /> in 2021.
+One day I was reading the MDN docs when I came accross the experimental <ArticleLink text="Array.prototype.group" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/group" ariaLabel="MDN article about the Array.group() method" /> function. It peaked my interest since once I had to write a several lines of code to accomplish a similar result when working on <ArticleLink text="minhamola" href="https://www.minhamola.com" ariaLabel="Web application developed by Milton David" /> in 2021.
 
 ## Introduction
 
-The first example on the docs was enough to make me think "what if I created a polyfill for this"? Check the package <ArticleLink text="here" href="https://github.com/ToniMaunde/array-group-polyfill" />. It actually wasn't a npm package at first, just a repository for sharing my approach to tackle the temporary lack of browser support for the group() function.
+The first example on the docs was enough to make me think "what if I created a polyfill for this"? Check the <ArticleLink text="array-group-polyfill" href="https://github.com/ToniMaunde/array-group-polyfill" ariaLabel="Github repository for the package referenced in the article" /> on Github. At first it was not a npm package, just a repository for sharing my approach to tackle the temporary lack of browser support for the group() function, but then I thought it would be nice to share the approach I came up with.
 
 ## Creating my first npm package
 

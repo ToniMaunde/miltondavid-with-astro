@@ -21,24 +21,28 @@ const projects: Array<{
   name: string;
   description: string;
   link: string;
+  stack: Array<string>;
 }> = [
   {
     name: "minhamola",
     link: "https://minhamola.com",
     description:
       "A web-based personal finance management application. Built with Vue.js and Express.js.",
+    stack: ["Vue.js", "Express.js", "PostgreSQL"],
   },
   {
     name: "typed-formdata",
     link: "https://github.com/ToniMaunde/typed-formdata",
     description:
       "An experiment on parsing and validating the native formdata object based on a schema. Built with TypeScript and Zod.",
+    stack: ["TypeScript", "Zod"],
   },
   {
     name: "react-svg-icon",
     link: "https://github.com/ToniMaunde/react-svg-component",
     description:
       "A tree-shakeable approach to rendering SVGs (in React.js). All without the use of a library or using the HTMLImageElement. Built with React.js and TypeScript.",
+    stack: ["React.js", "TypeScript"],
   },
 ];
 ---
@@ -66,6 +70,13 @@ const projects: Array<{
                 <h3>{project.name}</h3>
               </a>
               <p>{project.description}</p>
+              <ul data-content-type="technology-stack">
+                {project.stack.map((technology) => (
+                  <li>
+                    <span>{technology}</span>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))
         }
