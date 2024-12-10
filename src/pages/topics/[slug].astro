@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import type { TArticleEntry } from "../../types";
-import { formatDate, slugify } from "../../util";
+import { formatDate, slugify, truncateText } from "../../util";
 
 export async function getStaticPaths() {
   function deduplicateTopics(listOfArticles: Array<TArticleEntry>) {
@@ -39,6 +39,8 @@ export async function getStaticPaths() {
   });
 }
 
+const SUMMARY_LENGTH = 140;
+
 const { pageTopic, listOfArticleEntries } = Astro.props;
 ---
 
@@ -63,7 +65,7 @@ const { pageTopic, listOfArticleEntries } = Astro.props;
               <a href={`/articles/${article.slug}`}>
                 <h3>{article.data.title}</h3>
               </a>
-              <p>{article.data.summary}</p>
+              <p>{truncateText(article.data.summary, SUMMARY_LENGTH)}</p>
               <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
                 {formatDate(article.data.updatedAt, "MMM dd yyyy")}
               </time>

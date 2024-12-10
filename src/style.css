@@ -434,6 +434,10 @@ a {
 		border-left: 4px solid var(--color-neutral-400);
 
 		p {
+			span {
+				font-weight: 500;
+			}
+
 			margin-inline-start: 0.5rem;
 		}
 	}

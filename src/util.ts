@@ -9,3 +9,7 @@ export function formatDate(date: Date, pattern: TDatePattern) {
 export function slugify(topic: string) {
   return topic.toLowerCase().replaceAll(".", "").split(" ").join("-");
 }
+
+export function truncateText(text: string, length: number): string {
+  return text.substring(0, length).concat("...");
+}

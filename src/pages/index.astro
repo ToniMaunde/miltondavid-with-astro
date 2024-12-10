@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { formatDate } from "../util";
+import { formatDate, truncateText } from "../util";
 const pageDescription = "Milton David's personal website";
 
 const articles = await getCollection("articles");
@@ -16,6 +16,8 @@ const orderedArticles = articles.sort((prev, next) => {
 });
 
 const drafts = orderedArticles.filter((article) => article.data.isDraft);
+
+const SUMMARY_LENGTH = 140;
 
 const projects: Array<{
   name: string;
@@ -91,7 +93,7 @@ const projects: Array<{
               <a href={`/articles/${article.slug}`}>
                 <h3>{article.data.title}</h3>
               </a>
-              <p>{article.data.summary}</p>
+              <p>{truncateText(article.data.summary, SUMMARY_LENGTH)}</p>
               <time datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}>
                 {formatDate(article.data.updatedAt, "MMM dd yyyy")}
               </time>
@@ -110,7 +112,7 @@ const projects: Array<{
                 <a href={`/articles/${article.slug}`}>
                   <h3>{article.data.title}</h3>
                 </a>
-                <p>article.data.summary</p>
+                <p>{truncateText(article.data.summary, SUMMARY_LENGTH)}</p>
                 <time
                   datetime={formatDate(article.data.updatedAt, "yyyy-MM-dd")}
                 >
