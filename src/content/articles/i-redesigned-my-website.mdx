@@ -1,21 +1,99 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
 title: I redesigned my website
-summary: Modern CSS and HTML are very powerful. By embracing the cascading nature of CSS, with the help of a methodology like CUBE, is possible to code a great website while avoiding the complexity of CSS frameworks like TailwindCSS
+summary: Modern CSS and HTML are very powerful. By embracing the cascading nature of CSS, with the help of a methodology like CUBE CSS, is possible to code a great website while avoiding the complexity of CSS frameworks.
 createdAt: 2024-12-09
 updatedAt: 2024-12-09 
 topics:
   - CSS
   - TailwindCSS
-isDraft: true
+isDraft: false
 ---
 import ArticleLink from "../../components/articles/Link.astro";
 
 I like TailwindCSS. It's a great technology that promotes consistency across teams and works great for individuals too when it comes to prototyping.
 
-But TailwindCSS also leads to repetitive and rigid CSS. So, I decided to code the redesign of my website using only vanilla CSS. It was great.
+But TailwindCSS also leads to repetitive and rigid CSS. So, I decided to code the redesign of my website using only vanilla CSS. It was great. Here are some of the lessons I learned.
 
-## Embracing the cascade - WIP
+## Embracing the cascade
 
 I know that most, if not all, CSS frameworks have resets, and resets are a way of using the cascade to define the behavior of child elements. The cascade allows for more, though.
 
+By using the cascade not only to apply a reset, but to also implement the core styles of your design system, syle guide, etc, the amount of repeated rules is reduced. Also, focusing on building upon what was inherited reduces the occurence of **specificity clashes** and, instead, you identify exceptions.
+
+```css
+/* global style that cascades */
+p,
+li,
+ul, /* the target of the exception */
+strong,
+blockquote:not([class]) {
+	max-width: 52ch;
+	overflow-wrap: break-word;
+}
+
+/* exception */
+[data-content-type='projects'],
+[data-content-type='articles'],
+[data-content-type='article-drafts'] {
+	ul {
+		max-width: 100%;
+
+		li a {
+			width: fit-content;
+		}
+	}
+}
+```
+
+The snippet above shows that the *ul* element had an inherited the **max-width** value from a global rule. But an exception was created for ul elements with parents that matched the data attribute selectors.
+
+You can learn more about this methodology on the <ArticleLink text="CUBE CSS website" href="https://cube.fyi/" ariaLabel="Opens the CUBE CSS website in a new tab" />.
+
+## Access to the latest CSS features
+
+CSS frameworks can, at most, provide polyfills for bleeding edge CSS features. That negatively affects your ability to provide the best experience possible for the users using the latest browsers, offering the standard experience to those who are not on the latest browsers.
+
+```css
+a {
+	text-decoration: transparent;
+
+	:hover,
+	:focus-visible {
+		text-decoration: underline;
+		text-underline-offset: 0.25rem;
+	}
+}
+```
+
+The snippet above using say, TailwindCSS, would be
+
+```html
+<a class="decoration-transparent hover:underline
+hover:underline-offset-[0.25rem] focus-visible:underline 
+focus-visible:underline-offset-[0.25rem]">...</a>
+```
+
+Not only the readability took a massive hit, but the styling is only applicable to a single anchor tag element. It is clear that access to CSS nesting simplifies the styling, but also adds a layer of context to it.
+
+## Simpler design token structure
+
+To be able to simply declare the design token library inside the **:root** (instead of a JavaScript file): promotes separation of concerns, reduces the need of context switching, simplifies token utilization, and makes it easy to change the library depending on user preferences.
+
+```css
+:root {
+	--color-text: #394352;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-text: #e6e6e6;
+	}
+}
+```
+
+## Conclusion
+
+All websites are responsive until we start writing our CSS styles. By working with it (and the cascade) instead of fighting against it, writing CSS becomes a 'coaching session' between us, the developers, and the browser.
+
+I know I'm going to embrace this methodology in all my projects, what about you?
