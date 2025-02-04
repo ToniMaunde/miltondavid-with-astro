@@ -224,7 +224,6 @@ code {
 	font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 }
 
-
 a:any-link {
 	text-decoration: none;
 }
@@ -389,6 +388,18 @@ a {
 		text-decoration: none;
 	}
 
+	a {
+		color: var(--color-link-light-400);
+
+	}
+
+	a:hover,
+	a:active {
+		text-decoration: underline;
+		text-underline-offset: 0.25rem;
+		color: var(--color-link-light-600);
+	}
+
 	header {
 		time {
 			display: inline-block;
@@ -413,17 +424,6 @@ a {
 
 	strong {
 		font-weight: 500;
-	}
-
-	a {
-		color: var(--color-link-light-400);
-	}
-
-	a:hover,
-	a:active {
-		text-decoration: underline;
-		text-underline-offset: 0.25rem;
-		color: var(--color-link-light-600);
 	}
 
 	hr {
