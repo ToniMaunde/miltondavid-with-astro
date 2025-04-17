@@ -1,5 +1,5 @@
 ---
-import '../style.css';
+import "../style.css";
 interface Props {
   title: string;
   description: string;
@@ -15,7 +15,6 @@ const { href } = Astro.url;
 const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID;
 
 export { umamiSecret };
-
 ---
 
 <!doctype html>
@@ -36,14 +35,19 @@ export { umamiSecret };
     <meta name="twitter:url" content={href} />
     <meta name="twitter:title" content={title} />
     <meta name="viewport" content="width=device-width" />
-    <meta name="keywords" content="personal website, software engineering, articles, thoughts" />
+    <meta
+      name="keywords"
+      content="personal website, software engineering, articles, thoughts"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <script
       defer
-      src="https://analytics.eu.umami.is/script.js"
+      src="../src/umami.js"
       is:inline
-      data-website-id={umamiSecret}></script>
+      data-website-id={umamiSecret}
+      data-host-url="https://cloud.umami.is"
+    ></script>
     <title>{title}</title>
     <ViewTransitions />
   </head>
