@@ -24,7 +24,7 @@ const drafts = articlesAndDrafts.filter((article) => article.data.isDraft);
 const orderedDrafts = sortArticles(drafts);
 
 const SUMMARY_LENGTH = 140;
-const pageDescription = "My name is Milton, and I am a software engineer and a UI designer. This is my personal website/blog were you can learn about my work and thoughts.";
+const pageDescription = "Milton David - a full stack developer and an UI designer. In this website you will discover the applications that I've created, and the articles I've written. I hope you enjoy the content!";
 
 const projects: Array<{
   name: string;
@@ -36,21 +36,21 @@ const projects: Array<{
     name: "minhamola",
     link: "https://minhamola.com",
     description:
-      "A web-based personal finance management application. Built with Vue.js and Express.js.",
+      "A personal finance management application to ease the identification of poor financial habits.",
     stack: ["Vue.js", "Express.js", "PostgreSQL"],
   },
   {
     name: "typed-formdata",
     link: "https://github.com/ToniMaunde/typed-formdata",
     description:
-      "An experiment on parsing and validating the native formdata object based on a schema. Built with TypeScript and Zod.",
+      "An experiment on parsing and validating the native formdata object based on a schema.",
     stack: ["TypeScript", "Zod"],
   },
   {
     name: "react-svg-icon",
     link: "https://github.com/ToniMaunde/react-svg-component",
     description:
-      "A tree-shakeable approach to rendering SVGs (in React.js). All without the use of a library or using the HTMLImageElement. Built with React.js and TypeScript.",
+      "a tree-shakeable approach to rendering svgs (in react.js). all without the use of a library or using the htmlimageelement.",
     stack: ["React.js", "TypeScript"],
   },
 ];
@@ -59,14 +59,12 @@ const projects: Array<{
 <Layout title="Home - Milton David" description={pageDescription}>
   <main class="region" data-region="content">
     <header data-page="home">
-      <h1>Building handy tools for others and I</h1>
+      <h1>Building apps that work well, look great, and solve problems</h1>
       <p>
-        I’m a software engineer and a UI designer. I combine these specialties
-        to create apps that are useful.
+        I’m a full stack developer and an UI designer. I combine these disciplines to build enjoyable and useful digital experiences.
       </p>
       <p>
-        Below are a few tools I created and articles I wrote on topics worth
-        pondering.
+        here you'll find some featured projects of mine, and the articles i've written on a variety of topics.
       </p>
     </header>
     <section data-content-type="projects">
