@@ -535,6 +535,14 @@ a {
 			margin-block: var(--flow-space-sm)
 		}
 
+		blockquote {
+			background-color: var(--color-primary-600);
+			padding-block: 0.75rem;
+			padding-inline-start: 1rem;
+			margin-block-start: var(--flow-space-xsm);
+			font-style: italic;
+		}
+
 		h2+p,
 		h3+p,
 		h4+p,
@@ -543,6 +551,7 @@ a {
 		}
 
 		ul {
+			padding-block-start: var(--flow-space-xsm);
 			padding-inline-start: 2rem;
 		}
 	}
