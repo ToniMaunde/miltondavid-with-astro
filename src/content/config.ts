@@ -13,9 +13,9 @@ export type TArticle = z.infer<typeof ZArticleSchema>;
 
 const articleCollection = defineCollection({
   schema: ZArticleSchema,
-  type: "content"
+  type: "content",
 });
 
 export const collections = {
-  "articles": articleCollection,
-}
+  articles: articleCollection,
+};

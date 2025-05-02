@@ -1,9 +1,14 @@
-import type { TArticle } from "./content/config";
+import type { TArticle } from "./content/config.ts";
 
 export type TTwitterMeta = {
-  name: "twitter:card" | "twitter:site" | "twitter:creator" | "twitter:title" | "twitter:description";
+  name:
+    | "twitter:card"
+    | "twitter:site"
+    | "twitter:creator"
+    | "twitter:title"
+    | "twitter:description";
   content: string;
-}
+};
 
 export type TArticleEntry = {
   id: string;

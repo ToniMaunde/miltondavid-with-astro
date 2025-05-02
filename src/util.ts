@@ -2,11 +2,11 @@ import { format } from "date-fns";
 
 type TDatePattern = "MMM dd yyyy" | "yyyy-MM-dd";
 
-export function formatDate(date: Date, pattern: TDatePattern) {
+export function formatDate(date: Date, pattern: TDatePattern): string {
   return format(date, pattern);
 }
 
-export function slugify(topic: string) {
+export function slugify(topic: string): string {
   return topic.toLowerCase().replaceAll(".", "").split(" ").join("-");
 }
 
