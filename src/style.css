@@ -108,8 +108,7 @@ h5 {
 p,
 li,
 ul,
-strong,
-blockquote:not([class]) {
+strong {
   max-width: 52ch;
   overflow-wrap: break-word;
 }

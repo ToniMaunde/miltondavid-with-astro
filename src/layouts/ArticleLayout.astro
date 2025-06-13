@@ -1,25 +1,25 @@
 ---
-import "../style.css";
-import { getCollection } from "astro:content";
-import { formatDate, slugify } from "../util";
-import type { MarkdownLayoutProps } from "astro";
-import type { TTwitterMeta } from "../types.ts";
-import { ViewTransitions } from "astro:transitions";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
-import Arrow from "../components/icons/Arrow.astro";
-import Chevron from "../components/icons/Chevron.astro";
-import X from "../components/icons/X.astro";
-import Linkedin from "../components/icons/Linkedin.astro";
+import "../style.css"
+import { getCollection } from "astro:content"
+import { formatDate, slugify } from "../util"
+import type { MarkdownLayoutProps } from "astro"
+import type { TTwitterMeta } from "../types.ts"
+import { ViewTransitions } from "astro:transitions"
+import Navbar from "../components/Navbar.astro"
+import Footer from "../components/Footer.astro"
+import Arrow from "../components/icons/Arrow.astro"
+import Chevron from "../components/icons/Chevron.astro"
+import X from "../components/icons/X.astro"
+import Linkedin from "../components/icons/Linkedin.astro"
 
 type Props = MarkdownLayoutProps<{
-  title: string;
-  summary: string;
-  createdAt: Date;
-  updatedAt: Date;
-  isDraft: boolean;
-  topics: Array<string>;
-}>;
+  title: string
+  summary: string
+  createdAt: Date
+  updatedAt: Date
+  isDraft: boolean
+  topics: Array<string>
+}>
 
 function generateTwitterMeta(
   title: string,
@@ -46,7 +46,7 @@ function generateTwitterMeta(
       name: "twitter:description",
       content: description,
     },
-  ];
+  ]
 }
 
 function generateLinkedinMeta(
@@ -67,17 +67,17 @@ function generateLinkedinMeta(
       property: "og:url",
       content: url,
     },
-  ];
+  ]
 }
 
 function generateKeywords(topics: Array<string>) {
-  return topics.join(", ");
+  return topics.join(", ")
 }
 
-const { frontmatter, headings } = Astro.props;
-const { href, origin } = Astro.url;
+const { frontmatter, headings } = Astro.props
+const { href, origin } = Astro.url
 
-const listOfArticles = await getCollection("articles");
+const listOfArticles = await getCollection("articles")
 const relatedArticles = listOfArticles
   .filter((article) => article.data.title != frontmatter.title)
   .filter((article) => article.data.isDraft != true)
@@ -85,17 +85,17 @@ const relatedArticles = listOfArticles
     (article) =>
       article.data.topics.filter((topic) => frontmatter.topics.includes(topic))
         .length > 0,
-  );
+  )
 
-const TWITTER_SHARING_URL = "https://twitter.com/intent/tweet";
+const TWITTER_SHARING_URL = "https://twitter.com/intent/tweet"
 const LINKEDIN_SHARING_URL =
-  "https://www.linkedin.com/sharing/share-offsite/?url=";
+  "https://www.linkedin.com/sharing/share-offsite/?url="
 const GITHUB_CONTENT_URL =
-  "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles";
+  "https://github.com/ToniMaunde/miltondavid-with-astro/tree/main/src/content/articles"
 
-const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID;
+const umamiSecret: string = import.meta.env.SECRET_UMAMI_ID
 
-export { umamiSecret };
+export { umamiSecret }
 ---
 
 <!doctype html>
@@ -210,7 +210,7 @@ export { umamiSecret };
           target="_blank"
           rel="noreferrer"
           aria-label="Contribute to the improvement of the article on Github"
-        >Github link</a
+          >Github link</a
         >.
       </p>
       <section>
@@ -224,7 +224,7 @@ export { umamiSecret };
               aria-label="Share on X (former Twitter)"
             >
               <X />
-               twitter
+               X
             </a>
           </li>
           <li class="">
