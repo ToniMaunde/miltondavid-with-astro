@@ -1,35 +1,11 @@
 ---
-import Logo from "./icons/Logo.astro";
-import Github from "../components/icons/Github.astro";
-import Dribbble from "../components/icons/Dribbble.astro";
-import Linkedin from "../components/icons/Linkedin.astro";
-import X from "../components/icons/X.astro";
-import Codepen from "../components/icons/Codepen.astro";
+import Logo from "./icons/Logo.astro"
+import Github from "../components/icons/Github.astro"
+import Dribbble from "../components/icons/Dribbble.astro"
+import Linkedin from "../components/icons/Linkedin.astro"
+import Codepen from "../components/icons/Codepen.astro"
 
-export const currentYear = new Date().getFullYear();
-
-export const socialProfiles = [
-  {
-    href: "https://github.com/ToniMaunde",
-    name: "Github",
-  },
-  {
-    href: "https://dribbble.com/ToniMaunde",
-    name: "Dribbble",
-  },
-  {
-    href: "https://www.linkedin.com/in/tonimaunde/",
-    name: "Linkedin",
-  },
-  {
-    href: "https://twitter.com/tonimaunde",
-    name: "Twitter",
-  },
-  {
-    href: "https://codepen.io/ToniMaunde",
-    name: "Codepen",
-  },
-];
+export const currentYear = new Date().getFullYear()
 ---
 
 <footer class="region" data-region="footer">
@@ -38,33 +14,47 @@ export const socialProfiles = [
   </a>
   <ul role="list">
     <li>
-      <a href="https://github.com/ToniMaunde" target="_blank" rel="noreferrer" aria-label="Milton David's Github profile">
+      <a
+        href="https://github.com/ToniMaunde"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Milton David's Github profile"
+      >
         <Github />
         <span>Github</span>
       </a>
     </li>
     <li>
-      <a href="https://codepen.io/ToniMaunde" target="_blank" rel="noreferrer" aria-label="Milton David's Codepen profile">
+      <a
+        href="https://codepen.io/ToniMaunde"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Milton David's Codepen profile"
+      >
         <Codepen />
         <span>Codepen</span>
       </a>
     </li>
     <li>
-      <a href="https://dribbble.com/ToniMaunde" target="_blank" rel="noreferrer" aria-label="Milton David's Dribbble profile">
+      <a
+        href="https://dribbble.com/ToniMaunde"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Milton David's Dribbble profile"
+      >
         <Dribbble />
         <span>Dribbble</span>
       </a>
     </li>
     <li>
-      <a href="https://linkedin.com/in/toniMaunde" target="_blank" rel="noreferrer" aria-label="Milton David's LinkedIn profile">
+      <a
+        href="https://linkedin.com/in/toniMaunde"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Milton David's LinkedIn profile"
+      >
         <Linkedin />
         <span>Linkedin</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://twitter.com/ToniMaunde" target="_blank" rel="noreferrer" aria-label="Milton David's X (former Twitter) profile">
-        <X />
-        <span>X</span>
       </a>
     </li>
   </ul>
