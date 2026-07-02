@@ -20,8 +20,6 @@
   --color-link-dark-500: #7cffff;
   --color-link-dark-600: #8fffff;
   --color-link-dark-800: #a3ffff;
-  --tracking: -0.03ch;
-  --tracking-heading: -0.075ch;
   --flow-space: clamp(3rem, 2.7143rem + 1.4286vw, 4rem);
   --flow-space-sm: clamp(1.5rem, 1.2143rem + 1.4286vw, 2.5rem);
   --flow-space-xsm: clamp(0.75rem, 0.6429rem + 0.5357vw, 1.125rem);
@@ -105,6 +103,7 @@ h5 {
 }
 
 /* Keep the line width accessible */
+/* TODO: in very large viewports (1080p) the browser fails to use the max-width value */
 p,
 li,
 ul,
@@ -114,7 +113,7 @@ strong {
 }
 
 pre {
-  /* I eye-balled it, don't judge me*/
+  /* Consider changing 52ch to 54ch to match the value for p and other inline-block elements */
   max-width: calc(52ch + 7.2vw);
 }
 
@@ -161,7 +160,6 @@ body {
     Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
-  letter-spacing: var(--tracking);
 
   display: grid;
   grid-template-columns: 1fr fit-content(90vw) 1fr;
@@ -188,7 +186,6 @@ h3,
 h4,
 h5 {
   font-family: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
-  letter-spacing: var(--tracking-heading);
   color: var(--color-primary-600);
 }
 
@@ -224,6 +221,10 @@ pre,
 code {
   font-family:
     ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+}
+
+pre code span {
+  font-size: 1rem;
 }
 
 a:any-link {
@@ -554,6 +555,10 @@ a {
       padding-block-start: var(--flow-space-xsm);
       padding-inline-start: 2rem;
     }
+
+    p {
+      text-wrap: pretty;
+    }
   }
 }
 
@@ -699,7 +704,7 @@ hr.region[data-region="meta"] {
       background-color: var(--color-primary-600);
 
       h2 {
-        color: var(--color-neutral-200);
+        color: var(--color-neutral-100);
       }
 
       ul li {
